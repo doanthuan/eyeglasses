@@ -1,0 +1,9 @@
+<div class="paginator-row">
+    <div class="pull-left">
+        <span st-pagination="" st-items-by-page="itemsByPage"></span>
+    </div>
+    <div class="pull-left select-box">
+        Display <input class="input-sm" type="number" ng-model="itemsByPage">
+        <span ng-if="total"> Total {{total}} records found </span>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 /**
  * Created by doanthuan on 4/9/2015.
  */
-var myAppProduct = angular.module('myApp.product', ['ngRoute', 'ngResource']);
+var myAppProduct = angular.module('myApp.product', ['ngRoute', 'ngResource', 'smart-table', 'myApp.common']);
 
 myAppProduct.config(['$routeProvider', function($routeProvider) {
     $routeProvider

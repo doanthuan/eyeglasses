@@ -13,6 +13,7 @@
     "angular-mocks": "~1.2.x",
     "html5-boilerplate": "~4.3.0",
     "jquery": "1.x",
-    "angular-smart-table": "~2.0.1"
+    "angular-smart-table": "~2.0.1",
+    "bootstrap": "~3.3.4"
   }
 }

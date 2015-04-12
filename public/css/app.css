@@ -1,0 +1,18 @@
+.paginator-row nav{
+    display: inline-block;
+}
+.paginator-row .pagination{
+    margin: 0px;
+}
+
+.paginator-row .select-box{
+    margin-left:20px;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}

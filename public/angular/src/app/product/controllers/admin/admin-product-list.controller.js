@@ -2,12 +2,22 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-myAppProduct.controller('AdminProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-    Product.query( {} ,function(products) {
-        console.log(products);
-        $scope.products = products;
-    }, function(error) {
-        console.log(error);
-    });
+myAppProduct.controller('AdminProductListController', ['$scope', 'Product' , 'PaginationService', '$http', function($scope, Product, PaginationService, $http) {
+
+    $scope.getPage = function(tableState) {
+
+        $scope.isLoading = true;
+
+        PaginationService.getPage('/product', tableState, function(result){
+
+            $scope.products = result.data;
+
+            $scope.total = result.total;
+
+            $scope.isLoading = false;
+        });
+
+    };
+
 
 }]);
