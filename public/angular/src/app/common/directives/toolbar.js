@@ -1,14 +1,13 @@
 /**
  * Created by doanthuan on 4/12/2015.
  */
-
-angular.module('myApp.common').directive('pagination', function () {
+angular.module('myApp.common').directive('toolbar', function () {
     return {
         restrict: 'E',
         scope: {
-            'total': '='
+            'pageTitle': '@'
         },
-        templateUrl: '/views/common/directives/pagination.html',
+        templateUrl: '/views/common/directives/toolbar.html',
         link: function (scope, elem, attrs) {
 
         }

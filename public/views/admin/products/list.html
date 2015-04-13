@@ -1,44 +1,6 @@
-<div class="container-fluid">
+<div class="container">
 
-  <table st-table="products" st-pipe="getPage" class="table table-striped">
-    <thead>
-    <tr>
-      <td colspan="5">
-        <pagination total="total"></pagination>
-      </td>
-    </tr>
-    <tr>
-      <th st-sort="name">Name</th>
-      <th st-sort="price" st-skip-natural="true">Price</th>
-      <th st-sort="quantity">Quantity</th>
-      <th st-sort="created_at">Created At</th>
-      <th st-sort="status">Status</th>
-    </tr>
-    <tr>
-      <th>
-        <input st-search="name" placeholder="Search Name" class="input-sm form-control" type="search"/>
-      </th>
-      <th>
-        <input st-search="price" placeholder="Search Price" class="input-sm form-control" type="search"/>
-      </th>
-      <th>
-        <input st-search="quantity" placeholder="Search Quantity" class="input-sm form-control" type="search"/>
-      </th>
-    </tr>
-    </thead>
-    <tbody ng-show="!isLoading">
-      <tr ng-repeat="product in products" >
-        <td>{{product.name}}</td>
-        <td>{{product.price | currency}}</td>
-        <td>{{product.quantity}}</td>
-        <td>{{product.created_at | date}}</td>
-        <td>{{product.status}}</td>
-      </tr>
-    </tbody>
-    <tbody ng-show="isLoading">
-    <tr>
-      <td colspan="4" class="text-center">Loading ... </td>
-    </tr>
-    </tbody>
-  </table>
+  <toolbar page-title="Manage Products"></toolbar>
+
+  <grid url="/product" cols="gridCols"></grid>
 </div>

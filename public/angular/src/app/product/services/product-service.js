@@ -2,7 +2,7 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-myAppProduct.factory('Product', ['$resource',
+angular.module('myApp.product').factory('Product', ['$resource',
     function($resource) {
         return $resource('/product/:id', {id: '@id'},{
                 update: {
@@ -13,7 +13,7 @@ myAppProduct.factory('Product', ['$resource',
     }]
 );
 
-myAppProduct.factory('ProductService', ['$q', '$filter', '$timeout' , 'Product', function($q, $filter, $timeout, Product) {
+angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$timeout' , 'Product', function($q, $filter, $timeout, Product) {
             //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
             //in our case, it actually performs the logic which would happened in the server
             function getPage(start, number, params) {

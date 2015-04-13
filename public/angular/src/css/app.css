@@ -1,3 +1,25 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+
+.navbar-inverse {
+    background: #2c3742;
+    border-color: #191e23;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #fff;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+
 .paginator-row nav{
     display: inline-block;
 }
@@ -15,4 +37,8 @@
 
 .st-sort-descent:before {
     content: '\25BC';
+}
+
+.page-header h2{
+    margin: 0px;
 }

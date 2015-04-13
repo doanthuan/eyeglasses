@@ -1,9 +1,9 @@
 /**
  * Created by doanthuan on 4/9/2015.
  */
-var myAppProduct = angular.module('myApp.product', ['ngRoute', 'ngResource', 'smart-table', 'myApp.common']);
+angular.module('myApp.product', ['ngRoute', 'ngResource', 'myApp.common']);
 
-myAppProduct.config(['$routeProvider', function($routeProvider) {
+angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'ProductListController',

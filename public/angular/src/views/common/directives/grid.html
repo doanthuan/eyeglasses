@@ -1,0 +1,39 @@
+<table st-table="items" st-pipe="getPage" class="table table-striped table-bordered table-hover table-condensed">
+    <thead>
+    <tr>
+        <td colspan="6">
+            <pagination total="total"></pagination>
+        </td>
+    </tr>
+    <tr>
+        <th ng-repeat="col in cols" st-sort="{{col.name}}">
+            {{col.title}}
+        </th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <th ng-repeat="col in cols">
+            <input ng-if="col.search" st-search="{{col.name}}" placeholder="Search" class="input-sm form-control" type="search"/>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody ng-show="!isLoading">
+    <tr ng-repeat="item in items" >
+        <td ng-repeat="col in cols">
+            {{item[col.name] | picker:col.format}}
+        </td>
+        <td>
+            <a class="btn btn-sm btn-info" href="">
+                <i class="glyphicon glyphicon-pencil"></i>
+                Edit
+            </a>
+        </td>
+    </tr>
+    </tbody>
+    <tbody ng-show="isLoading">
+    <tr>
+        <td colspan="6" class="text-center">Loading ... </td>
+    </tr>
+    </tbody>
+</table>

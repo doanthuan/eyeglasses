@@ -2,7 +2,7 @@
  * Created by doanthuan on 4/12/2015.
  */
 
-myAppCommon.factory('PaginationService', [ '$http', function($http) {
+angular.module('myApp.common').factory('PaginationService', [ '$http', function($http) {
         function getPage(url, tableState, callback) {
 
             var pagination = tableState.pagination;
