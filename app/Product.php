@@ -8,8 +8,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Product extends Model{
 
     protected $table = 'product';
@@ -30,28 +28,28 @@ class Product extends Model{
     //relationship
     public function images()
     {
-        return $this->hasMany('\Goxob\Catalog\Model\Image', 'product_id', 'product_id');
+        return $this->hasMany('\App\Image', 'product_id', 'product_id');
     }
 
     public function category()
     {
-        return $this->belongsTo('\Goxob\Catalog\Model\Category','category_id', 'category_id');
+        return $this->belongsTo('\App\Category','category_id', 'category_id');
     }
 
     public function attributeSet()
     {
-        return $this->belongsTo('\Goxob\Catalog\Model\AttributeSet','attr_set_id', 'attr_set_id');
+        return $this->belongsTo('\App\AttributeSet','attr_set_id', 'attr_set_id');
     }
 
     public function attributes()
     {
-        return $this->belongsToMany('\Goxob\Catalog\Model\Attribute', 'product_attribute_value', 'product_id', 'attr_id')
+        return $this->belongsToMany('\App\Attribute', 'product_attribute_value', 'product_id', 'attr_id')
             ->withPivot('attr_value');
     }
 
     public function reviews()
     {
-        return $this->hasMany('\Goxob\Catalog\Model\Review', 'product_id', 'product_id');
+        return $this->hasMany('\App\Review', 'product_id', 'product_id');
     }
 
     public function relatedProducts()
@@ -71,21 +69,6 @@ class Product extends Model{
         }
 
         parent::setData($input);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        //after product deleted
-        static::deleted(function($model)
-        {
-            //delete product images
-            $model->deleteImages();
-
-            //delete all attributes values
-            $model->attributes()->detach();
-        });
     }
 
     public function getCartQty()

@@ -1,4 +1,21 @@
-var app = angular.module('myApp', ['myApp.product']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.tinymce', 'myApp.common', 'myApp.product', 'myApp.category']);
+
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+angular.module('myApp.category', ['ngRoute', 'ngResource']);
+
+angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/admin/category', {
+            controller: 'AdminCategoryListController',
+            templateUrl: 'templates/admin/categories/list.html'
+        })
+        .when('/admin/category/add', {
+            controller: 'AdminCategoryAddController',
+            templateUrl: 'templates/admin/categories/add.html'
+        })
+}]);
 
 /**
  * Created by doanthuan on 4/9/2015.
@@ -9,20 +26,154 @@ angular.module('myApp.common',['smart-table']);
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.product', ['ngRoute', 'ngResource', 'myApp.common']);
+angular.module('myApp.product', ['ngRoute', 'ngResource']);
 
 angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'ProductListController',
-            templateUrl: 'views/products/list.html'
+            templateUrl: 'templates/products/list.html'
         })
-        .when('/admin', {
+        .when('/admin/product', {
             controller: 'AdminProductListController',
-            templateUrl: 'views/admin/products/list.html'
+            templateUrl: 'templates/admin/products/list.html'
+        })
+        .when('/admin/product/add', {
+            controller: 'AdminProductAddController',
+            templateUrl: 'templates/admin/products/add.html'
         })
 }]);
 
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').factory('Product', ['$resource',
+    function($resource) {
+        return $resource('/product/:id', {id: '@id'},{
+                update: {
+                    method: 'PUT'
+                }
+            }
+        );
+    }]
+);
+
+angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$timeout' , 'Product', function($q, $filter, $timeout, Product) {
+            //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
+            //in our case, it actually performs the logic which would happened in the server
+            function getPage(start, number, params) {
+
+                var deferred = $q.defer();
+
+                var filtered = params.search.predicateObject ? $filter('filter')(randomsItems, params.search.predicateObject) : randomsItems;
+
+                if (params.sort.predicate) {
+                    filtered = $filter('orderBy')(filtered, params.sort.predicate, params.sort.reverse);
+                }
+
+                var result = filtered.slice(start, start + number);
+
+                $timeout(function () {
+                    //note, the server passes the information about the data set size
+                    deferred.resolve({
+                        data: result,
+                        numberOfPages: Math.ceil(1000 / number)
+                    });
+                }, 1500);
+
+                return deferred.promise;
+            }
+
+            return {
+                getPage: getPage
+            };
+        }]
+);
+
+/**
+ * Created by doanthuan on 4/12/2015.
+ */
+angular.module('myApp.common').directive('appGrid', ['PaginationService', function (PaginationService) {
+    return {
+        restrict: 'E',
+        templateUrl: '/templates/common/directives/grid.html',
+        scope: {
+            url: '@',
+            cols: '='
+        },
+        link: {
+            pre: function (scope, element, attrs, ctrl) {
+
+                scope.getPage = function(tableState) {
+
+                    scope.isLoading = true;
+
+                    PaginationService.getPage(scope.url, tableState, function(result){
+
+                        scope.items = result.data;
+
+                        scope.total = result.total;
+
+                        scope.isLoading = false;
+                    });
+
+                };
+            }
+        }
+    }
+}]);
+
+angular.module('myApp.common').filter('picker', function($filter) {
+    return function(value, filterName) {
+        if(filterName){
+            if(filterName == 'status'){
+                if(value == 1){
+                    return 'Enabled';
+                } else{
+                    return 'Disabled';
+                }
+            }
+            else{
+                return $filter(filterName)(value);
+            }
+        }
+        else{
+            return value;
+        }
+    };
+});
+/**
+ * Created by doanthuan on 4/12/2015.
+ */
+
+angular.module('myApp.common').directive('appPagination', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            'total': '='
+        },
+        templateUrl: '/templates/common/directives/pagination.html',
+        link: function (scope, elem, attrs) {
+
+        }
+    }
+});
+/**
+ * Created by doanthuan on 4/12/2015.
+ */
+angular.module('myApp.common').directive('appToolbar', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            'pageTitle': '@'
+        },
+        templateUrl: '/templates/common/directives/toolbar.html',
+        link: function (scope, elem, attrs) {
+
+        }
+    }
+});
 /**
  * Created by doanthuan on 4/12/2015.
  */
@@ -75,80 +226,6 @@ angular.module('myApp.common').factory('PaginationService', [ '$http', function(
         };
     }]
 );
-/**
- * Created by doanthuan on 4/12/2015.
- */
-angular.module('myApp.common').directive('grid', ['PaginationService', function (PaginationService) {
-    return {
-        restrict: 'E',
-        templateUrl: '/views/common/directives/grid.html',
-        scope: {
-            url: '@',
-            cols: '='
-        },
-        link: {
-            pre: function (scope, element, attrs, ctrl) {
-
-                scope.getPage = function(tableState) {
-
-                    scope.isLoading = true;
-
-                    PaginationService.getPage(scope.url, tableState, function(result){
-
-                        scope.items = result.data;
-
-                        scope.total = result.total;
-
-                        scope.isLoading = false;
-                    });
-
-                };
-            }
-        }
-    }
-}]);
-
-angular.module('myApp.common').filter('picker', function($filter) {
-    return function(value, filterName) {
-        if(filterName){
-            return $filter(filterName)(value);
-        }
-        else{
-            return value;
-        }
-    };
-});
-/**
- * Created by doanthuan on 4/12/2015.
- */
-
-angular.module('myApp.common').directive('pagination', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            'total': '='
-        },
-        templateUrl: '/views/common/directives/pagination.html',
-        link: function (scope, elem, attrs) {
-
-        }
-    }
-});
-/**
- * Created by doanthuan on 4/12/2015.
- */
-angular.module('myApp.common').directive('toolbar', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            'pageTitle': '@'
-        },
-        templateUrl: '/views/common/directives/toolbar.html',
-        link: function (scope, elem, attrs) {
-
-        }
-    }
-});
 /**
  * Created by doanthuan on 4/9/2015.
  */
@@ -213,6 +290,44 @@ angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$ti
  * Created by doanthuan on 4/9/2015.
  */
 
+angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
+
+    $scope.tinymceOptions = {
+        handle_event_callback: function (e) {
+            // put logic here for keypress
+        }
+    };
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', function($scope) {
+
+    $scope.gridCols = [
+        {title: 'Name', name: 'name', search: 'text'},
+        {title: 'Child Count', name: 'child_count', search: 'text'}
+    ];
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
+
+    $scope.tinymceOptions = {
+        handle_event_callback: function (e) {
+            // put logic here for keypress
+        }
+    };
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
 angular.module('myApp.product').controller('AdminProductListController', ['$scope', function($scope) {
 
     $scope.gridCols = [
@@ -220,7 +335,7 @@ angular.module('myApp.product').controller('AdminProductListController', ['$scop
         {title: 'Price', name: 'price', search: 'text', format: 'currency'},
         {title: 'Quantity', name: 'quantity', search: 'text'},
         {title: 'Created At', name: 'created_at', format: 'date'},
-        {title: 'Status', name: 'status'}
+        {title: 'Status', name: 'status', format: 'status'}
     ];
 
 }]);

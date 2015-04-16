@@ -42,3 +42,8 @@ body {
 .page-header h2{
     margin: 0px;
 }
+
+
+form .nav-tabs {
+    margin-bottom: 15px;
+}

@@ -9,7 +9,7 @@ angular.module('myApp.product').controller('AdminProductListController', ['$scop
         {title: 'Price', name: 'price', search: 'text', format: 'currency'},
         {title: 'Quantity', name: 'quantity', search: 'text'},
         {title: 'Created At', name: 'created_at', format: 'date'},
-        {title: 'Status', name: 'status'}
+        {title: 'Status', name: 'status', format: 'status'}
     ];
 
 }]);

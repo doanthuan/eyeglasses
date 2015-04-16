@@ -1,10 +1,10 @@
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('grid', ['PaginationService', function (PaginationService) {
+angular.module('myApp.common').directive('appGrid', ['PaginationService', function (PaginationService) {
     return {
         restrict: 'E',
-        templateUrl: '/views/common/directives/grid.html',
+        templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
             cols: '='
@@ -34,7 +34,16 @@ angular.module('myApp.common').directive('grid', ['PaginationService', function 
 angular.module('myApp.common').filter('picker', function($filter) {
     return function(value, filterName) {
         if(filterName){
-            return $filter(filterName)(value);
+            if(filterName == 'status'){
+                if(value == 1){
+                    return 'Enabled';
+                } else{
+                    return 'Disabled';
+                }
+            }
+            else{
+                return $filter(filterName)(value);
+            }
         }
         else{
             return value;

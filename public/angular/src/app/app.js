@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['myApp.product']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ui.tinymce', 'myApp.common', 'myApp.product', 'myApp.category']);

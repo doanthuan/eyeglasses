@@ -8,11 +8,11 @@ var publicFolderPath = '..';
 
 var paths = {
   appJavascript:     ['src/app/app.js', 'src/app/**/*.js'],
-  appTemplates:      'src/views/**/*.html',
+  appTemplates:      'src/templates/**/*.html',
   appMainSass:       'src/scss/main.scss',
   appStyles:         'src/css/**/*.css',
   appImages:         'src/images/**/*',
-  appMainTemplates:  'src/views/**/*.html',
+  appMainTemplates:  'src/templates/**/*.html',
   appBower:          'src/bower_components/**/*',
   indexHtml:         'src/index.html',
   finalAppJsPath:    '/js/app.js',
@@ -22,7 +22,7 @@ var paths = {
   publicAppJs:       publicFolderPath + '/js/app.js',
   publicCss:         publicFolderPath + '/css',
   publicImages:      publicFolderPath + '/images',
-  publicTemplates:   publicFolderPath + '/views',
+  publicTemplates:   publicFolderPath + '/templates',
   publicIndex:       publicFolderPath + '/angular.html',
   publicBower:       publicFolderPath + '/bower_components',
   publicJsManifest:  publicFolderPath + '/js/rev-manifest.json',

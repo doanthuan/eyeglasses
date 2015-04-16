@@ -1,16 +1,20 @@
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.product', ['ngRoute', 'ngResource', 'myApp.common']);
+angular.module('myApp.product', ['ngRoute', 'ngResource']);
 
 angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'ProductListController',
-            templateUrl: 'views/products/list.html'
+            templateUrl: 'templates/products/list.html'
         })
-        .when('/admin', {
+        .when('/admin/product', {
             controller: 'AdminProductListController',
-            templateUrl: 'views/admin/products/list.html'
+            templateUrl: 'templates/admin/products/list.html'
+        })
+        .when('/admin/product/add', {
+            controller: 'AdminProductAddController',
+            templateUrl: 'templates/admin/products/add.html'
         })
 }]);
