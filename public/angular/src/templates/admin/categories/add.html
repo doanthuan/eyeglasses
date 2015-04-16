@@ -1,47 +1,28 @@
 <div class="container">
-  <form method="POST" accept-charset="UTF-8" name="adminForm" class="form-horizontal" enctype="multipart/form-data"><input name="_token" type="hidden" value="w1iwMHHGNFNNge1JcRCrlKLpDoXRc05xptXTV8PG">
 
-    <tabset>
-      <tab heading="General">
+  <app-toolbar page-title="New Category" buttons="save,cancel"></app-toolbar>
 
-        <div class="form-group">
-          <label  class="col-sm-2 control-label">Name</label>
-          <div class="col-sm-10">
-            <input required="required" placeholder="Enter Name" class="form-control" name="name" type="text" ng-model="product.name">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label  class="col-sm-2 control-label">Description</label>
-          <div class="col-sm-10">
-            <textarea ui-tinymce="tinymceOptions" name="description" ng-model="product.description"></textarea>
-          </div>
-        </div>
-
-
-        <div class="form-group">
-          <label  class="col-sm-2 control-label">Price</label>
-          <div class="col-sm-10">
-            <input required="required" placeholder="Enter Price" class="form-control" name="price" type="text" ng-model="product.price">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label  class="col-sm-2 control-label">Quantity</label>
-          <div class="col-sm-10">
-            <input required="required" class="form-control" name="quantity" type="number" ng-model="product.quantity"  ng-init="product.quantity=5.00">
-          </div>
-        </div>
-
-
-      </tab>
-      <tab select="alertMe()">
-        <tab-heading>
-          Images
-        </tab-heading>
-        I've got an HTML heading, and a select callback. Pretty cool!
-      </tab>
-    </tabset>
+  <form method="POST" action="" accept-charset="UTF-8" name="adminForm" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input required="required" class="form-control" name="name" type="text" ng-model="category.name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Parent Category</label>
+      <div class="col-sm-10">
+        <select class="form-control" name="parent_id" ng-model="category.parent_id">
+          <option value="0">Root</option>
+          <option value="9">Phone</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-10">
+        <input id="category_id" class="form-control" name="category_id" type="hidden" ng-model="category.category_id">
+      </div>
+    </div>
 
   </form>
 </div>

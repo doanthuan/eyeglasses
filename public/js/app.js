@@ -162,18 +162,66 @@ angular.module('myApp.common').directive('appPagination', function () {
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appToolbar', function () {
+angular.module('myApp.common').directive('appToolbar', ['$location', function ($location) {
     return {
         restrict: 'E',
         scope: {
-            'pageTitle': '@'
+            'pageTitle': '@',
+            'buttons': '@'
         },
         templateUrl: '/templates/common/directives/toolbar.html',
-        link: function (scope, elem, attrs) {
-
+        link:
+        {
+            pre: function (scope, elem, attrs) {
+                var buttons = [];
+                var buttonNameArr = scope.buttons.split(',');
+                buttonNameArr.forEach(function(buttonName){
+                    var button = null;
+                    switch(buttonName){
+                        case 'add':
+                            button = {
+                                text: 'Add New',
+                                class: 'btn-success',
+                                icon: 'glyphicon glyphicon-plus',
+                                click: function(){
+                                    var curUrl = $location.path();
+                                    $location.path(curUrl + '/add');
+                                }
+                            };
+                            break;
+                        case 'delete':
+                            button = {
+                                text: 'Delete',
+                                class: 'btn-danger',
+                                icon: 'glyphicon glyphicon-remove'
+                            };
+                            break;
+                        case 'save':
+                            button = {
+                                text: 'Save',
+                                class: 'btn-primary',
+                                click: function(){
+                                    scope.$parent.saveForm();
+                                }
+                            };
+                            break;
+                        case 'cancel':
+                            button = {
+                                text: 'Cancel',
+                                class: 'btn-default',
+                                click: function(){
+                                    window.history.back();
+                                }
+                            };
+                            break;
+                    }
+                    buttons.push(button);
+                });
+                scope.toolbarButtons = buttons;
+            }
         }
     }
-});
+}]);
 /**
  * Created by doanthuan on 4/12/2015.
  */
@@ -290,15 +338,31 @@ angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$ti
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
+angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope', '$http', function($scope, $http) {
 
-    $scope.tinymceOptions = {
-        handle_event_callback: function (e) {
-            // put logic here for keypress
-        }
+    $scope.category = {};
+
+    $scope.saveForm = function(){
+        $http({
+            method  : 'GET',
+            url     : '/category/create',
+            data    : $.param($scope.category),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+            .success(function(data) {
+                console.log(data);
+
+                if (!data.success) {
+                    // if not successful, bind errors to error variables
+                    alert('error');
+                } else {
+                    // if successful, bind success message to message
+                    $scope.message = data.message;
+                }
+            });
     };
-
-}]);
+}
+]);
 /**
  * Created by doanthuan on 4/9/2015.
  */

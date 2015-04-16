@@ -4,12 +4,10 @@
             <h2>{{pageTitle}}</h2>
         </div>
         <div class="col-sm-6 text-right btn-toolbar">
-            <button type="button" class="btn btn-sm btn-success" onclick="return setLocation('http://acs.local/admin/device/create')">
-                <i class="glyphicon glyphicon-plus"></i>
-                Add New</button>
-            <button type="button" class="btn btn-sm btn-danger" onclick="return deleteItems()">
-                <i class="glyphicon glyphicon-remove"></i>
-                Delete</button>
+            <button ng-repeat="button in toolbarButtons" type="button" class="btn btn-sm {{button.class}}" ng-click="button.click()">
+                <i ng-if="button.icon" class="{{button.icon}}"></i>
+                {{button.text}}
+            </button>
         </div>
     </div>
 </div>

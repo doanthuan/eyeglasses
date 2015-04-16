@@ -15,7 +15,7 @@ class QueryRepository implements QueryRepositoryInterface{
     {
         //filters
         if (isset($input['filters'])) {
-            $filters = Input::get('filters');
+            $filters = $input['filters'];
             $filters = (array)json_decode($filters);
             if(is_array($filters)){
                 foreach ($filters as $key => $value) {
