@@ -2,28 +2,32 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope', '$http', function($scope, $http) {
+angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope','$location', 'Category', 'toaster',
+    function($scope, $location, Category, toaster) {
 
-    $scope.category = {};
+    $scope.buttons = [
+        {
+            name: 'save',
+            click: function(){
+                $scope.saveForm();
+            }
+        },
+        'cancel'
+    ];
+
+    $scope.category = new Category();
 
     $scope.saveForm = function(){
-        $http({
-            method  : 'GET',
-            url     : '/category/create',
-            data    : $.param($scope.category),  // pass in data as strings
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-        })
-            .success(function(data) {
-                console.log(data);
-
-                if (!data.success) {
-                    // if not successful, bind errors to error variables
-                    alert('error');
-                } else {
-                    // if successful, bind success message to message
-                    $scope.message = data.message;
-                }
-            });
+        $scope.category.$save({},
+            function(response){
+                toaster.pop('success', "", response.message);
+                $location.path('/admin/category');
+            },
+            function(response){
+                toaster.pop('error', "", response.message);
+                console.log(result);
+            }
+        );
     };
 }
 ]);

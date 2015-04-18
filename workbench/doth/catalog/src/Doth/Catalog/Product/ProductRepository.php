@@ -8,7 +8,7 @@
 
 namespace Doth\Catalog\Product;
 
-use Doth\Catalog\Core\QueryRepositoryInterface;
+use Doth\Core\QueryRepositoryInterface;
 use Input;
 
 class ProductRepository implements ProductRepositoryInterface{

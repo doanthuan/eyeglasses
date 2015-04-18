@@ -1,7 +1,7 @@
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.product', ['ngRoute', 'ngResource']);
+angular.module('myApp.product', []);
 
 angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
     $routeProvider

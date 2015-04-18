@@ -2,9 +2,9 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').factory('Product', ['$resource',
+angular.module('myApp.category').factory('Category', ['$resource',
     function($resource) {
-        return $resource('/product/:id', {id: '@id'},{
+        return $resource('/category/:id', {id: '@id'},{
                 update: {
                     method: 'PUT'
                 }

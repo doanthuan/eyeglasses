@@ -2,7 +2,7 @@
 namespace Doth\Catalog\Category;
 
 use Str;
-use Doth\Catalog\Abstracts\Model;
+use Doth\Core\Abstracts\Model;
 
 class Category extends Model{
 

@@ -6,7 +6,7 @@
  * Time: 10:21 AM
  */
 
-namespace Doth\Catalog\Core;
+namespace Doth\Core;
 
 
 class QueryRepository implements QueryRepositoryInterface{

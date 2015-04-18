@@ -8,7 +8,7 @@
 
 namespace Doth\Catalog\Product;
 
-use Doth\Catalog\Abstracts\Model;
+use Doth\Core\Abstracts\Model;
 
 class Product extends Model{
 

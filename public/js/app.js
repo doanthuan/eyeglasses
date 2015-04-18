@@ -1,9 +1,9 @@
-var app = angular.module('myApp', ['ui.bootstrap', 'ui.tinymce', 'myApp.common', 'myApp.product', 'myApp.category']);
+var app = angular.module('myApp', ['ngRoute', 'ngResource','ngAnimate','ui.bootstrap','ui.tinymce','toaster','myApp.common','myApp.product','myApp.category']);
 
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.category', ['ngRoute', 'ngResource']);
+angular.module('myApp.category', []);
 
 angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -26,7 +26,7 @@ angular.module('myApp.common',['smart-table']);
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.product', ['ngRoute', 'ngResource']);
+angular.module('myApp.product', []);
 
 angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -48,47 +48,15 @@ angular.module('myApp.product').config(['$routeProvider', function($routeProvide
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').factory('Product', ['$resource',
+angular.module('myApp.category').factory('Category', ['$resource',
     function($resource) {
-        return $resource('/product/:id', {id: '@id'},{
+        return $resource('/category/:id', {id: '@id'},{
                 update: {
                     method: 'PUT'
                 }
             }
         );
     }]
-);
-
-angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$timeout' , 'Product', function($q, $filter, $timeout, Product) {
-            //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
-            //in our case, it actually performs the logic which would happened in the server
-            function getPage(start, number, params) {
-
-                var deferred = $q.defer();
-
-                var filtered = params.search.predicateObject ? $filter('filter')(randomsItems, params.search.predicateObject) : randomsItems;
-
-                if (params.sort.predicate) {
-                    filtered = $filter('orderBy')(filtered, params.sort.predicate, params.sort.reverse);
-                }
-
-                var result = filtered.slice(start, start + number);
-
-                $timeout(function () {
-                    //note, the server passes the information about the data set size
-                    deferred.resolve({
-                        data: result,
-                        numberOfPages: Math.ceil(1000 / number)
-                    });
-                }, 1500);
-
-                return deferred.promise;
-            }
-
-            return {
-                getPage: getPage
-            };
-        }]
 );
 
 /**
@@ -167,57 +135,74 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
         restrict: 'E',
         scope: {
             'pageTitle': '@',
-            'buttons': '@'
+            'buttons': '='
         },
         templateUrl: '/templates/common/directives/toolbar.html',
         link:
         {
             pre: function (scope, elem, attrs) {
-                var buttons = [];
-                var buttonNameArr = scope.buttons.split(',');
-                buttonNameArr.forEach(function(buttonName){
-                    var button = null;
-                    switch(buttonName){
-                        case 'add':
-                            button = {
-                                text: 'Add New',
-                                class: 'btn-success',
-                                icon: 'glyphicon glyphicon-plus',
-                                click: function(){
-                                    var curUrl = $location.path();
-                                    $location.path(curUrl + '/add');
-                                }
-                            };
-                            break;
-                        case 'delete':
-                            button = {
-                                text: 'Delete',
-                                class: 'btn-danger',
-                                icon: 'glyphicon glyphicon-remove'
-                            };
-                            break;
-                        case 'save':
-                            button = {
-                                text: 'Save',
-                                class: 'btn-primary',
-                                click: function(){
-                                    scope.$parent.saveForm();
-                                }
-                            };
-                            break;
-                        case 'cancel':
-                            button = {
-                                text: 'Cancel',
-                                class: 'btn-default',
-                                click: function(){
-                                    window.history.back();
-                                }
-                            };
-                            break;
-                    }
-                    buttons.push(button);
-                });
-                scope.toolbarButtons = buttons;
+                scope.toolbarButtons = [];
+                if(scope.buttons){
+                    scope.buttons.forEach(function(aButton){
+
+                        if(typeof aButton == 'string'){
+                            aButton = {name:aButton};
+                        }
+                        var buttonName = aButton.name;
+
+                        var button = null;
+                        switch(buttonName){
+                            case 'add':
+                                button = {
+                                    text: 'Add New',
+                                    class: 'btn-success',
+                                    icon: 'glyphicon glyphicon-plus',
+                                    click: function(){
+                                        var curUrl = $location.path();
+                                        $location.path(curUrl + '/add');
+                                    }
+                                };
+                                break;
+                            case 'delete':
+                                button = {
+                                    text: 'Delete',
+                                    class: 'btn-danger',
+                                    icon: 'glyphicon glyphicon-remove'
+                                };
+                                break;
+                            case 'save':
+                                button = {
+                                    text: 'Save',
+                                    class: 'btn-primary',
+                                    click: function(){
+                                        scope.$parent.saveForm();
+                                    }
+                                };
+                                break;
+                            case 'cancel':
+                                button = {
+                                    text: 'Cancel',
+                                    class: 'btn-default',
+                                    click: function(){
+                                        window.history.back();
+                                    }
+                                };
+                                break;
+                            default :
+                                button = {
+                                    text: 'Undefined',
+                                    class: 'btn-default'
+                                };
+                                break;
+                        }
+                        var mergedButton = angular.extend(button, aButton);
+
+                        scope.toolbarButtons.push(mergedButton);
+
+
+                    });
+                }
+
             }
         }
     }
@@ -302,64 +287,36 @@ angular.module('myApp.product').factory('Product', ['$resource',
     }]
 );
 
-angular.module('myApp.product').factory('ProductService', ['$q', '$filter', '$timeout' , 'Product', function($q, $filter, $timeout, Product) {
-            //fake call to the server, normally this service would serialize table state to send it to the server (with query parameters for example) and parse the response
-            //in our case, it actually performs the logic which would happened in the server
-            function getPage(start, number, params) {
-
-                var deferred = $q.defer();
-
-                var filtered = params.search.predicateObject ? $filter('filter')(randomsItems, params.search.predicateObject) : randomsItems;
-
-                if (params.sort.predicate) {
-                    filtered = $filter('orderBy')(filtered, params.sort.predicate, params.sort.reverse);
-                }
-
-                var result = filtered.slice(start, start + number);
-
-                $timeout(function () {
-                    //note, the server passes the information about the data set size
-                    deferred.resolve({
-                        data: result,
-                        numberOfPages: Math.ceil(1000 / number)
-                    });
-                }, 1500);
-
-                return deferred.promise;
-            }
-
-            return {
-                getPage: getPage
-            };
-        }]
-);
-
 /**
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope', '$http', function($scope, $http) {
+angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope','$location', 'Category', 'toaster',
+    function($scope, $location, Category, toaster) {
 
-    $scope.category = {};
+    $scope.buttons = [
+        {
+            name: 'save',
+            click: function(){
+                $scope.saveForm();
+            }
+        },
+        'cancel'
+    ];
+
+    $scope.category = new Category();
 
     $scope.saveForm = function(){
-        $http({
-            method  : 'GET',
-            url     : '/category/create',
-            data    : $.param($scope.category),  // pass in data as strings
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-        })
-            .success(function(data) {
-                console.log(data);
-
-                if (!data.success) {
-                    // if not successful, bind errors to error variables
-                    alert('error');
-                } else {
-                    // if successful, bind success message to message
-                    $scope.message = data.message;
-                }
-            });
+        $scope.category.$save({},
+            function(response){
+                toaster.pop('success', "", response.message);
+                $location.path('/admin/category');
+            },
+            function(response){
+                toaster.pop('error', "", response.message);
+                console.log(result);
+            }
+        );
     };
 }
 ]);
@@ -368,6 +325,8 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
  */
 
 angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', function($scope) {
+
+    $scope.buttons = ['add','delete'];
 
     $scope.gridCols = [
         {title: 'Name', name: 'name', search: 'text'},
@@ -380,6 +339,8 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
  */
 
 angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
+
+
 
     $scope.tinymceOptions = {
         handle_event_callback: function (e) {

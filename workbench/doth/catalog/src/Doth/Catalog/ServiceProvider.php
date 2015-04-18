@@ -4,7 +4,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
 	public function boot()
 	{
-		include __DIR__.'/../../routes.php';
+		include __DIR__ . '/../../routes.php';
 	}
 
 	public function register()
@@ -17,11 +17,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$this->app->bind(
 			'Doth\Catalog\Category\CategoryRepositoryInterface',
 			'Doth\Catalog\Category\CategoryRepository'
-		);
-
-		$this->app->bind(
-			'Doth\Catalog\Core\QueryRepositoryInterface',
-			'Doth\Catalog\Core\QueryRepository'
 		);
 	}
 }

@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Doth\Catalog\Abstracts;
+namespace Doth\Core\Abstracts;
 
 use Eloquent, Validator;
 abstract class Model extends \Illuminate\Database\Eloquent\Model {
@@ -29,6 +29,22 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model {
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
+    }
+
+    protected function setErrors($errors)
+    {
+        $this->errors = $errors;
+        return false;
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    public function hasErrors()
+    {
+        return ! empty($this->errors);
     }
 
     public function setData($input)
@@ -87,29 +103,7 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model {
         return false;
     }
 
-    /**
-     * Set error message bag
-     *
-     * @var Illuminate\Support\MessageBag
-     */
-    protected function setErrors($errors)
-    {
-        $this->errors = $errors;
-        return false;
-    }
 
-    /**
-     * Retrieve error message bag
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    public function hasErrors()
-    {
-        return ! empty($this->errors);
-    }
 
     public function publish($cid, $value, $col = 'status')
     {

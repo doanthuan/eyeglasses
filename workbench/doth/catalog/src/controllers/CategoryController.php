@@ -1,10 +1,10 @@
 <?php namespace Doth\Catalog\Controllers;
 
-use Doth\Catalog\Controllers\Controller;
+use Doth\Core\Abstracts\ApiController;
 
 use Doth\Catalog\Category\CategoryRepositoryInterface;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
 
     public function __construct( CategoryRepositoryInterface $category )
@@ -42,7 +42,8 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        //
+        $category = $this->category->save(\Input::all());
+        return $this->respondSuccess('Category created successfully', $category);
     }
 
     /**

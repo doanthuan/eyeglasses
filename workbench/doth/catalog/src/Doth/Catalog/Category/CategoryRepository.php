@@ -9,9 +9,11 @@
 namespace Doth\Catalog\Category;
 
 use Input;
-use Doth\Catalog\Core\QueryRepositoryInterface;
+use Doth\Core\QueryRepositoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface{
+
+    use \Doth\Core\Traits\Repository;
 
     /**
      * @param Category $category
