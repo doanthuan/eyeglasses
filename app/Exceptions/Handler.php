@@ -36,7 +36,15 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		return parent::render($request, $e);
+		if ($e instanceof \Doth\Core\Exceptions\BusinessException)
+		{
+			return response()->json([
+				'success' => false,
+				'message' => $e->getMessage()
+			], \Illuminate\Http\Response::HTTP_UNPROCESSABLE_ENTITY);
+
+		}
+		//return parent::render($request, $e);
 	}
 
 }

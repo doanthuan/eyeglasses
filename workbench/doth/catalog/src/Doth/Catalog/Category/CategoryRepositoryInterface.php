@@ -10,8 +10,7 @@ namespace Doth\Catalog\Category;
 
 
 interface CategoryRepositoryInterface {
-    public function getList();
-
+    
     public function updatePath($categoryId = 0);
 
     public function updateChildCount($categoryId = 0);

@@ -8,28 +8,17 @@
 
 namespace Doth\Catalog\Product;
 
-use Doth\Core\QueryRepositoryInterface;
+use Doth\Core\Abstracts\Repository;
 use Input;
 
-class ProductRepository implements ProductRepositoryInterface{
+class ProductRepository extends Repository implements ProductRepositoryInterface{
 
     /**
      * @param Product $product
-     * @param QueryRepositoryInterface $query
      */
-    public function __construct( Product $product, QueryRepositoryInterface $query )
+    public function __construct( Product $product )
     {
         $this->model = $product;
-        $this->query = $query;
-    }
-
-    public function getList()
-    {
-        $query = $this->model->query();
-
-        $items = $this->query->filterQuery($query, Input::all());
-
-        return $items;
     }
 
     public function deleteImages()

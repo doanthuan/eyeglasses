@@ -68,7 +68,8 @@ angular.module('myApp.common').directive('appGrid', ['PaginationService', functi
         templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
-            cols: '='
+            cols: '=',
+            key: '@'
         },
         link: {
             pre: function (scope, element, attrs, ctrl) {
@@ -87,6 +88,13 @@ angular.module('myApp.common').directive('appGrid', ['PaginationService', functi
                     });
 
                 };
+
+                scope.checkAll = function(){
+                    angular.forEach(scope.items, function (item) {
+                        item.Selected = !scope.selectedAll;
+                    });
+                }
+
             }
         }
     }
@@ -128,6 +136,17 @@ angular.module('myApp.common').directive('appPagination', function () {
     }
 });
 /**
+ * Created by doanthuan on 4/18/2015.
+ */
+angular.module('myApp.common').directive('appSpinner', function () {
+    return {
+        restrict: 'E',
+        template: '<div class="app-spinner">' +
+        '<span class="fa fa-spinner fa-spin"></span>' +
+        '</div>'
+    };
+});
+/**
  * Created by doanthuan on 4/12/2015.
  */
 angular.module('myApp.common').directive('appToolbar', ['$location', function ($location) {
@@ -167,7 +186,10 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                 button = {
                                     text: 'Delete',
                                     class: 'btn-danger',
-                                    icon: 'glyphicon glyphicon-remove'
+                                    icon: 'glyphicon glyphicon-remove',
+                                    click: function(){
+                                        scope.$parent.deleteItems();
+                                    }
                                 };
                                 break;
                             case 'save':
@@ -175,7 +197,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        scope.$parent.saveForm();
+                                        scope.$parent.saveItem();
                                     }
                                 };
                                 break;
@@ -298,7 +320,7 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
         {
             name: 'save',
             click: function(){
-                $scope.saveForm();
+                $scope.saveItem();
             }
         },
         'cancel'
@@ -306,7 +328,7 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
 
     $scope.category = new Category();
 
-    $scope.saveForm = function(){
+    $scope.saveItem = function(){
         $scope.category.$save({},
             function(response){
                 toaster.pop('success', "", response.message);
@@ -326,12 +348,23 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
 
 angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', function($scope) {
 
-    $scope.buttons = ['add','delete'];
+    $scope.buttons = [
+        'add', {
+            name: 'delete',
+            click: function(){
+                $scope.deleteItems();
+            }
+        }
+    ];
 
     $scope.gridCols = [
         {title: 'Name', name: 'name', search: 'text'},
         {title: 'Child Count', name: 'child_count', search: 'text'}
     ];
+
+    $scope.deleteItems = function(){
+
+    }
 
 }]);
 /**

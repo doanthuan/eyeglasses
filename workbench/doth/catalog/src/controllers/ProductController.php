@@ -1,10 +1,10 @@
 <?php namespace Doth\Catalog\Controllers;
 
-use Doth\Catalog\Controllers\Controller;
+use Doth\Core\Abstracts\ApiController;
 
 use Doth\Catalog\Product\ProductRepositoryInterface;
 
-class ProductController extends Controller
+class ProductController extends ApiController
 {
 
     public function __construct( ProductRepositoryInterface $product )

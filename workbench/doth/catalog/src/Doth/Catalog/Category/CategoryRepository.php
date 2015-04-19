@@ -8,30 +8,21 @@
 
 namespace Doth\Catalog\Category;
 
+use Doth\Core\Abstracts\Repository;
 use Input;
-use Doth\Core\QueryRepositoryInterface;
 
-class CategoryRepository implements CategoryRepositoryInterface{
-
-    use \Doth\Core\Traits\Repository;
+/**
+ * Class CategoryRepository
+ * @package Doth\Catalog\Category
+ */
+class CategoryRepository extends Repository implements CategoryRepositoryInterface{
 
     /**
      * @param Category $category
-     * @param QueryRepositoryInterface $query
      */
-    public function __construct( Category $category, QueryRepositoryInterface $query )
+    public function __construct( Category $category )
     {
         $this->model = $category;
-        $this->query = $query;
-    }
-
-    public function getList()
-    {
-        $query = $this->model->query();
-
-        $items = $this->query->filterQuery($query, Input::all());
-
-        return $items;
     }
 
     public function updatePath($categoryId = 0)
@@ -42,6 +33,8 @@ class CategoryRepository implements CategoryRepositoryInterface{
         }
 
         if($categoryId > 0){
+
+            //@var Category $category
             $category = $this->model->find($categoryId);
             $parent = $category->parent;
             if(isset($parent)){

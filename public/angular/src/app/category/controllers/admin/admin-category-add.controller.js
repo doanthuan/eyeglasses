@@ -9,7 +9,7 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
         {
             name: 'save',
             click: function(){
-                $scope.saveForm();
+                $scope.saveItem();
             }
         },
         'cancel'
@@ -17,7 +17,7 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
 
     $scope.category = new Category();
 
-    $scope.saveForm = function(){
+    $scope.saveItem = function(){
         $scope.category.$save({},
             function(response){
                 toaster.pop('success', "", response.message);

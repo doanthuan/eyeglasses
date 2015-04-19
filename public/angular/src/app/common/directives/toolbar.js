@@ -38,7 +38,10 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                 button = {
                                     text: 'Delete',
                                     class: 'btn-danger',
-                                    icon: 'glyphicon glyphicon-remove'
+                                    icon: 'glyphicon glyphicon-remove',
+                                    click: function(){
+                                        scope.$parent.deleteItems();
+                                    }
                                 };
                                 break;
                             case 'save':
@@ -46,7 +49,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        scope.$parent.saveForm();
+                                        scope.$parent.saveItem();
                                     }
                                 };
                                 break;

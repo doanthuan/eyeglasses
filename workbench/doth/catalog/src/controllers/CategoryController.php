@@ -3,6 +3,7 @@
 use Doth\Core\Abstracts\ApiController;
 
 use Doth\Catalog\Category\CategoryRepositoryInterface;
+use Doth\Core\Exceptions\BusinessException;
 
 class CategoryController extends ApiController
 {
@@ -88,6 +89,18 @@ class CategoryController extends ApiController
     public function destroy($id)
     {
         //
+    }
+
+    public function delete()
+    {
+        $cid = Input::get('cid');
+        if (empty($cid)){
+            throw new BusinessException('Deleting category error. Invalid request ids');
+        }
+
+        $this->category->delete($cid);
+
+        return Redirect::back()->with('success', trans(ucfirst(Str::plural($this->viewKey)).'(s) deleted').'!');
     }
 
 }

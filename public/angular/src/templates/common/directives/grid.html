@@ -6,12 +6,14 @@
         </td>
     </tr>
     <tr>
+        <th width="50px"><input type="checkbox" name="toggle" ng-model="selectedAll" ng-click="checkAll()"></th>
         <th ng-repeat="col in cols" st-sort="{{col.name}}">
             {{col.title}}
         </th>
         <th>Action</th>
     </tr>
     <tr>
+        <th></th>
         <th ng-repeat="col in cols">
             <input ng-if="col.search" st-search="{{col.name}}" placeholder="Search" class="input-sm form-control" type="search"/>
         </th>
@@ -20,6 +22,7 @@
     </thead>
     <tbody ng-show="!isLoading">
     <tr ng-repeat="item in items" >
+        <td><input type="checkbox" name="cid[]" ng-model="item.Selected"></td>
         <td ng-repeat="col in cols">
             {{item[col.name] | picker:col.format}}
         </td>
@@ -33,7 +36,7 @@
     </tbody>
     <tbody ng-show="isLoading">
     <tr>
-        <td colspan="6" class="text-center">Loading ... </td>
+        <td colspan="6"><app-spinner></app-spinner></td>
     </tr>
     </tbody>
 </table>

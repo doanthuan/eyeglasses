@@ -7,7 +7,8 @@ angular.module('myApp.common').directive('appGrid', ['PaginationService', functi
         templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
-            cols: '='
+            cols: '=',
+            key: '@'
         },
         link: {
             pre: function (scope, element, attrs, ctrl) {
@@ -26,6 +27,13 @@ angular.module('myApp.common').directive('appGrid', ['PaginationService', functi
                     });
 
                 };
+
+                scope.checkAll = function(){
+                    angular.forEach(scope.items, function (item) {
+                        item.Selected = !scope.selectedAll;
+                    });
+                }
+
             }
         }
     }
