@@ -9,12 +9,11 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
             'buttons': '='
         },
         templateUrl: '/templates/common/directives/toolbar.html',
-        link:
-        {
-            pre: function (scope, elem, attrs) {
-                scope.toolbarButtons = [];
-                if(scope.buttons){
-                    scope.buttons.forEach(function(aButton){
+        controller: function($scope, $element){
+            $scope.initButtons = function(){
+                $scope.toolbarButtons = [];
+                if($scope.buttons){
+                    $scope.buttons.forEach(function(aButton){
 
                         if(typeof aButton == 'string'){
                             aButton = {name:aButton};
@@ -40,7 +39,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     class: 'btn-danger',
                                     icon: 'glyphicon glyphicon-remove',
                                     click: function(){
-                                        scope.$parent.deleteItems();
+                                        $scope.$parent.$emit('delete_item');
                                     }
                                 };
                                 break;
@@ -49,7 +48,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        scope.$parent.saveItem();
+                                        $scope.saveItem();
                                     }
                                 };
                                 break;
@@ -71,13 +70,14 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                         }
                         var mergedButton = angular.extend(button, aButton);
 
-                        scope.toolbarButtons.push(mergedButton);
-
+                        $scope.toolbarButtons.push(mergedButton);
 
                     });
                 }
-
             }
+
+            $scope.initButtons();
+
         }
     }
 }]);

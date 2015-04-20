@@ -10,6 +10,7 @@ angular.module('myApp.common').config(function(RestangularProvider) {
         var extractedData;
         // .. to look for getList operations
         if (operation === "getList") {
+
             // .. and handle the data and meta data
             extractedData = data.data;
 
@@ -22,5 +23,20 @@ angular.module('myApp.common').config(function(RestangularProvider) {
         }
         return extractedData;
     });
+
+    RestangularProvider.setRequestInterceptor(function(elem, operation) {
+        if (operation === "remove") {
+            return null;
+        }
+        return elem;
+    });
+
+    RestangularProvider.configuration.getIdFromElem = function(elem) {
+        // if route is customers ==> returns customerID
+        console.log(elem.route);
+        if(elem.route == "category"){
+            return elem["category_id"];
+        }
+    }
 
 });

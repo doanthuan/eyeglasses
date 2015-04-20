@@ -29,6 +29,7 @@ angular.module('myApp.common').config(function(RestangularProvider) {
         var extractedData;
         // .. to look for getList operations
         if (operation === "getList") {
+
             // .. and handle the data and meta data
             extractedData = data.data;
 
@@ -41,6 +42,21 @@ angular.module('myApp.common').config(function(RestangularProvider) {
         }
         return extractedData;
     });
+
+    RestangularProvider.setRequestInterceptor(function(elem, operation) {
+        if (operation === "remove") {
+            return null;
+        }
+        return elem;
+    });
+
+    RestangularProvider.configuration.getIdFromElem = function(elem) {
+        // if route is customers ==> returns customerID
+        console.log(elem.route);
+        if(elem.route == "category"){
+            return elem["category_id"];
+        }
+    }
 
 });
 /**
@@ -93,9 +109,23 @@ angular.module('myApp.category').factory('Category', ['$resource',
 );
 
 /**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+    Product.query( {} ,function(products) {
+        console.log(products);
+        $scope.products = products;
+    }, function(error) {
+        console.log(error);
+    });
+
+}]);
+/**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['$http', 'Restangular', function ($http, Restangular) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location',
+    function (Restangular, toaster, $location) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
@@ -104,55 +134,79 @@ angular.module('myApp.common').directive('appGrid', ['$http', 'Restangular', fun
             cols: '=',
             items: '='
         },
-        link: {
-            pre: function (scope, element, attrs, ctrl) {
+        controller: function($scope, $element){
+            $scope.getPage = function (tableState) {
 
-                scope.getPage = function (tableState) {
+                $scope.isLoading = true;
 
-                    scope.isLoading = true;
-
-                    var pagination = tableState.pagination;
-                    if(pagination.number == undefined){
-                        return false;
-                    }
-
-                    var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
-                    var number = pagination.number || 10;  // Number of entries showed per page.
-                    var page = start / pagination.number + 1;
-
-                    var searchParams = tableState.search.predicateObject;
-                    var orderBy = tableState.sort.predicate;
-                    var orderDir = tableState.sort.reverse?1:0;
-
-                    var params = {
-                        limit: number,
-                        page: page,
-                        filters: searchParams,
-                        order: orderBy,
-                        dir: orderDir
-                    };
-
-                    Restangular.all(scope.url).getList(params).then(function(items) {
-
-                        tableState.pagination.numberOfPages = items.last_page;//set the number of pages so the pagination can update
-
-                        scope.items = items;
-
-                        scope.total = items.total;
-
-                        scope.isLoading = false;
-                    });
-
-
-                };
-
-                scope.checkAll = function(){
-                    angular.forEach(scope.items, function (item) {
-                        item.Selected = !scope.selectedAll;
-                    });
+                var pagination = tableState.pagination;
+                if(pagination.number == undefined){
+                    return false;
                 }
 
+                var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+                var number = pagination.number || 10;  // Number of entries showed per page.
+                var page = start / pagination.number + 1;
+
+                var searchParams = tableState.search.predicateObject;
+                var orderBy = tableState.sort.predicate;
+                var orderDir = tableState.sort.reverse?1:0;
+
+                var params = {
+                    limit: number,
+                    page: page,
+                    filters: searchParams,
+                    order: orderBy,
+                    dir: orderDir
+                };
+
+                Restangular.all($scope.url).getList(params).then(function(items) {
+
+                    tableState.pagination.numberOfPages = items.last_page;//set the number of pages so the pagination can update
+
+                    $scope.items = items;
+
+                    $scope.total = items.total;
+
+                    $scope.isLoading = false;
+                });
+
+
+            };
+
+            $scope.checkAll = function(){
+                angular.forEach($scope.items, function (item) {
+                    item.selected = !$scope.selectedAll;
+                });
             }
+
+            $scope.deleteItems = function(){
+
+                $scope.isLoading = true;
+
+                var deletedIds = [];
+                var deletedItems = [];
+                angular.forEach($scope.items, function (item) {
+                    if(item.selected){
+                        deletedIds.push(item.category_id);
+                        deletedItems.push(item);
+                    }
+                });
+
+                Restangular.all($scope.url).remove({cid: deletedIds}).then(function(){
+                    angular.forEach(deletedItems, function (item) {
+                        var index = $scope.items.indexOf(item);
+                        $scope.items.splice(index, 1);
+                    });
+                    $scope.isLoading = false;
+                    toaster.pop('success', "", "Category deleted!");
+                });
+
+            }
+
+            $scope.$parent.$on('delete_item', function(e, data){
+                $scope.deleteItems();
+            });
         }
     }
 }]);
@@ -214,12 +268,11 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
             'buttons': '='
         },
         templateUrl: '/templates/common/directives/toolbar.html',
-        link:
-        {
-            pre: function (scope, elem, attrs) {
-                scope.toolbarButtons = [];
-                if(scope.buttons){
-                    scope.buttons.forEach(function(aButton){
+        controller: function($scope, $element){
+            $scope.initButtons = function(){
+                $scope.toolbarButtons = [];
+                if($scope.buttons){
+                    $scope.buttons.forEach(function(aButton){
 
                         if(typeof aButton == 'string'){
                             aButton = {name:aButton};
@@ -245,7 +298,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     class: 'btn-danger',
                                     icon: 'glyphicon glyphicon-remove',
                                     click: function(){
-                                        scope.$parent.deleteItems();
+                                        $scope.$parent.$emit('delete_item');
                                     }
                                 };
                                 break;
@@ -254,7 +307,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        scope.$parent.saveItem();
+                                        $scope.saveItem();
                                     }
                                 };
                                 break;
@@ -276,28 +329,16 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                         }
                         var mergedButton = angular.extend(button, aButton);
 
-                        scope.toolbarButtons.push(mergedButton);
-
+                        $scope.toolbarButtons.push(mergedButton);
 
                     });
                 }
-
             }
+
+            $scope.initButtons();
+
         }
     }
-}]);
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-    Product.query( {} ,function(products) {
-        console.log(products);
-        $scope.products = products;
-    }, function(error) {
-        console.log(error);
-    });
-
 }]);
 /**
  * Created by doanthuan on 4/9/2015.
@@ -314,6 +355,36 @@ angular.module('myApp.product').factory('Product', ['$resource',
     }]
 );
 
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
+
+
+
+    $scope.tinymceOptions = {
+        handle_event_callback: function (e) {
+            // put logic here for keypress
+        }
+    };
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('AdminProductListController', ['$scope', function($scope) {
+
+    $scope.gridCols = [
+        {title: 'Name', name: 'name', search: 'text'},
+        {title: 'Price', name: 'price', search: 'text', format: 'currency'},
+        {title: 'Quantity', name: 'quantity', search: 'text'},
+        {title: 'Created At', name: 'created_at', format: 'date'},
+        {title: 'Status', name: 'status', format: 'status'}
+    ];
+
+}]);
 /**
  * Created by doanthuan on 4/9/2015.
  */
@@ -355,12 +426,7 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     function($scope, Category, Restangular) {
 
     $scope.buttons = [
-        'add', {
-            name: 'delete',
-            click: function(){
-                $scope.deleteItems();
-            }
-        }
+        'add', 'delete'
     ];
 
     $scope.gridCols = [
@@ -369,44 +435,6 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     ];
 
     $scope.categories = null;
-
-    $scope.deleteItems = function(){
-        angular.forEach($scope.categories, function (item) {
-            console.log(item);
-        });
-
-    }
-
-
-}]);
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
-
-
-
-    $scope.tinymceOptions = {
-        handle_event_callback: function (e) {
-            // put logic here for keypress
-        }
-    };
-
-}]);
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('AdminProductListController', ['$scope', function($scope) {
-
-    $scope.gridCols = [
-        {title: 'Name', name: 'name', search: 'text'},
-        {title: 'Price', name: 'price', search: 'text', format: 'currency'},
-        {title: 'Quantity', name: 'quantity', search: 'text'},
-        {title: 'Created At', name: 'created_at', format: 'date'},
-        {title: 'Status', name: 'status', format: 'status'}
-    ];
 
 }]);
 //# sourceMappingURL=app.js.map

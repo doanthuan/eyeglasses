@@ -22,7 +22,7 @@
     </thead>
     <tbody ng-show="!isLoading">
     <tr ng-repeat="item in items" >
-        <td><input type="checkbox" name="cid[]" ng-model="item.Selected"></td>
+        <td><input type="checkbox" name="cid[]" ng-model="item.selected"></td>
         <td ng-repeat="col in cols">
             {{item[col.name] | picker:col.format}}
         </td>

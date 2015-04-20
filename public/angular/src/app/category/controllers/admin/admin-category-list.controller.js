@@ -6,12 +6,7 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     function($scope, Category, Restangular) {
 
     $scope.buttons = [
-        'add', {
-            name: 'delete',
-            click: function(){
-                $scope.deleteItems();
-            }
-        }
+        'add', 'delete'
     ];
 
     $scope.gridCols = [
@@ -20,13 +15,5 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     ];
 
     $scope.categories = null;
-
-    $scope.deleteItems = function(){
-        angular.forEach($scope.categories, function (item) {
-            console.log(item);
-        });
-
-    }
-
 
 }]);

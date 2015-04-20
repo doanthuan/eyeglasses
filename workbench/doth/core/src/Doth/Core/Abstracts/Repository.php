@@ -88,6 +88,6 @@ abstract class Repository implements RepositoryInterface{
             throw new BusinessException('Deleting category error. Invalid request ids');
         }
 
-        $this->model->delete($ids);
+        $this->model->destroy($ids);
     }
 }

@@ -5,6 +5,8 @@ use Doth\Core\Abstracts\ApiController;
 use Doth\Catalog\Category\CategoryRepositoryInterface;
 use Doth\Core\Exceptions\BusinessException;
 
+use Input;
+
 class CategoryController extends ApiController
 {
 
@@ -89,6 +91,8 @@ class CategoryController extends ApiController
     public function destroy($id)
     {
         //
+        $this->category->delete($id);
+        $this->respondSuccess('Category deleted');
     }
 
     public function delete()
