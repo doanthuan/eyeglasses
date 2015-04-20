@@ -22,7 +22,7 @@ class CategoryController extends ApiController
     {
         $categories = $this->category->getList();
 
-        return $categories->toJson();
+        return $this->respondData($categories);
     }
 
     /**
@@ -100,7 +100,7 @@ class CategoryController extends ApiController
 
         $this->category->delete($cid);
 
-        return Redirect::back()->with('success', trans(ucfirst(Str::plural($this->viewKey)).'(s) deleted').'!');
+        return $this->respondSuccess('Categories deleted');
     }
 
 }

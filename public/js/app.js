@@ -20,9 +20,29 @@ angular.module('myApp.category').config(['$routeProvider', function($routeProvid
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.common',['smart-table']);
+angular.module('myApp.common',['smart-table', 'restangular']);
 
+angular.module('myApp.common').config(function(RestangularProvider) {
 
+    // add a response intereceptor
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        var extractedData;
+        // .. to look for getList operations
+        if (operation === "getList") {
+            // .. and handle the data and meta data
+            extractedData = data.data;
+
+            extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
+
+            extractedData.total = data.total;
+
+        } else {
+            extractedData = data.data;
+        }
+        return extractedData;
+    });
+
+});
 /**
  * Created by doanthuan on 4/9/2015.
  */
@@ -51,9 +71,22 @@ angular.module('myApp.product').config(['$routeProvider', function($routeProvide
 angular.module('myApp.category').factory('Category', ['$resource',
     function($resource) {
         return $resource('/category/:id', {id: '@id'},{
-                update: {
-                    method: 'PUT'
-                }
+                query:  {method:'GET', isArray:false,
+                    transformResponse: function(data, header) {
+                        var jsonData = JSON.parse(data); //or angular.fromJson(data)
+                        var items = [];
+
+                        angular.forEach(jsonData.data, function(item){
+                            var category = new this;
+                            category.category_id = item.category_id;
+                            category.name = item.name;
+                            category.child_count = item.child_count;
+                            items.push(category);
+                        });
+                        return items;
+                    }
+                },
+                update: {method: 'PUT'}
             }
         );
     }]
@@ -62,30 +95,54 @@ angular.module('myApp.category').factory('Category', ['$resource',
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['PaginationService', function (PaginationService) {
+angular.module('myApp.common').directive('appGrid', ['$http', 'Restangular', function ($http, Restangular) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
             cols: '=',
-            key: '@'
+            items: '='
         },
         link: {
             pre: function (scope, element, attrs, ctrl) {
 
-                scope.getPage = function(tableState) {
+                scope.getPage = function (tableState) {
 
                     scope.isLoading = true;
 
-                    PaginationService.getPage(scope.url, tableState, function(result){
+                    var pagination = tableState.pagination;
+                    if(pagination.number == undefined){
+                        return false;
+                    }
 
-                        scope.items = result.data;
+                    var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+                    var number = pagination.number || 10;  // Number of entries showed per page.
+                    var page = start / pagination.number + 1;
 
-                        scope.total = result.total;
+                    var searchParams = tableState.search.predicateObject;
+                    var orderBy = tableState.sort.predicate;
+                    var orderDir = tableState.sort.reverse?1:0;
+
+                    var params = {
+                        limit: number,
+                        page: page,
+                        filters: searchParams,
+                        order: orderBy,
+                        dir: orderDir
+                    };
+
+                    Restangular.all(scope.url).getList(params).then(function(items) {
+
+                        tableState.pagination.numberOfPages = items.last_page;//set the number of pages so the pagination can update
+
+                        scope.items = items;
+
+                        scope.total = items.total;
 
                         scope.isLoading = false;
                     });
+
 
                 };
 
@@ -230,58 +287,6 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
     }
 }]);
 /**
- * Created by doanthuan on 4/12/2015.
- */
-
-angular.module('myApp.common').factory('PaginationService', [ '$http', function($http) {
-        function getPage(url, tableState, callback) {
-
-            var pagination = tableState.pagination;
-            if(pagination.number == undefined){
-                return false;
-            }
-
-            var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
-            var number = pagination.number || 10;  // Number of entries showed per page.
-            var page = start / pagination.number + 1;
-
-            var searchParams = tableState.search.predicateObject;
-            var orderBy = tableState.sort.predicate;
-            var orderDir = tableState.sort.reverse?1:0;
-
-            var params = {
-                limit: number,
-                page: page,
-                filters: searchParams,
-                order: orderBy,
-                dir: orderDir
-            };
-
-            $http(
-                {
-                    url : url,
-                    method: 'GET',
-                    params: params
-                }
-            )
-            .success(function(result, status, headers, config) {
-
-                tableState.pagination.numberOfPages = result.last_page;//set the number of pages so the pagination can update
-
-                callback(result);
-
-            })
-            .error(function(data, status, headers, config) {
-
-            });
-
-        };
-        return {
-            getPage: getPage
-        };
-    }]
-);
-/**
  * Created by doanthuan on 4/9/2015.
  */
 
@@ -346,7 +351,8 @@ angular.module('myApp.category').controller('AdminCategoryAddController', ['$sco
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', function($scope) {
+angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', 'Category', 'Restangular',
+    function($scope, Category, Restangular) {
 
     $scope.buttons = [
         'add', {
@@ -362,9 +368,15 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
         {title: 'Child Count', name: 'child_count', search: 'text'}
     ];
 
+    $scope.categories = null;
+
     $scope.deleteItems = function(){
+        angular.forEach($scope.categories, function (item) {
+            console.log(item);
+        });
 
     }
+
 
 }]);
 /**

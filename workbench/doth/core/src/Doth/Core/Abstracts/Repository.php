@@ -81,4 +81,13 @@ abstract class Repository implements RepositoryInterface{
         $this->model->save();
         return $this->model;
     }
+
+    public function delete($ids)
+    {
+        if (empty($ids)){
+            throw new BusinessException('Deleting category error. Invalid request ids');
+        }
+
+        $this->model->delete($ids);
+    }
 }

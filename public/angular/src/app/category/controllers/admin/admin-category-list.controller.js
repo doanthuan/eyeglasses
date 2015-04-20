@@ -2,7 +2,8 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', function($scope) {
+angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', 'Category', 'Restangular',
+    function($scope, Category, Restangular) {
 
     $scope.buttons = [
         'add', {
@@ -18,11 +19,14 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
         {title: 'Child Count', name: 'child_count', search: 'text'}
     ];
 
+    $scope.categories = null;
+
     $scope.deleteItems = function(){
-        //angular.forEach($scope.items, function (item) {
-        //    item.Selected = !scope.selectedAll;
-        //});
-        console.log($scope.items);
+        angular.forEach($scope.categories, function (item) {
+            console.log(item);
+        });
+
     }
+
 
 }]);
