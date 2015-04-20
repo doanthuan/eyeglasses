@@ -9,8 +9,8 @@ angular.module('myApp.category').config(['$routeProvider', function($routeProvid
             controller: 'AdminCategoryListController',
             templateUrl: 'templates/admin/categories/list.html'
         })
-        .when('/admin/category/add', {
-            controller: 'AdminCategoryAddController',
-            templateUrl: 'templates/admin/categories/add.html'
+        .when('/admin/category/add/:id?', {
+            templateUrl: 'templates/admin/categories/add.html',
+            controller: 'AdminCategoryAddController'
         })
 }]);

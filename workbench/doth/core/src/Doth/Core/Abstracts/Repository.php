@@ -70,6 +70,11 @@ abstract class Repository implements RepositoryInterface{
         return $items;
     }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function save($input)
     {
         //store item to db

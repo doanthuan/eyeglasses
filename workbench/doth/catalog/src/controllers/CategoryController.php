@@ -58,6 +58,8 @@ class CategoryController extends ApiController
     public function show($id)
     {
         //
+        $category = $this->category->find($id);
+        return $this->respondData($category);
     }
 
     /**
@@ -69,6 +71,8 @@ class CategoryController extends ApiController
     public function edit($id)
     {
         //
+        $category = $this->category->find($id);
+        $this->respondData($category);
     }
 
     /**

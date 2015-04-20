@@ -21,6 +21,8 @@ interface RepositoryInterface {
 
     public function getList();
 
+    public function find($id);
+
     public function save($input);
 
 }

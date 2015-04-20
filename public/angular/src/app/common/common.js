@@ -9,18 +9,22 @@ angular.module('myApp.common').config(function(RestangularProvider) {
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         var extractedData;
         // .. to look for getList operations
-        if (operation === "getList") {
+        switch(operation)
+        {
+            case "getList":
+                extractedData = data.data;
 
-            // .. and handle the data and meta data
-            extractedData = data.data;
+                extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
 
-            extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
+                extractedData.total = data.total;
 
-            extractedData.total = data.total;
+                break;
 
-        } else {
-            extractedData = data.data;
+            default:
+                extractedData = data;
+                break;
         }
+
         return extractedData;
     });
 
@@ -33,7 +37,6 @@ angular.module('myApp.common').config(function(RestangularProvider) {
 
     RestangularProvider.configuration.getIdFromElem = function(elem) {
         // if route is customers ==> returns customerID
-        console.log(elem.route);
         if(elem.route == "category"){
             return elem["category_id"];
         }

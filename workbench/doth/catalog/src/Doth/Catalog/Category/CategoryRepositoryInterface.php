@@ -8,8 +8,9 @@
 
 namespace Doth\Catalog\Category;
 
+use Doth\Core\Abstracts\RepositoryInterface;
 
-interface CategoryRepositoryInterface {
+interface CategoryRepositoryInterface extends RepositoryInterface{
     
     public function updatePath($categoryId = 0);
 

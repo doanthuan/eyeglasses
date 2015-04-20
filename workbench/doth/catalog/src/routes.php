@@ -18,4 +18,4 @@ Route::get('/', function(){
 Route::resource('product', 'Doth\Catalog\Controllers\ProductController');
 
 Route::resource('category', 'Doth\Catalog\Controllers\CategoryController');
-Route::delete('category', 'Doth\Catalog\Controllers\CategoryController@delete');
+Route::post('category/delete', 'Doth\Catalog\Controllers\CategoryController@delete');

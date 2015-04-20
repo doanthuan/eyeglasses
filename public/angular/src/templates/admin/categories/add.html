@@ -1,6 +1,21 @@
 <div class="container">
 
-  <app-toolbar page-title="New Category" buttons="buttons"></app-toolbar>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 ng-show="!isEdit">New Category</h2>
+        <h2 ng-show="isEdit">Edit Category</h2>
+      </div>
+      <div class="col-sm-6 text-right btn-toolbar">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="save()">
+          Save
+        </button>
+        <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
 
   <form method="POST" action="" accept-charset="UTF-8" name="adminForm" class="form-horizontal">
     <div class="form-group">

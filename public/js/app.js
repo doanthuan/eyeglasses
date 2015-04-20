@@ -3,65 +3,6 @@ var app = angular.module('myApp', ['ngRoute', 'ngResource','ngAnimate','ui.boots
 /**
  * Created by doanthuan on 4/9/2015.
  */
-angular.module('myApp.category', []);
-
-angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/admin/category', {
-            controller: 'AdminCategoryListController',
-            templateUrl: 'templates/admin/categories/list.html'
-        })
-        .when('/admin/category/add', {
-            controller: 'AdminCategoryAddController',
-            templateUrl: 'templates/admin/categories/add.html'
-        })
-}]);
-
-/**
- * Created by doanthuan on 4/9/2015.
- */
-angular.module('myApp.common',['smart-table', 'restangular']);
-
-angular.module('myApp.common').config(function(RestangularProvider) {
-
-    // add a response intereceptor
-    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-        var extractedData;
-        // .. to look for getList operations
-        if (operation === "getList") {
-
-            // .. and handle the data and meta data
-            extractedData = data.data;
-
-            extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
-
-            extractedData.total = data.total;
-
-        } else {
-            extractedData = data.data;
-        }
-        return extractedData;
-    });
-
-    RestangularProvider.setRequestInterceptor(function(elem, operation) {
-        if (operation === "remove") {
-            return null;
-        }
-        return elem;
-    });
-
-    RestangularProvider.configuration.getIdFromElem = function(elem) {
-        // if route is customers ==> returns customerID
-        console.log(elem.route);
-        if(elem.route == "category"){
-            return elem["category_id"];
-        }
-    }
-
-});
-/**
- * Created by doanthuan on 4/9/2015.
- */
 angular.module('myApp.product', []);
 
 angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
@@ -79,6 +20,96 @@ angular.module('myApp.product').config(['$routeProvider', function($routeProvide
             templateUrl: 'templates/admin/products/add.html'
         })
 }]);
+
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+angular.module('myApp.category', []);
+
+angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/admin/category', {
+            controller: 'AdminCategoryListController',
+            templateUrl: 'templates/admin/categories/list.html'
+        })
+        .when('/admin/category/add/:id?', {
+            templateUrl: 'templates/admin/categories/add.html',
+            controller: 'AdminCategoryAddController'
+        })
+}]);
+
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+angular.module('myApp.common',['smart-table', 'restangular']);
+
+angular.module('myApp.common').config(function(RestangularProvider) {
+
+    // add a response intereceptor
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        var extractedData;
+        // .. to look for getList operations
+        switch(operation)
+        {
+            case "getList":
+                extractedData = data.data;
+
+                extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
+
+                extractedData.total = data.total;
+
+                break;
+
+            default:
+                extractedData = data;
+                break;
+        }
+
+        return extractedData;
+    });
+
+    RestangularProvider.setRequestInterceptor(function(elem, operation) {
+        if (operation === "remove") {
+            return null;
+        }
+        return elem;
+    });
+
+    RestangularProvider.configuration.getIdFromElem = function(elem) {
+        // if route is customers ==> returns customerID
+        if(elem.route == "category"){
+            return elem["category_id"];
+        }
+    }
+
+});
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
+    Product.query( {} ,function(products) {
+        console.log(products);
+        $scope.products = products;
+    }, function(error) {
+        console.log(error);
+    });
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').factory('Product', ['$resource',
+    function($resource) {
+        return $resource('/product/:id', {id: '@id'},{
+                update: {
+                    method: 'PUT'
+                }
+            }
+        );
+    }]
+);
 
 /**
  * Created by doanthuan on 4/9/2015.
@@ -109,23 +140,10 @@ angular.module('myApp.category').factory('Category', ['$resource',
 );
 
 /**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-    Product.query( {} ,function(products) {
-        console.log(products);
-        $scope.products = products;
-    }, function(error) {
-        console.log(error);
-    });
-
-}]);
-/**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location',
-    function (Restangular, toaster, $location) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$route',
+    function (Restangular, toaster, $location, $route) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
@@ -180,6 +198,10 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                 });
             }
 
+            $scope.editItem = function(item){
+                $scope.$parent.editItem(item);
+            }
+
             $scope.deleteItems = function(){
 
                 $scope.isLoading = true;
@@ -193,14 +215,27 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                     }
                 });
 
-                Restangular.all($scope.url).remove({cid: deletedIds}).then(function(){
-                    angular.forEach(deletedItems, function (item) {
-                        var index = $scope.items.indexOf(item);
-                        $scope.items.splice(index, 1);
-                    });
-                    $scope.isLoading = false;
-                    toaster.pop('success', "", "Category deleted!");
-                });
+                Restangular.all($scope.url + '/delete').post({'cid': deletedIds}).then(
+                    function(response){
+                        angular.forEach(deletedItems, function (item) {
+                            var index = $scope.items.indexOf(item);
+                            $scope.items.splice(index, 1);
+                        });
+
+                        if($scope.items.length == 0){
+                            $route.reload();
+                        }
+
+                        $scope.isLoading = false;
+
+                        toaster.pop('success', "", response.message);
+                    },
+                    function(response){
+                        $scope.isLoading = false;
+
+                        toaster.pop('error', "", response.data.message);
+                    }
+                );
 
             }
 
@@ -307,7 +342,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        $scope.saveItem();
+                                        $scope.$parent.$emit('save_item');
                                     }
                                 };
                                 break;
@@ -344,21 +379,6 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').factory('Product', ['$resource',
-    function($resource) {
-        return $resource('/product/:id', {id: '@id'},{
-                update: {
-                    method: 'PUT'
-                }
-            }
-        );
-    }]
-);
-
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
 angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
 
 
@@ -389,45 +409,58 @@ angular.module('myApp.product').controller('AdminProductListController', ['$scop
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope','$location', 'Category', 'toaster',
-    function($scope, $location, Category, toaster) {
+angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope','$location', 'toaster', 'Restangular', '$routeParams',
+    function($scope, $location, toaster, Restangular, $routeParams) {
 
-    $scope.buttons = [
-        {
-            name: 'save',
-            click: function(){
-                $scope.saveItem();
-            }
-        },
-        'cancel'
-    ];
+    $scope.cancel = function(){
+        $location.path('/admin/category');
+    }
 
-    $scope.category = new Category();
+    $scope.save = function(){
+        Restangular.all('category').post($scope.category).then(function(response){
+            toaster.pop('success', "", response.message);
+            $location.path('/admin/category');
+        });
+    }
 
-    $scope.saveItem = function(){
-        $scope.category.$save({},
-            function(response){
-                toaster.pop('success', "", response.message);
-                $location.path('/admin/category');
-            },
-            function(response){
-                toaster.pop('error', "", response.message);
-                console.log(result);
-            }
-        );
-    };
+    if($routeParams.id){
+        $scope.isEdit = true;
+        Restangular.one('category', $routeParams.id).get().then(function(response){
+            $scope.category = response;
+        });
+
+    }else{
+        $scope.isEdit = false;
+        $scope.category = {};
+    }
+
 }
 ]);
 /**
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', 'Category', 'Restangular',
-    function($scope, Category, Restangular) {
+angular.module('myApp.category').controller('AdminCategoryListController', ['$scope', 'Restangular', 'toaster', '$location',
+    function($scope, Restangular, toaster, $location) {
 
-    $scope.buttons = [
-        'add', 'delete'
-    ];
+    $scope.add = function(){
+        $location.path('/admin/category/add');
+    };
+
+    $scope.editItem = function(item){
+        var curUrl = $location.path();
+        $location.path(curUrl + '/add/'+item.id);
+    };
+
+    $scope.remove = function(){
+        //emit delete event to grid
+        $scope.$emit('delete_item');
+    };
+
+    $scope.editItem = function(item){
+        var curUrl = $location.path();
+        $location.path(curUrl + '/add/'+item.category_id);
+    };
 
     $scope.gridCols = [
         {title: 'Name', name: 'name', search: 'text'},
@@ -435,6 +468,7 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     ];
 
     $scope.categories = null;
+
 
 }]);
 //# sourceMappingURL=app.js.map

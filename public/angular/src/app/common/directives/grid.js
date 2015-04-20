@@ -1,8 +1,8 @@
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location',
-    function (Restangular, toaster, $location) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$route',
+    function (Restangular, toaster, $location, $route) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
@@ -57,6 +57,10 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                 });
             }
 
+            $scope.editItem = function(item){
+                $scope.$parent.editItem(item);
+            }
+
             $scope.deleteItems = function(){
 
                 $scope.isLoading = true;
@@ -70,14 +74,27 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                     }
                 });
 
-                Restangular.all($scope.url).remove({cid: deletedIds}).then(function(){
-                    angular.forEach(deletedItems, function (item) {
-                        var index = $scope.items.indexOf(item);
-                        $scope.items.splice(index, 1);
-                    });
-                    $scope.isLoading = false;
-                    toaster.pop('success', "", "Category deleted!");
-                });
+                Restangular.all($scope.url + '/delete').post({'cid': deletedIds}).then(
+                    function(response){
+                        angular.forEach(deletedItems, function (item) {
+                            var index = $scope.items.indexOf(item);
+                            $scope.items.splice(index, 1);
+                        });
+
+                        if($scope.items.length == 0){
+                            $route.reload();
+                        }
+
+                        $scope.isLoading = false;
+
+                        toaster.pop('success', "", response.message);
+                    },
+                    function(response){
+                        $scope.isLoading = false;
+
+                        toaster.pop('error', "", response.data.message);
+                    }
+                );
 
             }
 

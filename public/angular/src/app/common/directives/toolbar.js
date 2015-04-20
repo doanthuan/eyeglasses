@@ -48,7 +48,7 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
                                     text: 'Save',
                                     class: 'btn-primary',
                                     click: function(){
-                                        $scope.saveItem();
+                                        $scope.$parent.$emit('save_item');
                                     }
                                 };
                                 break;
