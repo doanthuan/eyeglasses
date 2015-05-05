@@ -122,7 +122,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('watch', ['indexHtml-dev', 'images', 'templates-dev', 'bower-dev', 'scripts-dev'], function() {
   gulp.watch(paths.appJavascript, ['scripts-dev']);
-  gulp.watch(paths.appImages, ['images-dev']);
+  gulp.watch(paths.appImages, ['images']);
   gulp.watch(paths.indexHtml, ['indexHtml-dev']);
   gulp.watch(paths.appStyles, ['styles-dev']);
   gulp.watch(paths.appMainTemplates, ['templates-dev']);

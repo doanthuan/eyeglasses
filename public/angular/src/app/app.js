@@ -10,6 +10,18 @@ var app = angular.module('myApp', [
     'myApp.category'
 ]);
 
+app.config(['$provide', Decorate]);
+
+function Decorate($provide) {
+    $provide.decorator('carouselDirective', function($delegate) {
+        var directive = $delegate[0];
+
+        directive.templateUrl = "/templates/custom/carousel.html";
+
+        return $delegate;
+    });
+}
+
 angular.module('myApp').config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 

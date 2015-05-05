@@ -1,9 +1,35 @@
 <div>
-    <carousel interval="myInterval">
-        <slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}" style="margin:auto;">
-        </slide>
-    </carousel>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="/images/banner1.jpg">
+            </div>
+            <div class="item">
+                <img src="/images/banner2.jpg">
+            </div>
+            <div class="item">
+                <img src="/images/banner3.jpg">
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" ng-non-bindable>
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" ng-non-bindable>
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
 
 <div class="container">
@@ -81,5 +107,335 @@
         </div>
     </div>
 </div>
+
+    <div class="row" id="featured_products_header">
+        <hr>
+        <span>Popular Frames</span>
+
+    </div>
+
+    <div class="row" id="featured_products">
+        <div id="carousel-example-generic1" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic1" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic1" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <ul>
+                        <li class="product">
+                            <a href="/glasses/Persol-PO3007V/Tortoise">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/luxottica_persol_po3007v_tortoise_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Persol PO3007V">
+                                    <span>Persol PO3007V</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Coach-Brooklyn/Tortoise+Teal">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/luxottica_coach_brooklyn_tortoise3_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Coach Brooklyn">
+                                    <span>Coach Brooklyn</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Oakley-Drill-Bit-0-5/Pewter">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/oakley_oakley_drillbit05_gunmetal_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Oakley Drill Bit 0.5">
+                                    <span>Oakley Drill Bit 0.5</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Original-Penguin-The-Clyde/Olive+Gradient">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/kenmark_originalpenguin_theclyde_green_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Original Penguin The Clyde">
+                                    <span>Original Penguin The Clyde</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/sunglasses/Oakley-Holbrook/Shaun+White+Series+%7C+Matte+Black+/+Grey+Polarized">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/oakley_oakleysun_holbrook_black4_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Oakley Holbrook">
+                                    <span>Oakley Holbrook</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <ul>
+                        <li class="product">
+                            <a href="/glasses/Ray-Ban-RX5228/Shiny+Black">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/luxottica_rayban_rx5228_black_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Ray-Ban RX5228">
+                                    <span>Ray-Ban RX5228</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Oakley-Servo-Large/Satin+Steel">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/oakley_oakley_servolarge_black3_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Oakley Servo Large">
+                                    <span>Oakley Servo Large</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Kate-Spade-New-York-Lyssa/Gold+Glitter">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/safilo_katespadenewyork_lyssa_gold_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Kate Spade New York Lyssa">
+                                    <span>Kate Spade New York Lyssa</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/sunglasses/Ray-Ban-Aviator-RB3025/Gold+%7C+Blue+Mirror+/+Blue+Mirror">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/luxottica_raybansun_aviatorrb3025_blue_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Ray-Ban Aviator RB3025">
+                                    <span>Ray-Ban Aviator RB3025</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="product">
+                            <a href="/glasses/Burberry-BE2170/Black">
+                                <img src="http://media.glasses.com/is/image/Glasses/admin_med?layer=1&amp;src=is{Glasses/luxottica_burberry_be2170_black_01?$GlassesProductPage$}&amp;op_sharpen=1&amp;qlt=95,1" style="max-height: 90px;">
+                                <div title="Burberry BE2170">
+                                    <span>Burberry BE2170</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic1" role="button" data-slide="prev" ng-non-bindable>
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic1" role="button" data-slide="next" ng-non-bindable>
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="evergreen-mosaic row" id="evergreenMosaic">
+        <div class="col-xs-6">
+            <div class="image-text-link">
+                <div class="link">
+                    <a href="/how-it-works" style="color: #ffffff; border-bottom: 2px solid #ffffff;">Learn More</a>
+                </div>
+                <img src="/images/evergreen-mosaic_how-it-works-9.jpg" alt="How It Works">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="image-text-link">
+                <div class="link">
+                    <a href="/in-home-try-on" style="color: #ffffff; border-bottom: 2px solid #ffffff;">Learn More</a>
+                </div>
+                <img src="/images/evergreen-mosaic_IHTO-3.jpg" alt="In Home Try On">
+            </div>
+        </div>
+    </div>
+
+    <div class="home-grid-1-1-1-headers row" id="homeGrid111Headers">
+        <div class="col-xs-4">
+            <div class="headers-details">
+                <a href="javascript:void(null)" onclick="$.colorbox({href:'#map_1702',scrolling:false,inline:true,title:&quot;Free Shipping &amp; Returns&quot;,width:493,height:315, onComplete: function () {
+	        window.setTimeout(function () {
+	            $('#colorbox').css({height: '250px'});
+	            $('#cboxContent').css({height: '250px'});
+	            $('#cboxLoadedContent').css({height: '250px'});
+	        }, 100);
+	        }});">
+                    <img src="" data-mobile-src="" alt="" id="imageMap_map_78847" class="placeholder ">
+                </a>
+                <div class="headers-details-link">
+                    <h2>FREE</h2>
+                    <h3>Shipping &amp; Returns</h3>
+                    <p style="padding: 35px 23px 0;">If your glasses aren't perfect, return them within 30 days for a full refund. We'll even pay shipping.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-4">
+            <div class="headers-details">
+                <a href="http://www.glasses.com/our-lenses/">
+                    <img src="" data-mobile-src="" alt="" id="imageMap_map_8053" class="placeholder ">
+                </a>
+                <div class="headers-details-link">
+                    <h2>LENSES</h2>
+                    <h3>THAT AREN'T A RIPOFF</h3>
+                    <p style="padding: 35px 20px 0;">We make quality lenses super affordable, so you can focus on frames and expand your style.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-4 last">
+            <div class="headers-details">
+                <a href="http://www.glasses.com/blog/need-adjustments/">
+                    <img src="" data-mobile-src="" alt="" id="imageMap_map_1702" class="placeholder ">
+                </a>
+
+                <div class="headers-details-link">
+                    <h2>FREE</h2>
+                    <h3>FRAME ADJUSTMENTS</h3>
+                    <p>We've partnered with LensCrafters to offer free frame adjustments at any US store.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div id="footer" class="container-fluid">
+    <!--  //  Footer Nav CMS Edit Button  //  -->
+    <div class="footer_content container">
+        <div class="footer_row">
+            <div class="newsletter_signup">
+                <form id="newsletter">
+                    <input type="hidden" name="newsletter_ip" value="115.78.129.189" autocomplete="off">
+                    <div style="float: left;">
+                        <span>Sign Up For Exclusive Discounts</span>
+
+                        <input type="text" name="newsletter_email" title="Email Address" class="subscribe" placeholder="EMAIL ADDRESS" autocomplete="off">
+                    </div>
+
+                    <div class="signup_button">
+                        <div class="newsletter" id="joiner" onclick=" newsletterSubscribe(); return false;">JOIN</div>
+                    </div>
+                </form>
+                <div class="signUpResponse"></div>
+            </div>
+
+            <div class="social">
+                <span>Connect With Us</span>
+
+                <ul>
+                    <li><a href="http://www.facebook.com/glassesdotcom" title="Like us on Facebook" target="_blank"><img src="/images/rebrand2015/pixel.png" alt="facebook" class="facebook"></a></li>
+                    <li><a href="https://instagram.com/glassesdotcom/" title="Follow us on Instagram" target="_blank"><img src="/images/rebrand2015/pixel.png" alt="Instagram" class="instagram"></a></li>
+                    <li><a href="http://www.twitter.com/glassesdotcom" title="Follow us on Twitter" target="_blank"><img src="/images/rebrand2015/pixel.png" alt="twitter" class="twitter"></a></li>
+                    <li><a href="https://www.youtube.com/user/glassescom" title="Follow us on YouTube" target="_blank"><img src="/images/rebrand2015/pixel.png" alt="youtube" class="youtube"></a></li>
+                    <li><a href="https://www.pinterest.com/glassesdotcom/" title="Follow us on Pinterest" target="_blank"><img src="/images/rebrand2015/pixel.png" alt="pinterest" class="pinterest"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer_row row footer_menu">
+            <div class="footer_nav col-xs-fifth" style="margin-right: 0;">
+					<span class="nav_category">
+						<a>
+                            HELP						</a>
+					</span>
+                <ul>
+                    <li><a href="/company/faqs">FAQ</a></li>
+                    <li><a href="/accounthub/login?redir=%2Faccounthub">My Account</a></li>
+                    <li><a href="/company/contact">Contact Us</a></li>
+                    <li><a href="/blog/need-adjustments/">LensCrafters</a></li>
+                    <li><a href="/how-to-videos">How to Videos</a></li>
+                    <li><a href="/downloads/glassesFittingStrip.pdf">PD Fitting Strip</a></li>
+                    <li><a href="/downloads/glassesPDRuler.pdf">PD Ruler</a></li>
+                </ul>
+            </div>
+            <div class="footer_nav col-xs-fifth">
+					<span class="nav_category">
+						<a>
+                            SHOP						</a>
+					</span>
+                <ul>
+                    <li><a href="/womens-glasses">Women's Eyeglasses</a></li>
+                    <li><a href="/womens-sunglasses">Women's Sunglasses</a></li>
+                    <li><a href="/coupons-promo-codes">Deals &amp; Promotions</a></li>
+                    <li><a href="/mens-glasses">Men's Eyeglasses</a></li>
+                    <li><a href="/mens-sunglasses">Men's Sunglasses</a></li>
+                    <li><a href="/prescription-sunglasses">Prescription Sun</a></li>
+                    <li><a href="/eyeglasses">Eyeglasses</a></li>
+                    <li><a href="/sale">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer_nav col-xs-fifth">
+					<span class="nav_category">
+						<a>
+                            BRANDS						</a>
+					</span>
+                <ul>
+                    <li><a href="/ray-ban">Ray-Ban</a></li>
+                    <li><a href="/oakley">Oakley</a></li>
+                    <li><a href="/tory-burch">Tory Burch</a></li>
+                    <li><a href="/coach">Coach</a></li>
+                    <li><a href="/kate-spade-new-york">Kate Spade New York</a></li>
+                    <li><a href="/michael-kors">Michael Kors</a></li>
+                    <li><a href="/brands">Shop All Brands</a></li>
+                </ul>
+            </div>
+            <div class="footer_nav col-xs-fifth">
+					<span class="nav_category">
+						<a>
+                            EXPLORE						</a>
+					</span>
+                <ul>
+                    <li><a href="/collections">Trends</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/our-lenses">Our Lenses</a></li>
+                    <li><a href="/staff-style">Staff Style</a></li>
+                    <li><a href="/asian-fit">Asian Fit</a></li>
+                    <li><a href="/what-is-coachella">Coachella</a></li>
+                    <li><a href="/in-home-try-on">In-Home Try-On</a></li>
+                    <li><a href="/virtual-try-on">Virtual Try-on</a></li>
+                </ul>
+            </div>
+            <div class="footer_nav col-xs-fifth">
+					<span class="nav_category">
+						<a>
+                            ABOUT US						</a>
+					</span>
+                <ul>
+                    <li><a href="/about">About Glasses.com</a></li>
+                    <li><a href="/how-it-works">How it Works</a></li>
+                    <li><a href="https://luxottica.taleo.net/careersection/luxjobs/jobsearch.ftl?lang=en&amp;portal=101430233">Careers</a></li>
+                    <li><a href="https://signup.cj.com/member/signup/publisher.cj;jsessionid=abcmRKB3L6QZ7-ka0XiXu?cid=3448167">Affiliate Program</a></li>
+                    <li><a href="/site-map">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> <!-- CLOSE FOOTER CONTENT -->
+
+    <!-- BEGIN: Google Trusted Stores -->
+    <script type="text/javascript">
+        var gts = gts || [];
+
+        gts.push(["id", "295882"]);
+        gts.push(["badge_position", "BOTTOM_RIGHT"]);
+        gts.push(["locale", "en"]);
+        //gts.push(["google_base_offer_id", ""]);//ITEM_GOOGLE_SHOPPING_ID
+        gts.push(["google_base_subaccount_id", "11519423"]);
+        gts.push(["google_base_country", "US"]);
+        gts.push(["google_base_language", "en"]);
+
+        (function() {
+            var gts = document.createElement("script");
+            gts.type = "text/javascript";
+            gts.async = true;
+            gts.src = "https://www.googlecommerce.com/trustedstores/api/js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(gts, s);
+        })();
+    </script>
+    <!-- END: Google Trusted Stores -->
+    <div class="copyright container-fluid">
+        <div class="footer_content container">
+            <div class="col-xs-6">© 2015 GLASSES.COM - ALL RIGHTS RESERVED</div>
+            <div class="col-xs-6"><a href="/privacy" class="pull-right">PRIVACY POLICY</a></div>
+        </div>
+    </div>
 
 </div>

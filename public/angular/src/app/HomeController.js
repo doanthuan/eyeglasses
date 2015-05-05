@@ -15,4 +15,6 @@ angular.module('myApp').controller('HomeController', ['$scope', function($scope)
         $scope.addSlide(i);
     }
 
+    $('.carousel').carousel();
+
 }]);

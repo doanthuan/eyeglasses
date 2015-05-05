@@ -10,6 +10,18 @@ var app = angular.module('myApp', [
     'myApp.category'
 ]);
 
+app.config(['$provide', Decorate]);
+
+function Decorate($provide) {
+    $provide.decorator('carouselDirective', function($delegate) {
+        var directive = $delegate[0];
+
+        directive.templateUrl = "/templates/custom/carousel.html";
+
+        return $delegate;
+    });
+}
+
 angular.module('myApp').config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
@@ -52,6 +64,8 @@ angular.module('myApp').controller('HomeController', ['$scope', function($scope)
     for (var i=1; i<4; i++) {
         $scope.addSlide(i);
     }
+
+    $('.carousel').carousel();
 
 }]);
 
@@ -151,24 +165,6 @@ angular.module('myApp.product').config(['$stateProvider', '$urlRouterProvider',
 
 }]);
 
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('ProductListController', ['$scope', 'Restangular',
-    function($scope, Restangular) {
-
-    $scope.isLoading = true;
-    Restangular.all('product').getList().then(function(items) {
-
-        $scope.items = items;
-
-        $scope.total = items.total;
-
-        $scope.isLoading = false;
-    });
-
-}]);
 /**
  * Created by doanthuan on 4/12/2015.
  */
@@ -406,6 +402,24 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
 
         }
     }
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('ProductListController', ['$scope', 'Restangular',
+    function($scope, Restangular) {
+
+    $scope.isLoading = true;
+    Restangular.all('product').getList().then(function(items) {
+
+        $scope.items = items;
+
+        $scope.total = items.total;
+
+        $scope.isLoading = false;
+    });
+
 }]);
 /**
  * Created by doanthuan on 4/9/2015.
