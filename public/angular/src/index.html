@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app="myApp" lang="en">
 <head>
   <meta charset="utf-8">
@@ -20,86 +20,38 @@
   <link rel="stylesheet" href="<%= css %>">
   <link href="bower_components/angularjs-toaster/toaster.min.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/custom.css" rel="stylesheet" />
 </head>
 <body>
 
-<div id="header">
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Admin Panel</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">Catalog<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li >
-                <a href="/#/admin/product">Products</a>
-              </li>
-              <li><a href="/#/admin/category">Category</a></li>
-              <li class="dropdown-submenu">
-                <a href="">Attributes</a>
-                <ul class="dropdown-menu">
-                  <li><a href="">Attributes</a></li>
-                  <li><a href="">Attribute Sets</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+<div ui-view></div>
 
-          <li><a href="http://acs.local/admin/device-type">Device Types</a></li>
-          <li><a href="http://acs.local/admin/visit-log">Visit Logs</a></li>
-          <li><a href="http://acs.local/admin/device-lending">Lending Devices</a></li>
-          <li><a href="http://acs.local/admin/setting">Settings</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="http://acs.local" onclick="">Front Page</a></li>
-        </ul>
-
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      var currentUrl = 'http://acs.local/admin/device';
-      if($('a[href="'+currentUrl+'"]').closest("li.dropdown").size() > 0 ){
-        $('a[href="'+currentUrl+'"]').closest("li.dropdown").addClass('active');
-      }
-      else{
-        $('a[href="'+currentUrl+'"]').closest("li").addClass('active');
-      }
-    }, false);
-  </script>
-</div>
-
-<div id="content">
-    <div ng-view></div>
-</div>
 
 <toaster-container></toaster-container>
 
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
 <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+
 <script src="bower_components/tinymce/tinymce.min.js"></script>
 <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+
 <script src="bower_components/angularjs-toaster/toaster.min.js"></script>
+
 <script src="bower_components/lodash/lodash.min.js"></script>
 <script src="bower_components/restangular/dist/restangular.min.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
 <script src="<%= js %>"></script>
 </body>
 </html>

@@ -18,5 +18,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			'Doth\Catalog\Category\CategoryRepositoryInterface',
 			'Doth\Catalog\Category\CategoryRepository'
 		);
+
+		$this->app->bind(
+			'Doth\Catalog\Media\MediaRepositoryInterface',
+			'Doth\Catalog\Media\MediaRepository'
+		);
 	}
 }

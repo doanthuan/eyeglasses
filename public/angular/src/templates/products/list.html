@@ -1,28 +1,21 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <!--Sidebar content-->
-
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
-      </select>
-
-    </div>
-    <div class="col-md-10">
-      <!--Body content-->
-
-      <ul class="products">
-        <li ng-repeat="product in products | filter:query | orderBy:orderProp"
-            class="thumbnail product-listing">
-          <a href="#/products/{{product.id}}" class="thumb"><img ng-src="{{product.imageUrl}}"></a>
-          <a href="#/products/{{product.id}}">{{product.name}}</a>
-          <p>{{product.snippet}}</p>
-        </li>
-      </ul>
-
+<div class="container">
+  <div class="row product-grid">
+    <div class="col-sm-3" ng-repeat="item in items | filter:query">
+      <div class="product-item">
+        <div class="thumbnail">
+          <a href="">
+            <img ng-src="/uploads/{{item.filename}}">
+          </a>
+          <div class="product-name">
+            <a href="http://goxob-laravel.local/product/3-" title="">
+              {{item.name}}</a>
+          </div>
+          <div class="price-box">
+            <span class="price">{{item.price | currency }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<app-spinner ng-show="isLoading"></app-spinner>

@@ -9,6 +9,7 @@
 namespace Doth\Catalog\Product;
 
 use Doth\Core\Abstracts\Model;
+use Str;
 
 class Product extends Model{
 
@@ -23,7 +24,6 @@ class Product extends Model{
     );
 
     public static $rules = array(
-        'attr_set_id'=>'required|integer',
         'name'=>'required'
     );
 
@@ -61,13 +61,16 @@ class Product extends Model{
 
     public function setData($input)
     {
-        if(!empty($input['price']))
-        {
-            $input['price'] = \Goxob\Locale\Helper\Currency::priceToNumber($input['price']);
-        }
+//        if(!empty($input['price']))
+//        {
+//            $input['price'] = \Goxob\Locale\Helper\Currency::priceToNumber($input['price']);
+//        }
 
         if(isset($input['name'])){
             $input['alias'] = Str::slug( $input['name'] , '-' );
+        }
+        if(!isset($input['status'])){
+            $input['status'] = 1;
         }
 
         parent::setData($input);

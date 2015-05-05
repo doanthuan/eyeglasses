@@ -1,0 +1,163 @@
+<header class="container-fluid">
+    <div class="row" id="top-header-row">
+        <div class="top-headers container">
+            <div class="row">
+                <div id="top-left-copy" class="col-xs-5">
+                    SECRET SALE. UP TO 70% OFF. <a id="details" class="pointer" onclick="$.colorbox({href:'#header_promo_details',inline:true,title:&quot;SECRET SALE&quot;,width:443,height:315})"> DETAILS </a>                </div>
+                <div id="account-nav" class="col-xs-7">
+                    <ul class="pull-right">
+                        <li id="signin-li" onclick="flyout(event, 'navigation-flyouts')" class="pointer">
+                            <span id="sign-ico"></span>SIGN IN <div class="arrw-down"></div>
+                            <div id="navigation-flyouts" class="flyout-hide">
+                                <div id="acct-login">
+                                    <div id="form-label" class="flyout-label">SIGN IN</div>
+                                    <form action="https://www.glasses.com/accounthub/login-modal" method="post" onsubmit="return false;" name="log-in" id="login-form">
+                                        <div class="login-selection">
+                                            <label for="login_type_returning" class="fake_radio_holder">
+                                                <input type="radio" id="login_type_returning" name="login_type" value="login_returning" checked="" onclick="signInSwitch(this)" autocomplete="off">
+                                                Returning Customer<span class="fake_radio"></span>
+                                            </label>
+                                        </div>
+                                        <div class="login-selection">
+                                            <label for="login_type_new" class="fake_radio_holder">
+                                                <input type="radio" id="login_type_new" name="login_type" value="login_new" onclick="signInSwitch(this)" autocomplete="off">
+                                                New Customer<span class="fake_radio"></span>
+                                            </label>
+                                        </div>
+                                        <input type="hidden" name="custom_form_name" value="signin_flyout" autocomplete="off">
+                                        <input type="hidden" name="custom_form_name" value="signin_flyout" autocomplete="off">                                        <div id="sign-in">
+                                        <input id="signin_flyout__ret_username" type="text" name="ret_username" value="" placeholder="EMAIL" autocomplete="off"><div id="signin_flyout__ret_username__advice" class="input_advice input_advice_text" style="display: none"></div>                                            <input id="signin_flyout__ret_password" type="password" name="ret_password" placeholder="PASSWORD" autocomplete="off"><div id="signin_flyout__ret_password__advice" class="input_advice input_advice_password" style="display: none"></div>                                            <div id="forgot-pass">
+                                        <span onclick="forgotPassword()">Forgot Password?</span>
+                                    </div>
+                                    </div>
+                                        <div id="sign-up" class="hidex">
+                                            <input id="signin_flyout__new_username" type="text" name="new_username" value="" placeholder="EMAIL" autocomplete="off"><div id="signin_flyout__new_username__advice" class="input_advice input_advice_text" style="display: none"></div>                                            <input id="signin_flyout__new_password" type="password" name="new_password" placeholder="PASSWORD" autocomplete="off"><div id="signin_flyout__new_password__advice" class="input_advice input_advice_password" style="display: none"></div>                                            <input id="signin_flyout__new_password2" type="password" name="new_password2" placeholder="CONFIRM PASSWORD" autocomplete="off"><div id="signin_flyout__new_password2__advice" class="input_advice input_advice_password" style="display: none"></div>                                            <div class="login-selection">
+                                            <div id="signin_flyout__new_password2__advice" class="input_advice input_advice_password" style="display: none"></div>
+                                            <label for="newsletter_opt_in" class="fake_check_holder small">
+                                                <input type="checkbox" name="newsletter_opt_in" checked="" id="newsletter_opt_in" autocomplete="off">
+                                                Receive emails from Glasses.com<span class="fake_check"></span>
+                                            </label>
+                                        </div>
+                                        </div>
+                                        <div id="sign-in-btn">
+                                            <button id="login-submit" onclick="stark_submit('https://www.glasses.com/accounthub/login-modal/', this,'signin_modal__Sign_In__advice',null,closeLoginOK,null,null,null,loginErrors);
+                                                return false;" style="width:100%" autocomplete="off">SIGN IN</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="verify-account" class="hidex">
+                                    <form action="#" onsubmit="return verifyAccount( this );">
+                                        <div class="flyout-label">VERIFY YOUR ACCOUNT</div>
+                                        <p>This email address is already registered. We will send you an email with a link to finalize your account and update your password.</p>
+
+                                        <input type="text" name="verify_pass_email" value="" id="verify_pass_email" class="required email" placeholder="Email" autocomplete="off"><span id="verify-email-message"></span>
+                                        <div><!--  class="btn-container" -->
+                                            <button class="g_button action" autocomplete="off">Verify Account</button>
+                                            <button class="g_button cancel cancel_verify" style="width: 107px;" onclick="forgotCancel('veri')" autocomplete="off">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="forgot-password" class="hidex">
+                                    <form id="forgot-pass-form" action="#">
+                                        <div class="flyout-label">RESET PASSWORD</div>
+                                        <p>Enter your email address and we'll email you a link to change your password.</p>
+                                        <input type="text" name="forgot_pass_email" value="" id="forgot_pass_email" class="required email" placeholder="EMAIL" autocomplete="off"><span id="forgot-pass-email-message"></span>
+                                        <div class="btn-container">
+                                            <button class="valign" onclick="globalPasswordReset(document.getElementById('forgot-pass-form')); return false;" autocomplete="off">Reset</button>
+                                            <button class="cancel_reset valign" onclick="forgotCancel('pass')" autocomplete="off">Cancel</button>
+                                        </div>
+                                    </form>
+                                    <div id="reset-success" class="hidex">
+                                        <div class="flyout-label">RESET PASSWORD</div>
+                                        <p>An email has been sent to you with password reset instructions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!--li class="pointer"><a href="/in-home-try-on"><img class="an-icon" src="/images/rebrand2015/house.png"/> TRY ON</a></li-->
+                        <li class="pointer cart-link"><a href="/cart"><i class="cart"></i> CART <span class="h-count" id="headerCartCount">0</span></a></li>
+                    </ul>
+                    <!-- Navigation Flyouts -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="second-header-row">
+        <div class="container">
+            <div class="top-headers glasses-title row">
+                <div class="col-md-2" id="logo-new">
+                    <a href="/"></a>
+                </div>
+                <div id="main-menus" class="header_list col-md-7">
+                    <ul>
+                        <li class="dropdown">
+                            <a href="/women"><span class="underline">WOMEN</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class=""><a href="/womens-glasses">GLASSES</a></li>
+                                <li class=""><a href="/womens-sunglasses">SUNGLASSES</a></li>
+                                <li><a href="/womens-prescription-sunglasses">PRESCRIPTION SUN</a></li>
+                                <li class=""><a href="/sale##:g-Women">SALE</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/men"><span class="underline">MEN</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class=""><a href="/mens-glasses">GLASSES</a></li>
+                                <li><a href="/mens-sunglasses">SUNGLASSES</a></li>
+                                <li><a href="/mens-prescription-sunglasses">PRESCRIPTION SUN</a></li>
+                                <li><a href="/sale##:g-Men">SALE</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/brands"><span class="underline">BRANDS</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class=""><a href="/ray-ban">RAY-BAN</a></li>
+                                <li><a href="/kate-spade-new-york">KATE SPADE NEW YORK</a></li>
+                                <li><a href="/tory-burch">TORY BURCH</a></li>
+                                <li><a href="/oakley">OAKLEY</a></li>
+                                <li><a href="/coach">COACH</a></li>
+                                <li><a href="/smith">SMITH OPTICS</a></li>
+                                <li><a href="/brands">VIEW ALL BRANDS</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/eyeglasses"><span class="underline">SHOP ALL</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/eyeglasses">GLASSES</a></li>
+                                <li><a href="/sunglasses">SUNGLASSES</a></li>
+                                <li><a href="/prescription-sunglasses">PRESCRIPTION SUN</a></li>
+                                <li><a href="/computer-glasses">COMPUTER/GAMING</a></li>
+                                <li><a href="/kids-glasses">KIDS</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a><span class="underline">EXPLORE</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/how-it-works">HOW IT WORKS</a></li>
+                                <li><a href="/our-lenses">OUR LENSES</a></li>
+                                <li><a href="/in-home-try-on">IN-HOME TRY-ON</a></li>
+                                <li><a href="/virtual-try-on">VIRTUAL TRY-ON</a></li>
+                                <li><a href="/how-to-videos">HOW-TO VIDEOS</a></li>
+                                <li><a href="/trends-collections">TRENDS</a></li>
+                                <li><a href="http://www.glasses.com/blog/">PERSPECTIVES BLOG</a></li>
+                                <li><a href="/company/about">ABOUT US</a></li>
+                                <li><a href="/company/contact">CONTACT US</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="search" class="col-md-3">
+                    <div id="search-box">
+                        <form action="/search/" method="get">
+                            <input type="text" name="q" id="q" class="search-input keywords" title="" placeholder="Search brands &amp; trends" autocomplete="off">
+                        </form>
+                    </div>
+                    <div id="search-results" class="dropdown-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div ui-view></div>

@@ -8,6 +8,7 @@
 
 namespace Doth\Catalog\Product;
 
+use Doth\Catalog\Media\MediaRepositoryInterface;
 use Doth\Core\Abstracts\Repository;
 use Input;
 
@@ -15,10 +16,47 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
 
     /**
      * @param Product $product
+     * @param MediaRepositoryInterface $media
      */
-    public function __construct( Product $product )
+    public function __construct( Product $product, MediaRepositoryInterface $media )
     {
         $this->model = $product;
+        $this->media = $media;
+    }
+
+    public function getList()
+    {
+        $query = $this->model->query();
+        $query->leftJoin('media', 'product.product_id', '=', 'media.product_id');
+
+        $items = $this->filterQuery($query, Input::all());
+
+        return $items;
+    }
+
+    public function save($input)
+    {
+        //store item to db
+        if(!$this->model->validate($input))
+        {
+            $this->setErrors($this->model->getErrors());
+        }
+        $this->model->setData($input);
+        $this->model->save();
+
+        //update images with product id
+        if(isset($input['images'])){
+            $images = $input['images'];
+            foreach($images as $img){
+                if($img['media_id']){
+                    $media = $this->media->find($img['media_id']);
+                    $media->product_id = $this->model->product_id;
+                    $media->save();
+                }
+            }
+        }
+
+        return $this->model;
     }
 
     public function deleteImages()

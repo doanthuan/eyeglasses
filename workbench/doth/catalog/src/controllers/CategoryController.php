@@ -99,13 +99,15 @@ class CategoryController extends ApiController
         $this->respondSuccess('Category deleted');
     }
 
+    /**
+     * Multiple deletes
+     *
+     * @param  [] $cid
+     * @return Response
+     */
     public function delete()
     {
         $cid = Input::get('cid');
-        if (empty($cid)){
-            throw new BusinessException('Deleting category error. Invalid request ids');
-        }
-
         $this->category->delete($cid);
 
         return $this->respondSuccess('Categories deleted');

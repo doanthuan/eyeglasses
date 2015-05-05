@@ -16,6 +16,10 @@ Route::get('/', function(){
 });
 
 Route::resource('product', 'Doth\Catalog\Controllers\ProductController');
+Route::post('product/delete', 'Doth\Catalog\Controllers\ProductController@delete');
 
 Route::resource('category', 'Doth\Catalog\Controllers\CategoryController');
 Route::post('category/delete', 'Doth\Catalog\Controllers\CategoryController@delete');
+
+Route::resource('media', 'Doth\Catalog\Controllers\MediaController');
+Route::post('media/upload', 'Doth\Catalog\Controllers\MediaController@upload');

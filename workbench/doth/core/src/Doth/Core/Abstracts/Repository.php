@@ -53,7 +53,7 @@ abstract class Repository implements RepositoryInterface{
 
         //paginate
         $defaultPageSize = 10;
-        $pageSize = $input['limit']?$input['limit']:$defaultPageSize;
+        $pageSize = isset($input['limit'])?$input['limit']:$defaultPageSize;
 
         $items = $query->paginate($pageSize);
         $items->appends($_GET);
@@ -90,7 +90,7 @@ abstract class Repository implements RepositoryInterface{
     public function delete($ids)
     {
         if (empty($ids)){
-            throw new BusinessException('Deleting category error. Invalid request ids');
+            throw new BusinessException('Deleting error. Invalid request ids');
         }
 
         $this->model->destroy($ids);

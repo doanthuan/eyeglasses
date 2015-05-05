@@ -3,6 +3,7 @@
 use Doth\Core\Abstracts\ApiController;
 
 use Doth\Catalog\Product\ProductRepositoryInterface;
+use Input;
 
 class ProductController extends ApiController
 {
@@ -42,6 +43,8 @@ class ProductController extends ApiController
     public function store()
     {
         //
+        $product = $this->product->save(\Input::all());
+        return $this->respondSuccess('Product created successfully', $product);
     }
 
     /**
@@ -53,6 +56,8 @@ class ProductController extends ApiController
     public function show($id)
     {
         //
+        $product = $this->product->find($id);
+        return $this->respondData($product);
     }
 
     /**
@@ -88,4 +93,17 @@ class ProductController extends ApiController
         //
     }
 
+    /**
+     * Multiple deletes
+     *
+     * @param  [] $cid
+     * @return Response
+     */
+    public function delete()
+    {
+        $cid = Input::get('cid');
+        $this->product->delete($cid);
+
+        return $this->respondSuccess('Products deleted');
+    }
 }

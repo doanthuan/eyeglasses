@@ -44,7 +44,9 @@ class Handler extends ExceptionHandler {
 			], \Illuminate\Http\Response::HTTP_UNPROCESSABLE_ENTITY);
 
 		}
-		//return parent::render($request, $e);
+		else{
+			return parent::render($request, $e);
+		}
 	}
 
 }

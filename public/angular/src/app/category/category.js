@@ -3,14 +3,18 @@
  */
 angular.module('myApp.category', []);
 
-angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/admin/category', {
+angular.module('myApp.category').config(['$stateProvider', function($stateProvider) {
+
+    $stateProvider
+        .state('admin.category', {
+            url: "/category",
             controller: 'AdminCategoryListController',
             templateUrl: 'templates/admin/categories/list.html'
         })
-        .when('/admin/category/add/:id?', {
+        .state('admin.category-add', {
+            url: "/category/add/{id}",
             templateUrl: 'templates/admin/categories/add.html',
             controller: 'AdminCategoryAddController'
         })
+    ;
 }]);

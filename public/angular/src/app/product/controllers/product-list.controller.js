@@ -2,12 +2,17 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-    Product.query( {} ,function(products) {
-        console.log(products);
-        $scope.products = products;
-    }, function(error) {
-        console.log(error);
+angular.module('myApp.product').controller('ProductListController', ['$scope', 'Restangular',
+    function($scope, Restangular) {
+
+    $scope.isLoading = true;
+    Restangular.all('product').getList().then(function(items) {
+
+        $scope.items = items;
+
+        $scope.total = items.total;
+
+        $scope.isLoading = false;
     });
 
 }]);

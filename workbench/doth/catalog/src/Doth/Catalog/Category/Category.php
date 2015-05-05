@@ -42,10 +42,12 @@ class Category extends Model{
             $input['alias'] = Str::slug( $input['name'] , '-' );
         }
 
-        $parentCat = static::find($input['parent_id']);
-        if(!is_null($parentCat))
-        {
-            $input['tree_level'] = $parentCat->tree_level + 1;
+        if(isset($input['parent_id'])){
+            $parentCat = static::find($input['parent_id']);
+            if(!is_null($parentCat))
+            {
+                $input['tree_level'] = $parentCat->tree_level + 1;
+            }
         }
 
         parent::setData($input);

@@ -1,24 +1,58 @@
-var app = angular.module('myApp', ['ngRoute', 'ngResource','ngAnimate','ui.bootstrap','ui.tinymce','toaster','myApp.common','myApp.product','myApp.category']);
+var app = angular.module('myApp', [
+    'ngAnimate',
+    'ui.router',
+    'ui.bootstrap',
+    'ui.tinymce',
+    'toaster',
+    'ngFileUpload',
+    'myApp.common',
+    'myApp.product',
+    'myApp.category'
+]);
+
+angular.module('myApp').config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise("/");
+
+        // Now set up the states
+        $stateProvider
+            .state('admin', {
+                url: "/admin",
+                templateUrl: "admin.html"
+            })
+            .state('front', {
+                templateUrl: "front.html"
+            })
+            .state('front.home', {
+                url: "/",
+                controller: 'HomeController',
+                templateUrl: "templates/front/home.html"
+            })
+        ;
+
+
+    }]);
+
 
 /**
- * Created by doanthuan on 4/9/2015.
+ * Created by doanthuan on 4/28/2015.
  */
-angular.module('myApp.product', []);
+angular.module('myApp').controller('HomeController', ['$scope', function($scope) {
 
-angular.module('myApp.product').config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/', {
-            controller: 'ProductListController',
-            templateUrl: 'templates/products/list.html'
-        })
-        .when('/admin/product', {
-            controller: 'AdminProductListController',
-            templateUrl: 'templates/admin/products/list.html'
-        })
-        .when('/admin/product/add', {
-            controller: 'AdminProductAddController',
-            templateUrl: 'templates/admin/products/add.html'
-        })
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    $scope.addSlide = function(i) {
+        slides.push({
+            image: '/images/banner'+i+'.jpg',
+            text: ''
+        });
+    };
+    for (var i=1; i<4; i++) {
+        $scope.addSlide(i);
+    }
+
 }]);
 
 /**
@@ -26,16 +60,20 @@ angular.module('myApp.product').config(['$routeProvider', function($routeProvide
  */
 angular.module('myApp.category', []);
 
-angular.module('myApp.category').config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/admin/category', {
+angular.module('myApp.category').config(['$stateProvider', function($stateProvider) {
+
+    $stateProvider
+        .state('admin.category', {
+            url: "/category",
             controller: 'AdminCategoryListController',
             templateUrl: 'templates/admin/categories/list.html'
         })
-        .when('/admin/category/add/:id?', {
+        .state('admin.category-add', {
+            url: "/category/add/{id}",
             templateUrl: 'templates/admin/categories/add.html',
             controller: 'AdminCategoryAddController'
         })
+    ;
 }]);
 
 /**
@@ -86,71 +124,64 @@ angular.module('myApp.common').config(function(RestangularProvider) {
 /**
  * Created by doanthuan on 4/9/2015.
  */
+angular.module('myApp.product', []);
 
-angular.module('myApp.product').controller('ProductListController', ['$scope', 'Product', '$http', function($scope, Product, $http) {
-    Product.query( {} ,function(products) {
-        console.log(products);
-        $scope.products = products;
-    }, function(error) {
-        console.log(error);
+angular.module('myApp.product').config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+
+    // Now set up the states
+    $stateProvider
+        .state('admin.product', {
+            url: "/product",
+            controller: 'AdminProductListController',
+            templateUrl: 'templates/admin/products/list.html'
+        })
+        .state('admin.product-add', {
+            url: "/product/add/{id}",
+            controller: 'AdminProductAddController',
+            templateUrl: 'templates/admin/products/add.html'
+        })
+        .state('front.product', {
+            url: "/products",
+            controller: 'ProductListController',
+            templateUrl: 'templates/products/list.html'
+        })
+    ;
+
+
+}]);
+
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('ProductListController', ['$scope', 'Restangular',
+    function($scope, Restangular) {
+
+    $scope.isLoading = true;
+    Restangular.all('product').getList().then(function(items) {
+
+        $scope.items = items;
+
+        $scope.total = items.total;
+
+        $scope.isLoading = false;
     });
 
 }]);
 /**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').factory('Product', ['$resource',
-    function($resource) {
-        return $resource('/product/:id', {id: '@id'},{
-                update: {
-                    method: 'PUT'
-                }
-            }
-        );
-    }]
-);
-
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.category').factory('Category', ['$resource',
-    function($resource) {
-        return $resource('/category/:id', {id: '@id'},{
-                query:  {method:'GET', isArray:false,
-                    transformResponse: function(data, header) {
-                        var jsonData = JSON.parse(data); //or angular.fromJson(data)
-                        var items = [];
-
-                        angular.forEach(jsonData.data, function(item){
-                            var category = new this;
-                            category.category_id = item.category_id;
-                            category.name = item.name;
-                            category.child_count = item.child_count;
-                            items.push(category);
-                        });
-                        return items;
-                    }
-                },
-                update: {method: 'PUT'}
-            }
-        );
-    }]
-);
-
-/**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$route',
-    function (Restangular, toaster, $location, $route) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$state',
+    function (Restangular, toaster, $location, $state) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
             cols: '=',
-            items: '='
+            items: '=',
+            itemKey: '@'
         },
         controller: function($scope, $element){
             $scope.getPage = function (tableState) {
@@ -199,7 +230,8 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
             }
 
             $scope.editItem = function(item){
-                $scope.$parent.editItem(item);
+                var curUrl = $location.path();
+                $location.path(curUrl + '/add/'+ item[$scope.itemKey]);
             }
 
             $scope.deleteItems = function(){
@@ -210,7 +242,7 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                 var deletedItems = [];
                 angular.forEach($scope.items, function (item) {
                     if(item.selected){
-                        deletedIds.push(item.category_id);
+                        deletedIds.push(item[$scope.itemKey]);
                         deletedItems.push(item);
                     }
                 });
@@ -223,7 +255,7 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                         });
 
                         if($scope.items.length == 0){
-                            $route.reload();
+                            $state.reload();
                         }
 
                         $scope.isLoading = false;
@@ -379,53 +411,32 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').controller('AdminProductAddController', ['$scope', function($scope) {
-
-
-
-    $scope.tinymceOptions = {
-        handle_event_callback: function (e) {
-            // put logic here for keypress
-        }
-    };
-
-}]);
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.product').controller('AdminProductListController', ['$scope', function($scope) {
-
-    $scope.gridCols = [
-        {title: 'Name', name: 'name', search: 'text'},
-        {title: 'Price', name: 'price', search: 'text', format: 'currency'},
-        {title: 'Quantity', name: 'quantity', search: 'text'},
-        {title: 'Created At', name: 'created_at', format: 'date'},
-        {title: 'Status', name: 'status', format: 'status'}
-    ];
-
-}]);
-/**
- * Created by doanthuan on 4/9/2015.
- */
-
-angular.module('myApp.category').controller('AdminCategoryAddController', ['$scope','$location', 'toaster', 'Restangular', '$routeParams',
-    function($scope, $location, toaster, Restangular, $routeParams) {
+angular.module('myApp.category').controller('AdminCategoryAddController',
+    ['$scope','$location', 'toaster', 'Restangular', '$stateParams',
+    function($scope, $location, toaster, Restangular, $stateParams) {
 
     $scope.cancel = function(){
         $location.path('/admin/category');
     }
 
     $scope.save = function(){
-        Restangular.all('category').post($scope.category).then(function(response){
-            toaster.pop('success', "", response.message);
-            $location.path('/admin/category');
-        });
+        $scope.isSaving = true;
+        Restangular.all('category').post($scope.category).then(
+            function(response){
+                toaster.pop('success', "", response.message);
+                $location.path('/admin/category');
+                $scope.isSaving = false;
+            },
+            function(error){
+                toaster.pop('error', "", error.data.message);
+                $scope.isSaving = false;
+            }
+        );
     }
 
-    if($routeParams.id){
+    if($stateParams.id){
         $scope.isEdit = true;
-        Restangular.one('category', $routeParams.id).get().then(function(response){
+        Restangular.one('category', $stateParams.id).get().then(function(response){
             $scope.category = response;
         });
 
@@ -444,22 +455,12 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     function($scope, Restangular, toaster, $location) {
 
     $scope.add = function(){
-        $location.path('/admin/category/add');
-    };
-
-    $scope.editItem = function(item){
-        var curUrl = $location.path();
-        $location.path(curUrl + '/add/'+item.id);
+        $location.path('/admin/category/add/');
     };
 
     $scope.remove = function(){
         //emit delete event to grid
         $scope.$emit('delete_item');
-    };
-
-    $scope.editItem = function(item){
-        var curUrl = $location.path();
-        $location.path(curUrl + '/add/'+item.category_id);
     };
 
     $scope.gridCols = [
@@ -469,6 +470,104 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
 
     $scope.categories = null;
 
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('AdminProductAddController',
+    ['$scope','$location', 'toaster', 'Restangular', '$stateParams', 'Upload',
+        function($scope, $location, toaster, Restangular, $stateParams, Upload) {
+
+    $scope.cancel = function(){
+        $location.path('/admin/product');
+    }
+
+    $scope.save = function(){
+        $scope.isSaving = true;
+
+        $scope.product.images = $scope.images;
+
+        Restangular.all('product').post($scope.product).then(
+            function(response){
+                toaster.pop('success', "", response.message);
+                $location.path('/admin/product');
+                $scope.isSaving = false;
+            },
+            function(error){
+                toaster.pop('error', "", error.data.message);
+                $scope.isSaving = false;
+            }
+        );
+    };
+
+    if($stateParams.id){
+        $scope.isEdit = true;
+        Restangular.one('product', $stateParams.id).get().then(function(response){
+            $scope.product = response;
+        });
+
+    }else{
+        $scope.isEdit = false;
+        $scope.product = {};
+    }
+
+
+    $scope.tinymceOptions = {
+        handle_event_callback: function (e) {
+            // put logic here for keypress
+        }
+    };
+
+    $scope.$watch('images', function () {
+        $scope.upload($scope.images);
+    });
+
+    $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                Upload.upload({
+                    url: 'media/upload',
+                    fields: {'username': $scope.username},
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    file.media_id = data;
+                });
+            }
+        }
+    };
+
+}]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('AdminProductListController', ['$scope', 'Restangular', 'toaster', '$location',
+    function($scope, Restangular, toaster, $location) {
+
+    $scope.add = function(){
+        $location.path('/admin/product/add/');
+    };
+
+    $scope.remove = function(){
+        //emit delete event to grid
+        $scope.$emit('delete_item');
+    };
+
+    $scope.gridCols = [
+        {title: 'Name', name: 'name', search: 'text'},
+        {title: 'Price', name: 'price', search: 'text', format: 'currency'},
+        {title: 'Quantity', name: 'quantity', search: 'text'},
+        {title: 'Created At', name: 'created_at', format: 'date'},
+        {title: 'Status', name: 'status', format: 'status'}
+        ];
+
+    $scope.products = null;
 
 }]);
 //# sourceMappingURL=app.js.map

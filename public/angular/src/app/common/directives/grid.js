@@ -1,15 +1,16 @@
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$route',
-    function (Restangular, toaster, $location, $route) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$state',
+    function (Restangular, toaster, $location, $state) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
         scope: {
             url: '@',
             cols: '=',
-            items: '='
+            items: '=',
+            itemKey: '@'
         },
         controller: function($scope, $element){
             $scope.getPage = function (tableState) {
@@ -58,7 +59,8 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
             }
 
             $scope.editItem = function(item){
-                $scope.$parent.editItem(item);
+                var curUrl = $location.path();
+                $location.path(curUrl + '/add/'+ item[$scope.itemKey]);
             }
 
             $scope.deleteItems = function(){
@@ -69,7 +71,7 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                 var deletedItems = [];
                 angular.forEach($scope.items, function (item) {
                     if(item.selected){
-                        deletedIds.push(item.category_id);
+                        deletedIds.push(item[$scope.itemKey]);
                         deletedItems.push(item);
                     }
                 });
@@ -82,7 +84,7 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
                         });
 
                         if($scope.items.length == 0){
-                            $route.reload();
+                            $state.reload();
                         }
 
                         $scope.isLoading = false;

@@ -6,22 +6,12 @@ angular.module('myApp.category').controller('AdminCategoryListController', ['$sc
     function($scope, Restangular, toaster, $location) {
 
     $scope.add = function(){
-        $location.path('/admin/category/add');
-    };
-
-    $scope.editItem = function(item){
-        var curUrl = $location.path();
-        $location.path(curUrl + '/add/'+item.id);
+        $location.path('/admin/category/add/');
     };
 
     $scope.remove = function(){
         //emit delete event to grid
         $scope.$emit('delete_item');
-    };
-
-    $scope.editItem = function(item){
-        var curUrl = $location.path();
-        $location.path(curUrl + '/add/'+item.category_id);
     };
 
     $scope.gridCols = [
