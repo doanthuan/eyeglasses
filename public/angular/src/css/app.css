@@ -657,7 +657,7 @@ span.inputHint { color: #262628 !important; }
 
 /*product item*/
 .product-item{
-    height: 200px;
+    padding: 15px;
 }
 .product-item a img{
     height: 120px;
