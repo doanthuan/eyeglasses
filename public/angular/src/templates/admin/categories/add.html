@@ -24,15 +24,16 @@
         <input required="required" class="form-control" name="name" type="text" ng-model="category.name">
       </div>
     </div>
+
     <!--<div class="form-group">-->
       <!--<label class="col-sm-2 control-label">Parent Category</label>-->
-      <!--<div class="col-sm-10">-->
-        <!--<select class="form-control" name="parent_id" ng-model="category.parent_id">-->
-          <!--<option value="0">Root</option>-->
-          <!--<option value="9">Phone</option>-->
+      <!--<div class="col-sm-10" ng-show="!isLoading">-->
+        <!--<select class="form-control" name="parent_id" ng-model="category.parent_id" ng-options="category.name for category in categories">-->
         <!--</select>-->
       <!--</div>-->
+      <!--<app-spinner ng-show="isLoading"></app-spinner>-->
     <!--</div>-->
+
     <div class="form-group">
       <div class="col-sm-10">
         <input id="category_id" class="form-control" name="category_id" type="hidden" ng-model="category.category_id">

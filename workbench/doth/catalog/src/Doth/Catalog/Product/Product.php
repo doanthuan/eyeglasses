@@ -20,7 +20,7 @@ class Product extends Model{
     protected $fillable = array('name','alias','price','short_description','description','sku', 'quantity','cost',
         'weight', 'vendor_id', 'tax', 'status', 'created_at', 'updated_at', 'hits', 'sold', 'sort_order', 'category_id',
         'attr_set_id', 'old_price', 'published_date', 'new_from', 'new_to', 'hot_from', 'hot_to',
-        'meta_title', 'meta_key', 'meta_desc', 'related_products', 'frontpage'
+        'meta_title', 'meta_key', 'meta_desc', 'related_products', 'frontpage', 'brand_id'
     );
 
     public static $rules = array(

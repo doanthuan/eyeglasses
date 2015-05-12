@@ -2,19 +2,17 @@
 
 use Doth\Core\Abstracts\ApiController;
 
-use Doth\Catalog\Media\MediaRepositoryInterface;
+use Doth\Catalog\Brand\BrandRepositoryInterface;
+use Doth\Core\Exceptions\BusinessException;
 
-use Request;
-use Storage;
-use File;
-use Str;
+use Input;
 
-class MediaController extends ApiController
+class BrandController extends ApiController
 {
 
-    public function __construct( MediaRepositoryInterface $media )
+    public function __construct( BrandRepositoryInterface $brand )
     {
-        $this->media = $media;
+        $this->brand = $brand;
     }
 
     /**
@@ -24,9 +22,9 @@ class MediaController extends ApiController
      */
     public function index()
     {
-        $medias = $this->media->getList();
+        $brands = $this->brand->getList();
 
-        return $medias->toJson();
+        return $this->respondData($brands);
     }
 
     /**
@@ -37,6 +35,7 @@ class MediaController extends ApiController
     public function create()
     {
         //
+
     }
 
     /**
@@ -46,7 +45,8 @@ class MediaController extends ApiController
      */
     public function store()
     {
-        //
+        $brand = $this->brand->save(\Input::all());
+        return $this->respondSuccess('Brand created successfully', $brand);
     }
 
     /**
@@ -58,6 +58,8 @@ class MediaController extends ApiController
     public function show($id)
     {
         //
+        $brand = $this->brand->find($id);
+        return $this->respondData($brand);
     }
 
     /**
@@ -69,6 +71,8 @@ class MediaController extends ApiController
     public function edit($id)
     {
         //
+        $brand = $this->brand->find($id);
+        $this->respondData($brand);
     }
 
     /**
@@ -91,35 +95,22 @@ class MediaController extends ApiController
     public function destroy($id)
     {
         //
+        $this->brand->delete($id);
+        $this->respondSuccess('Brand deleted');
     }
 
     /**
-     * upload image
+     * Multiple deletes
      *
+     * @param  [] $cid
      * @return Response
      */
-    public function upload()
+    public function delete()
     {
-        //
-        if (Request::file('file')->isValid())
-        {
-            //
-            $file = Request::file('file');
+        $cid = Input::get('cid');
+        $this->brand->delete($cid);
 
-            $fileName = $file->getClientOriginalName();
-            $fileName = pathinfo($fileName, PATHINFO_FILENAME);
-            $extension = $file->getClientOriginalExtension();
-            $random = Str::random(6);
-            $fileName = $fileName.'_'.$random.'.'.$extension;
-            $uploadDir = public_path('uploads');
-
-            Request::file('file')->move($uploadDir, $fileName);
-
-            $data['filename'] = $fileName;
-            $data['original_filename'] = $file->getClientOriginalName();
-            $data['color_id'] = Request::input('color-id');
-            $row = $this->media->save($data);
-            echo $row->id;exit;
-        }
+        return $this->respondSuccess('Brands deleted');
     }
+
 }

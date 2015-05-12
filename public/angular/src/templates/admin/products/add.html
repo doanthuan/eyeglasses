@@ -1,66 +1,111 @@
 <div class="container">
+  <div class="col-sm-10 col-xs-12">
 
-  <div class="page-header">
-    <div class="row">
-      <div class="col-sm-6">
-        <h2 ng-show="!isEdit">New Product</h2>
-        <h2 ng-show="isEdit">Edit Product</h2>
-      </div>
-      <div class="col-sm-6 text-right btn-toolbar">
-        <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ng-disabled="isSaving">
-          {{isSaving?"Saving":"Save"}}
-        </button>
-        <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">
-          Cancel
-        </button>
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2 ng-show="!isEdit">New Product</h2>
+          <h2 ng-show="isEdit">Edit Product</h2>
+        </div>
+        <div class="col-sm-6 text-right btn-toolbar">
+          <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ng-disabled="isSaving||isUploading">
+            {{isSaving?"Saving":"Save"}}
+          </button>
+          <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
+
+    <form method="POST" accept-charset="UTF-8" name="adminForm" class="form-horizontal" enctype="multipart/form-data" novalidate>
+
+      <tabset>
+        <tab heading="General">
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input required="required" placeholder="Enter Name" class="form-control" name="name" type="text" ng-model="product.name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+              <textarea ui-tinymce="tinymceOptions" name="description" ng-model="product.description"></textarea>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">Price</label>
+            <div class="col-sm-10">
+              <input required="required" placeholder="Enter Price" class="form-control" name="price" type="text" ng-model="product.price">
+            </div>
+          </div>
+
+          <!--<div class="form-group">-->
+            <!--<label  class="col-sm-2 control-label">Quantity</label>-->
+            <!--<div class="col-sm-10">-->
+              <!--<input required="required" class="form-control" name="quantity" type="number" ng-model="product.quantity"  ng-init="product.quantity=5.00">-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">Category</label>
+            <div class="col-sm-10">
+              <select class="form-control" ng-model="product.category_id" ng-options="category.category_id as category.name for category in categories">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">Brand</label>
+            <div class="col-sm-10">
+              <select class="form-control" ng-model="product.brand_id" ng-options="brand.id as brand.name for brand in brands">
+              </select>
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <tab-heading>
+            Colors & Images
+          </tab-heading>
+
+          <div class="form-group" ng-show="!isSelected">
+            <label  class="col-sm-2 control-label">Colors</label>
+            <div class="col-sm-10">
+              <select class="form-control" ng-model="product.colors" multiple ng-options="color.name for color in colors" size="20">
+              </select>
+            </div>
+          </div>
+          <div class="form-group" ng-show="!isSelected">
+            <div class="col-sm-10 col-sm-offset-2">
+              <button class="btn btn-sm btn-info" ng-click="selectColors()">Select Colors</button>
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="isSelected&&!isUploading" ng-repeat="color in product.colors">
+            <label  class="col-sm-3 control-label">Images for {{color.name}} color</label>
+            <div class="col-sm-8">
+              <div ngf-drop ngf-select ng-model="images[color.id]" class="drop-box"
+                   ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                   accept="image/*">Drop images here or click to upload</div>
+              <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+              Files:
+              <ul>
+                <li ng-repeat="f in images[color.id]" style="font:smaller">{{f.name}}</li>
+              </ul>
+            </div>
+            <input type="hidden" ng->
+          </div>
+
+          <app-spinner ng-show="isUploading"></app-spinner>
+
+        </tab>
+      </tabset>
+
+
+    </form>
   </div>
-
-  <form method="POST" accept-charset="UTF-8" name="adminForm" class="form-horizontal" enctype="multipart/form-data">
-
-    <div class="form-group">
-      <label  class="col-sm-2 control-label">Name</label>
-      <div class="col-sm-10">
-        <input required="required" placeholder="Enter Name" class="form-control" name="name" type="text" ng-model="product.name">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label  class="col-sm-2 control-label">Description</label>
-      <div class="col-sm-10">
-        <textarea ui-tinymce="tinymceOptions" name="description" ng-model="product.description"></textarea>
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <label  class="col-sm-2 control-label">Price</label>
-      <div class="col-sm-10">
-        <input required="required" placeholder="Enter Price" class="form-control" name="price" type="text" ng-model="product.price">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label  class="col-sm-2 control-label">Quantity</label>
-      <div class="col-sm-10">
-        <input required="required" class="form-control" name="quantity" type="number" ng-model="product.quantity"  ng-init="product.quantity=5.00">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label  class="col-sm-2 control-label">Images</label>
-      <div class="col-sm-10">
-        <div ngf-drop ngf-select ng-model="images" class="drop-box"
-             ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-             accept="image/*">Drop images here or click to upload</div>
-        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-        Files:
-        <ul>
-          <li ng-repeat="f in images" style="font:smaller">{{f.name}}</li>
-        </ul>
-      </div>
-    </div>
-
-  </form>
 </div>

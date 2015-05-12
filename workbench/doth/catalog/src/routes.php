@@ -23,3 +23,6 @@ Route::post('category/delete', 'Doth\Catalog\Controllers\CategoryController@dele
 
 Route::resource('media', 'Doth\Catalog\Controllers\MediaController');
 Route::post('media/upload', 'Doth\Catalog\Controllers\MediaController@upload');
+
+Route::resource('brand', 'Doth\Catalog\Controllers\BrandController');
+Route::post('brand/delete', 'Doth\Catalog\Controllers\BrandController@delete');

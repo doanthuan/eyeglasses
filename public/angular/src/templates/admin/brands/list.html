@@ -1,0 +1,24 @@
+<div class="container">
+
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Manage Brands</h2>
+      </div>
+      <div class="col-sm-6 text-right btn-toolbar">
+        <button type="button" class="btn btn-sm btn-success" ng-click="add()">
+          <i ng-if="button.icon" class="glyphicon glyphicon-plus"></i>
+          Add New
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" ng-click="remove()">
+          <i ng-if="button.icon" class="glyphicon glyphicon-remove"></i>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <app-grid url="/brand" cols="gridCols" items="brands" item-key="id"></app-grid>
+
+</div>

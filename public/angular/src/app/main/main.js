@@ -7,7 +7,8 @@ var app = angular.module('myApp', [
     'ngFileUpload',
     'myApp.common',
     'myApp.product',
-    'myApp.category'
+    'myApp.category',
+    'myApp.brand'
 ]);
 
 app.config(['$provide', Decorate]);

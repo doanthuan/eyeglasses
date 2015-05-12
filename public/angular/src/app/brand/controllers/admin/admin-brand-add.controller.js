@@ -2,20 +2,20 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.category').controller('AdminCategoryAddController',
+angular.module('myApp.brand').controller('AdminBrandAddController',
     ['$scope','$location', 'toaster', 'Restangular', '$stateParams',
         function($scope, $location, toaster, Restangular, $stateParams) {
 
             $scope.cancel = function(){
-                $location.path('/admin/category');
+                $location.path('/admin/brand');
             };
 
             $scope.save = function(){
                 $scope.isSaving = true;
-                Restangular.all('category').post($scope.category).then(
+                Restangular.all('brand').post($scope.brand).then(
                     function(response){
                         toaster.pop('success', "", response.message);
-                        $location.path('/admin/category');
+                        $location.path('/admin/brand');
                         $scope.isSaving = false;
                     },
                     function(error){
@@ -27,21 +27,14 @@ angular.module('myApp.category').controller('AdminCategoryAddController',
 
             if($stateParams.id){
                 $scope.isEdit = true;
-                Restangular.one('category', $stateParams.id).get().then(function(response){
-                    $scope.category = response;
+                Restangular.one('brand', $stateParams.id).get().then(function(response){
+                    $scope.brand = response;
                 });
 
             }else{
                 $scope.isEdit = false;
-                $scope.category = {};
+                $scope.brand = {};
             }
-
-            //$scope.isLoading = true;
-            //Restangular.all('category').getList().then(function(items) {
-            //
-            //    $scope.categories = items;
-            //    $scope.isLoading = false;
-            //});
 
 
         }]);

@@ -521,6 +521,7 @@
 		</div>
 		<div class="container-fluid">
 			<div class="product-grid">
+				<app-spinner ng-show="isLoading"></app-spinner>
 				<div class="col-sm-4" ng-repeat="item in items | filter:query">
 					<div class="product-item">
 						<div class="thumbnail">
@@ -553,7 +554,5 @@
 			</div>
 		</div>
 	</div>
-	<app-spinner ng-show="isLoading"></app-spinner>
-
 
 </div>

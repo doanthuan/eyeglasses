@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 ng-show="!isEdit">New Brand</h2>
+        <h2 ng-show="isEdit">Edit Brand</h2>
+      </div>
+      <div class="col-sm-6 text-right btn-toolbar">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="save()" ng-disabled="isSaving">
+          {{isSaving?"Saving":"Save"}}
+        </button>
+        <button type="button" class="btn btn-sm btn-default" ng-click="cancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" action="" accept-charset="UTF-8" name="adminForm" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input required="required" class="form-control" name="name" type="text" ng-model="brand.name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-init="brand.for_men = 1" name="for_men" ng-model="brand.for_men" ng-checked="brand.for_men"> For Men
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-init="brand.for_women = 1" name="for_women" ng-model="brand.for_women" ng-checked="brand.for_women"> For Women
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-10">
+        <input id="brand_id" class="form-control" name="brand_id" type="hidden" ng-model="brand.id">
+      </div>
+    </div>
+
+  </form>
+</div>

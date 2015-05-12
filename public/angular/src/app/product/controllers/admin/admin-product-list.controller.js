@@ -17,7 +17,6 @@ angular.module('myApp.product').controller('AdminProductListController', ['$scop
     $scope.gridCols = [
         {title: 'Name', name: 'name', search: 'text'},
         {title: 'Price', name: 'price', search: 'text', format: 'currency'},
-        {title: 'Quantity', name: 'quantity', search: 'text'},
         {title: 'Created At', name: 'created_at', format: 'date'},
         {title: 'Status', name: 'status', format: 'status'}
         ];

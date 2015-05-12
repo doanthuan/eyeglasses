@@ -10,7 +10,7 @@ namespace Doth\Catalog\Product;
 
 use Doth\Catalog\Media\MediaRepositoryInterface;
 use Doth\Core\Abstracts\Repository;
-use Input;
+use Input, DB;
 
 class ProductRepository extends Repository implements ProductRepositoryInterface{
 
@@ -27,7 +27,8 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
     public function getList()
     {
         $query = $this->model->query();
-        $query->leftJoin('media', 'product.product_id', '=', 'media.product_id');
+//        $query->leftJoin('media', 'product.product_id', '=', 'media.product_id');
+        $query->select('product.*');
 
         $items = $this->filterQuery($query, Input::all());
 
@@ -44,17 +45,26 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         $this->model->setData($input);
         $this->model->save();
 
-        //update images with product id
+        //update product images and color
         if(isset($input['images'])){
             $images = $input['images'];
+
             foreach($images as $img){
-                if($img['media_id']){
+                if(isset($img['media_id'])){
                     $media = $this->media->find($img['media_id']);
                     $media->product_id = $this->model->product_id;
                     $media->save();
+
+                    //update product image colors
+                    DB::table('product_color')->insert(
+                        ['color_id' => $media->color_id, 'product_id' => $this->model->product_id]
+                    );
                 }
             }
         }
+
+
+
 
         return $this->model;
     }

@@ -23,5 +23,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			'Doth\Catalog\Media\MediaRepositoryInterface',
 			'Doth\Catalog\Media\MediaRepository'
 		);
+
+		$this->app->bind(
+			'Doth\Catalog\Brand\BrandRepositoryInterface',
+			'Doth\Catalog\Brand\BrandRepository'
+		);
 	}
 }

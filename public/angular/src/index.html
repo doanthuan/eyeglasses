@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" lang="en">
+<html ng-app="myApp" lang="en" ng-controller="MainController">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="<%= css %>">
   <link href="bower_components/angularjs-toaster/toaster.min.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <link href="css/products.css" rel="stylesheet" />
+  <link ng-if="!isAdmin" href="css/products.css" rel="stylesheet" />
 </head>
 <body>
 

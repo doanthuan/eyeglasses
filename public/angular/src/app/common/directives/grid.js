@@ -60,6 +60,7 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
 
             $scope.editItem = function(item){
                 var curUrl = $location.path();
+                console.log(item);
                 $location.path(curUrl + '/add/'+ item[$scope.itemKey]);
             }
 
@@ -115,6 +116,13 @@ angular.module('myApp.common').filter('picker', function($filter) {
                     return 'Enabled';
                 } else{
                     return 'Disabled';
+                }
+            }
+            else if(filterName == 'yes-no'){
+                if(value == 1){
+                    return 'Yes';
+                } else{
+                    return 'No';
                 }
             }
             else{
