@@ -12,12 +12,8 @@ namespace Doth\Core\Abstracts;
 interface RepositoryInterface {
 
     public function setErrors($errors);
-
     public function getErrors();
-
     public function hasErrors();
-
-    public function filterQuery($query, $input);
 
     public function getList();
 

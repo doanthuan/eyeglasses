@@ -12,12 +12,16 @@ angular.module('myApp.common').config(function(RestangularProvider) {
         switch(operation)
         {
             case "getList":
-                extractedData = data.data;
+                if(angular.isArray(data)){//not pagination
+                    extractedData = data;
+                }
+                else{//pagination
+                    extractedData = data.data;
 
-                extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
+                    extractedData.last_page = data.last_page;//set the number of pages so the pagination can update
 
-                extractedData.total = data.total;
-
+                    extractedData.total = data.total;
+                }
                 break;
 
             default:

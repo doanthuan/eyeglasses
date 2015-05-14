@@ -29,19 +29,29 @@ abstract class Repository implements RepositoryInterface{
         return ! empty($this->errors);
     }
 
-    public function filterQuery($query, $input)
+    protected function filter($query, $input)
     {
         //filters
         if (isset($input['filters'])) {
-            $filters = $input['filters'];
-            $filters = (array)json_decode($filters);
-            if(is_array($filters)){
-                foreach ($filters as $key => $value) {
+            $filters = (array)json_decode($input['filters']);
+            foreach ($filters as $key => $value) {
+                if(is_null($value) || (empty($value) && $value != 0)){
+                    continue;
+                }
+                if(is_array($value)){
+                    $query->whereIn($key, $value);
+                }
+                else{
                     $query->where($key,'like', '%'.$value.'%');
                 }
             }
         }
 
+        return $query;
+    }
+
+    protected function sortBy(&$query, $input)
+    {
         //sort
         if(isset($input['order']) && !empty($input['order'])){
 
@@ -50,22 +60,42 @@ abstract class Repository implements RepositoryInterface{
 
             $query->orderBy($orderBy, $orderDir);
         }
+    }
 
+    protected function pagination(&$query, $input)
+    {
         //paginate
-        $defaultPageSize = 10;
-        $pageSize = isset($input['limit'])?$input['limit']:$defaultPageSize;
+        if(isset($input['limit'])){//if pagination
+            $pageSize = $input['limit'];
+            $curPage = $input['page'];
 
-        $items = $query->paginate($pageSize);
-        $items->appends($_GET);
+            $orgQuery = clone $query;
+            $query->groups = null;
+            $total = $query->count();
 
-        return $items;
+            $items = $orgQuery->skip(($curPage - 1)  * $pageSize)->take($pageSize)->get();
+
+            $paginator = new \Illuminate\Pagination\LengthAwarePaginator($items, $total, $pageSize, $curPage);
+            $paginator->appends($_GET);
+            return $paginator;
+        }
+        else{
+            $items= $query->get();
+            return $items;
+        }
     }
 
     public function getList()
     {
-        $query = $this->model->query();
+        $input = Input::all();
 
-        $items = $this->filterQuery($query, Input::all());
+        $query = $this->model->getQuery();
+
+        $this->filter($query, $input);
+
+        $this->sortBy($query, $input);
+
+        $items = $this->pagination($query, $input);
 
         return $items;
     }

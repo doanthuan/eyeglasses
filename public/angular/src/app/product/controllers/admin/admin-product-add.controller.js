@@ -3,8 +3,8 @@
  */
 
 angular.module('myApp.product').controller('AdminProductAddController',
-    ['$scope','$location', 'toaster', 'Restangular', '$stateParams', 'Upload',
-        function($scope, $location, toaster, Restangular, $stateParams, Upload) {
+    ['$scope','$location', 'toaster', 'Restangular', '$stateParams', 'Upload', 'ProductService',
+        function($scope, $location, toaster, Restangular, $stateParams, Upload, ProductService) {
 
             $scope.cancel = function(){
                 $location.path('/admin/product');
@@ -78,11 +78,30 @@ angular.module('myApp.product').controller('AdminProductAddController',
                 }
             };
 
+            //init data
+            $scope.genders = [
+                {id: 1, name: 'Women'},
+                {id: 2, name: 'Men'},
+                {id: 3, name: 'Unisex'}
+            ];
+
+            $scope.colors = ProductService.getColors();
+
+            $scope.shapes = ProductService.getFaceShapes();
+
+            $scope.frameSizes = ProductService.getFrameSizes();
+
+            $scope.frameTypes = ProductService.getFrameTypes();
+
+            $scope.frameShapes = ProductService.getFrameShapes();
+
+
             $scope.isLoading = true;
             Restangular.all('category').getList().then(function(items) {
 
                 $scope.categories = items;
                 $scope.isLoading = false;
+
             });
 
             Restangular.all('brand').getList().then(function(items) {
@@ -91,29 +110,7 @@ angular.module('myApp.product').controller('AdminProductAddController',
                 $scope.isLoading = false;
             });
 
-            $scope.colors = [
-                {id: 1, name:'Black', class: 'black'},
-                {id: 2, name:'Black 2', class: 'black2'},
-                {id: 3, name:'Blue', class: 'blue'},
-                {id: 4, name:'Brown', class: 'brown'},
-                {id: 5, name:'Burgundy', class: 'burgundy'},
-                {id: 6, name:'Crystal', class: 'crystal'},
-                {id: 7, name:'Gold', class: 'gold'},
-                {id: 8, name:'Green', class: 'green'},
-                {id: 9, name:'Grey', class: 'grey'},
-                {id: 10, name:'Gunmetal', class: 'gunmetal'},
-                {id: 11, name:'Orange', class: 'orange'},
-                {id: 12, name:'Pink', class: 'pink'},
-                {id: 13, name:'Print', class: 'print'},
-                {id: 14, name:'Purple', class: 'purple '},
-                {id: 15, name:'Red', class: 'red'},
-                {id: 16, name:'Silver', class: 'silver'},
-                {id: 17, name:'Tortoise', class: 'tortoise'},
-                {id: 18, name:'Turquoise', class: 'turquoise'},
-                {id: 19, name:'White', class: 'white'},
-                {id: 20, name:'Yellow', class: 'yellow'},
-            ]
-
+            $scope.product = {};
             if($stateParams.id){
                 $scope.isEdit = true;
                 Restangular.one('product', $stateParams.id).get().then(function(response){
@@ -122,7 +119,6 @@ angular.module('myApp.product').controller('AdminProductAddController',
 
             }else{
                 $scope.isEdit = false;
-                $scope.product = {};
             }
 
 

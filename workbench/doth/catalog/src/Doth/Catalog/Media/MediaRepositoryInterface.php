@@ -12,6 +12,6 @@ use Doth\Core\Abstracts\RepositoryInterface;
 
 interface MediaRepositoryInterface extends RepositoryInterface{
 
-
+    public function addImagesToProduct($images, $product);
 
 }

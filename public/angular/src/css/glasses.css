@@ -525,3 +525,16 @@ span.inputHint { color: #262628 !important; }
 #footer .footer_nav li { padding: 2px 0 4px 0; font-size: 11.5px;}
 #footer .copyright { display: inline-block; width: 100%; height: 40px; margin-top: 20px; background-color: #333335; color: #777779; padding-top: 13px; font-size: 11px; position: relative; top: 5px;}
 /*===============   END FOOTER  ===============*/
+
+
+/*=== Sprites ===*/
+
+p.sprite-checkbox-light {
+    background: url('/images/glasses-rebrand-2015-pdp-ui-sprite.png') no-repeat -114px -173px;
+    width: 15px;
+    height: 15px;
+    left: 0;
+}
+p.sprite-checkbox-light.checked {
+    background-position: -134px -173px;
+}

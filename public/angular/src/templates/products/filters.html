@@ -1,0 +1,108 @@
+<div class="pcp_filters pull-left">
+    <div class="title-bar">
+        <div class="results ng-binding">
+            {{items.length}} Results
+        </div>
+        Now Showing
+    </div>
+
+    <div class="filter">
+        <a class="clear-all-filters" href="javascript:return void(null)" ng-click="clearAllFilters()">Clear All Filters</a>
+    </div>
+
+    <div class="filter facet-template-sort first" ng-class="{'first': $first, 'last': $last}">
+        <!-- ngInclude: undefined -->
+        <label class="facet-name">Sort By</label>
+        <select class="form-control" ng-model="sortBy" ng-change="getList()">
+            <option value="hits|DESC" selected="selected">Most Popular</option>
+            <option value="price|ASC">Lowest Price</option>
+            <option value="price|DESC">Highest Price</option>
+        </select>
+    </div>
+    <div class="filter facet-template-colors">
+        <div class="title">Colors</div>
+        <div class="colors ng-scope">
+            <label ng-repeat="color in colors" ng-class=" 'swatch ' + color.class + (color.selected?' selected':' ')"
+                   ng-click="selectItem(color, filters.color)">
+            </label>
+        </div>
+    </div>
+    <div class="filter facet-template-select_multiple">
+        <select class="form-control" ng-model="filters.brand_id" ng-change="getList()" ng-options="brand.id as brand.name for brand in brands">
+            <option value="" selected="selected">Filter Brands</option>
+        </select>
+
+    </div>
+
+    <div class="filter facet-template-face_shapes">
+        <div class="title ng-binding ng-scope">Face Shape</div>
+        <div ng-repeat="shape in faceShapes"
+             ng-class="'item face-shapes ' + shape.class + (shape.selected?' selected':'')"
+             ng-click="selectItem(shape, filters.face_shape)">
+            <div class="face_shapes_image"></div>
+            <div class="face_shapes_title ng-binding">{{shape.name}}</div>
+        </div>
+    </div>
+
+    <div class="filter facet-template-flat_checks">
+        <div class="title">Frame Size</div>
+        <div class="row">
+            <div class="col-sm-6" ng-repeat="frameSize in frameSizes" >
+                <label  ng-class=" 'item'+ (frameSize.selected?' selected':'')"
+                        ng-click="selectItem(frameSize, filters.frame_size);">
+                    {{frameSize.name}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter facet-template-flat_checks">
+        <div class="title">Frame Type</div>
+        <div class="row">
+            <div class="col-sm-6" ng-repeat="frameType in frameTypes" >
+                <label  ng-class=" 'item'+ (frameType.selected?' selected':'')"
+                        ng-click="selectItem(frameType, filters.frame_size)">
+                    {{frameType.name}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="filter facet-template-frame_shapes">
+        <div class="title">Frame Shape</div>
+        <div ng-repeat="frameShape in frameShapes" ng-class="'frame_shape ' + frameShape.class + (frameShape.selected?' selected':'')"
+             ng-click="selectItem(frameShape, filters.frame_shape)">
+            <div  class="ng-scope">
+                <div class="frame_shape_container item"></div>
+                <span class="frame_shape_name ng-binding">{{frameShape.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter facet-template-flat_checks">
+        <div class="title">Price</div>
+        <div class="row">
+            <div class="col-sm-6" ng-repeat="price in prices">
+                <label ng-class=" 'item' + (price.selected?' selected':'')"
+                       ng-click="selectItem(price, filters.prices)">
+                {{price.name}}
+            </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter facet-template-flat_checks last">
+        <div class="title"></div>
+        <div class="styles">
+            <div class="column item_prescription_type">
+                <label ng-class="'item' + (filters.eligible==''? ' ' : ' selected' )"
+                       ng-click="selectEligible()" class="ng-binding ng-scope item">
+                <p style="float: right; position: relative; top: 6px;" ng-class="'sprite-checkbox-light' + (filters.eligible==''? ' ' : ' checked' )"></p>
+                Bifocal Eligible
+            </label>
+            </div>
+        </div>
+    </ng-include></div>
+
+</div>

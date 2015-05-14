@@ -22,7 +22,7 @@ class ProductController extends ApiController
     {
         $products = $this->product->getList();
 
-        return $products->toJson();
+        return $this->respondData($products);
     }
 
     /**
