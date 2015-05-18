@@ -27,7 +27,7 @@ class MediaRepository extends Repository implements MediaRepositoryInterface{
 
     public function addImagesToProduct($images, $product)
     {
-        if (isset($images)) {
+        if (isset($images) && count($images) > 0) {
             //remove old images
             $this->removeImagesFromProduct($product->product_id);
 
@@ -84,5 +84,15 @@ class MediaRepository extends Repository implements MediaRepositoryInterface{
     protected function clean()
     {
         Media::where('product_id', null)->delete();
+    }
+
+    public function getProductColors($productId)
+    {
+        return \DB::table('product_color')->where('product_id', $productId)->lists('product_color.color_id');
+    }
+
+    public function getProductImages($productId)
+    {
+        return Media::where('product_id', $productId)->get();
     }
 }

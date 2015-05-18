@@ -17,6 +17,7 @@ Route::get('/', function(){
 
 Route::resource('product', 'Doth\Catalog\Controllers\ProductController');
 Route::post('product/delete', 'Doth\Catalog\Controllers\ProductController@delete');
+Route::get('product/get-by-alias/{alias}', 'Doth\Catalog\Controllers\ProductController@getByAlias');
 
 Route::resource('category', 'Doth\Catalog\Controllers\CategoryController');
 Route::post('category/delete', 'Doth\Catalog\Controllers\CategoryController@delete');

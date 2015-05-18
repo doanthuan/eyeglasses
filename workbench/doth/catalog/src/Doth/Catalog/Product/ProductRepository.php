@@ -107,4 +107,38 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         return $product;
     }
 
+    public function findByAlias($alias)
+    {
+        $query = $this->model->getQuery();
+        $query->where('alias', $alias);
+        $product = $query->first();
+
+        //get product colors
+        $colorIds = $this->media->getProductColors($product->product_id);
+
+        //get product images
+        $images = $this->media->getProductImages($product->product_id);
+
+        //attach images to colors
+        $colorsImages = [];
+        foreach($colorIds as $colorId){
+
+            $aColorImages = new \stdClass();
+            $aColorImages->colorId = $colorId;
+
+            $colorImages = [];
+            foreach($images as $image){
+                if($image->color_id == $colorId){
+                    $colorImages[] = $image;
+                }
+            }
+            $aColorImages->images = $colorImages;
+
+            $colorsImages[] = $aColorImages;
+        }
+
+        $product->colors = $colorsImages;
+        return $product;
+    }
+
 }

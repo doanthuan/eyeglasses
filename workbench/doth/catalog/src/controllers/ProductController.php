@@ -106,4 +106,16 @@ class ProductController extends ApiController
 
         return $this->respondSuccess('Products deleted');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  string $alias
+     * @return Response
+     */
+    public function getByAlias($alias)
+    {
+        $product = $this->product->findByAlias($alias);
+        return $this->respondData($product);
+    }
 }

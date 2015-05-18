@@ -5,6 +5,7 @@ var app = angular.module('myApp', [
     'ui.tinymce',
     'toaster',
     'ngFileUpload',
+    'imagesLoaded',
     'myApp.common',
     'myApp.product',
     'myApp.category',

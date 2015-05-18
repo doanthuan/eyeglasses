@@ -7,11 +7,11 @@
 				<div class="col-sm-4" ng-repeat="item in items | filter:query" ng-show="!isLoading">
 					<div class="product-item">
 						<div class="thumbnail">
-							<a href="">
+							<a ng-href="#/product/{{item.alias}}">
 								<img ng-src="/uploads/{{item.thumbnail}}">
 							</a>
 							<div class="product-name">
-								<a href="http://goxob-laravel.local/product/3-" title="">
+								<a ng-href="#/product/{{item.alias}}">
 									{{item.name}}</a>
 							</div>
 							<div class="price-box">

@@ -40,6 +40,58 @@ angular.module('myApp.category').config(['$stateProvider', function($stateProvid
     ;
 }]);
 
+var app = angular.module('myApp', [
+    'ngAnimate',
+    'ui.router',
+    'ui.bootstrap',
+    'ui.tinymce',
+    'toaster',
+    'ngFileUpload',
+    'imagesLoaded',
+    'myApp.common',
+    'myApp.product',
+    'myApp.category',
+    'myApp.brand'
+]);
+
+app.config(['$provide', Decorate]);
+
+function Decorate($provide) {
+    $provide.decorator('carouselDirective', function($delegate) {
+        var directive = $delegate[0];
+
+        directive.templateUrl = "/templates/custom/carousel.html";
+
+        return $delegate;
+    });
+}
+
+angular.module('myApp').config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise("/");
+
+        // Now set up the states
+        $stateProvider
+            .state('admin', {
+                url: "/admin",
+                templateUrl: "admin.html"
+            })
+            .state('front', {
+                templateUrl: "front.html"
+            })
+            .state('front.home', {
+                url: "/",
+                controller: 'HomeController',
+                templateUrl: "templates/front/home.html"
+            })
+        ;
+
+
+    }]);
+
+
 /**
  * Created by doanthuan on 4/9/2015.
  */
@@ -89,57 +141,6 @@ angular.module('myApp.common').config(function(RestangularProvider) {
     }
 
 });
-var app = angular.module('myApp', [
-    'ngAnimate',
-    'ui.router',
-    'ui.bootstrap',
-    'ui.tinymce',
-    'toaster',
-    'ngFileUpload',
-    'myApp.common',
-    'myApp.product',
-    'myApp.category',
-    'myApp.brand'
-]);
-
-app.config(['$provide', Decorate]);
-
-function Decorate($provide) {
-    $provide.decorator('carouselDirective', function($delegate) {
-        var directive = $delegate[0];
-
-        directive.templateUrl = "/templates/custom/carousel.html";
-
-        return $delegate;
-    });
-}
-
-angular.module('myApp').config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
-
-        // For any unmatched url, redirect to /
-        $urlRouterProvider.otherwise("/");
-
-        // Now set up the states
-        $stateProvider
-            .state('admin', {
-                url: "/admin",
-                templateUrl: "admin.html"
-            })
-            .state('front', {
-                templateUrl: "front.html"
-            })
-            .state('front.home', {
-                url: "/",
-                controller: 'HomeController',
-                templateUrl: "templates/front/home.html"
-            })
-        ;
-
-
-    }]);
-
-
 /**
  * Created by doanthuan on 4/9/2015.
  */
@@ -160,13 +161,60 @@ angular.module('myApp.product').config(['$stateProvider', '$urlRouterProvider',
             controller: 'AdminProductAddController',
             templateUrl: 'templates/admin/products/add.html'
         })
-        .state('front.product', {
+        .state('front.products', {
             url: "/products",
             controller: 'ProductListController',
             templateUrl: 'templates/products/list.html'
         })
+        .state('front.product', {
+            url: "/product/{alias}",
+            controller: 'ProductViewController',
+            templateUrl: 'templates/products/view.html'
+        })
     ;
 
+
+}]);
+
+/**
+ * Created by doanthuan on 4/28/2015.
+ */
+angular.module('myApp').controller('HomeController', ['$scope', function($scope) {
+
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    $scope.addSlide = function(i) {
+        slides.push({
+            image: '/images/banner'+i+'.jpg',
+            text: ''
+        });
+    };
+    for (var i=1; i<4; i++) {
+        $scope.addSlide(i);
+    }
+
+    $('.carousel').carousel();
+
+}]);
+
+/**
+ * Created by doanthuan on 4/28/2015.
+ */
+angular.module('myApp').controller('MainController', ['$scope', '$location', function($scope, $location) {
+
+    //detect admin area
+    $scope.isAdmin = false;
+    var path = $location.path();
+    if( path.indexOf("admin") > 0 ){
+        $scope.isAdmin = true;
+    }
+
+    if( path.indexOf("product") > 0 ){
+        $scope.curPage = 'product';
+        if( path.indexOf("products") > 0 ){
+            $scope.curPage = 'products';
+        }
+    }
 
 }]);
 
@@ -417,142 +465,6 @@ angular.module('myApp.common').directive('appToolbar', ['$location', function ($
     }
 }]);
 /**
- * Created by doanthuan on 4/28/2015.
- */
-angular.module('myApp').controller('HomeController', ['$scope', function($scope) {
-
-    $scope.myInterval = 5000;
-    var slides = $scope.slides = [];
-    $scope.addSlide = function(i) {
-        slides.push({
-            image: '/images/banner'+i+'.jpg',
-            text: ''
-        });
-    };
-    for (var i=1; i<4; i++) {
-        $scope.addSlide(i);
-    }
-
-    $('.carousel').carousel();
-
-}]);
-
-/**
- * Created by doanthuan on 4/28/2015.
- */
-angular.module('myApp').controller('MainController', ['$scope', '$location', function($scope, $location) {
-
-    //detect admin area
-    $scope.isAdmin = false;
-    var path = $location.path();
-    if( path.indexOf("admin") > 0 ){
-        $scope.isAdmin = true;
-    }
-
-}]);
-
-/**
- * Created by doanthuan on 4/12/2015.
- */
-
-angular.module('myApp.product').factory('ProductService', [
-        function() {
-
-            var service = {};
-
-            service.getColors = function(){
-                return [
-                    {id: 1, name:'Black', class: 'black'},
-                    {id: 2, name:'Black 2', class: 'black2'},
-                    {id: 3, name:'Blue', class: 'blue'},
-                    {id: 4, name:'Brown', class: 'brown'},
-                    {id: 5, name:'Burgundy', class: 'burgundy'},
-                    {id: 6, name:'Crystal', class: 'crystal'},
-                    {id: 7, name:'Gold', class: 'gold'},
-                    {id: 8, name:'Green', class: 'green'},
-                    {id: 9, name:'Grey', class: 'grey'},
-                    {id: 10, name:'Gunmetal', class: 'gunmetal'},
-                    {id: 11, name:'Orange', class: 'orange'},
-                    {id: 12, name:'Pink', class: 'pink'},
-                    {id: 13, name:'Print', class: 'print'},
-                    {id: 14, name:'Purple', class: 'purple '},
-                    {id: 15, name:'Red', class: 'red'},
-                    {id: 16, name:'Silver', class: 'silver'},
-                    {id: 17, name:'Tortoise', class: 'tortoise'},
-                    {id: 18, name:'Turquoise', class: 'turquoise'},
-                    {id: 19, name:'White', class: 'white'},
-                    {id: 20, name:'Yellow', class: 'yellow'}
-                ];
-            }
-
-            service.getColorById = function(colorId){
-                var colors = service.getColors();
-                var retColor = null;
-                angular.forEach(colors, function(color){
-                    if(color.id == colorId){
-                        retColor = color;
-                        return;
-                    }
-                })
-                return retColor;
-            }
-
-            service.getFaceShapes = function(){
-                return [
-                    {id: 1, name: 'Heart', class: 'heart'},
-                    {id: 2, name: 'Oblong', class: 'oblong'},
-                    {id: 3, name: 'Oval', class: 'oval'},
-                    {id: 4, name: 'Round', class: 'round'},
-                    {id: 5, name: 'Square', class: 'square'},
-                ];
-            }
-
-            service.getFrameSizes = function(){
-                return [
-                    {id: 1, name: 'Large'},
-                    {id: 2, name: 'Medium'},
-                    {id: 3, name: 'Small'},
-                    {id: 4, name: 'Petite'}
-                ];
-            };
-
-            service.getFrameTypes = function(){
-                return [
-                    {id: 1, name: 'Full-Rim Metal'},
-                    {id: 2, name: 'Full-Rim Plastic'},
-                    {id: 3, name: 'Full-Rim Wood'},
-                    {id: 4, name: 'Rimless'},
-                    {id: 5, name: 'Semi-Rimless'},
-                ];
-            }
-
-            service.getFrameShapes = function() {
-                return [
-                    {id: 1, name: 'Butterfly', class: 'butterfly'},
-                    {id: 2, name: 'Cat-Eye', class: 'cat-eye'},
-                    {id: 3, name: 'Geometric', class: 'geometric'},
-                    {id: 4, name: 'Oval', class: 'oval'},
-                    {id: 5, name: 'Rectangle', class: 'rectangle'},
-                    {id: 6, name: 'Round', class: 'round'},
-                    {id: 7, name: 'Square', class: 'square'}
-                ];
-            }
-
-            service.getFilterPrices = function() {
-                return [
-                    {id: '50 and 100', name: '$50 - $100'},
-                    {id: '100 and 150', name: '$100 - $150'},
-                    {id: '150 and 200', name: '$150 - $200'},
-                    {id: '200 and 250', name: '$200 - $250'},
-                    {id: '250 and 300', name: '$250 - $300'},
-                    {id: '300 and 1000000', name: 'Over $300'},
-                ];
-            }
-
-            return service;
-        }]
-);
-/**
  * Created by doanthuan on 4/9/2015.
  */
 
@@ -578,17 +490,8 @@ angular.module('myApp.product').controller('ProductListController', ['$scope', '
 
                 angular.forEach(items, function(item){
 
-                    if(item.colors != null) {
-                        //convert color ids string to color objects
-                        var colorIds = item.colors.split(',');
-                        var itemColors = [];
-                        angular.forEach(colorIds, function (colorId) {
-                            var color = ProductService.getColorById(colorId);
-                            itemColors.push(color);
-                        })
-                        itemColors[0].active = true;
-                        item.colors = itemColors;
-                    }
+                    ProductService.colorIdsToObjects(item);
+
                 });
 
                 $scope.items = items;
@@ -651,6 +554,237 @@ angular.module('myApp.product').controller('ProductListController', ['$scope', '
         });
 
     }]);
+/**
+ * Created by doanthuan on 4/9/2015.
+ */
+
+angular.module('myApp.product').controller('ProductViewController', ['$scope', 'Restangular', 'ProductService', '$stateParams', '$timeout',
+    function ($scope, Restangular, ProductService, $stateParams, $timeout) {
+
+        $scope.isLoading = true;
+        Restangular.one('product/get-by-alias', $stateParams.alias).get().then(function (product) {
+
+            ProductService.colorIdsToObjects(product);
+
+            $scope.product = product;
+
+            $scope.product.colors[0].selected = true;
+            $scope.selectedColorName = $scope.product.colors[0].name;
+
+            $scope.isLoading = false;
+
+        });
+
+        $scope.$on('ALWAYS', function() {
+            $scope.initGallery();
+        });
+
+        $scope.initGallery = function(){
+            angular.forEach($scope.product.colors, function(color){
+                $("#zoom_"+color.id).elevateZoom({
+                    gallery: 'gallery_'+color.id,
+                    cursor: 'pointer',
+                    galleryActiveClass: 'active',
+                    imageCrossfade: true,
+                    scrollZoom : true,
+                    constrainType:"width",
+                    constrainSize:643
+                });
+            })
+        };
+
+        $scope.selectColor = function(color){
+            angular.forEach($scope.product.colors, function(color){
+                color.selected = false;
+            })
+
+            $scope.selectedColorName = color.name;
+            color.selected = true;
+        }
+
+
+        $scope.selected_package_code = 'single_vision';
+
+        $scope.packages = {
+            'single_vision' : {
+                'lens':{
+                    'cr39' : {'name': 'CR-39', 'price': 39},
+                    'poly' : {'name': 'Polycarbonate', 'price': 79},
+                    'ulpoly' : {'name': 'High-Index', 'price': 99}
+                },
+                'upgrades': [1]
+            },
+            'multi_vision' : {
+                'name': 'Progressive/Multifocal Lenses',
+                'lens':{
+                    'cr39' : {'name': 'CR-39', 'price': 79},
+                    'poly' : {'name': 'Polycarbonate', 'price': 99},
+                    'ulpoly' : {'name': 'High-Index', 'price': 139}
+                },
+                'upgrades': [1]
+            },
+            'reader' : {
+                'price': 39,
+                'upgrades': [1]
+            },
+            'plano' : {
+                'name': 'Blank Lenses',
+                'price': 0,
+                'upgrades': [1, 2]
+            },
+            'demo' : {
+                'price': 0,
+                'upgrades': []
+            }
+        }
+
+        $scope.packages.lens_choice = 'cr39';
+
+        $scope.upgrades = [
+            {name:'CleanShield', price: 49},
+            {name:'Transitions', price: 99}
+        ];
+
+
+        $scope.changeSelectedPackage = function(selected_package_code){
+            $scope.selected_package_code = selected_package_code;
+        }
+
+        $scope.getPriceTotal = function(){
+            var price = 0;
+            //lens options
+            if($scope.selected_package_code == 'single_vision' || $scope.selected_package_code == 'multi_vision'){
+                price = $scope.packages[$scope.selected_package_code].lens[$scope.packages.lens_choice].price;
+            }
+            else{
+                price = $scope.packages[$scope.selected_package_code].price;
+            }
+            //upgrades
+            if($scope.upgrades[0].selected){
+                price += $scope.upgrades[0].price;
+            }
+            if($scope.upgrades[1].selected){
+                price += $scope.upgrades[1].price;
+            }
+            return price;
+        }
+
+    }]);
+/**
+ * Created by doanthuan on 4/12/2015.
+ */
+
+angular.module('myApp.product').factory('ProductService', [
+        function() {
+
+            var service = {};
+
+            service.getColors = function(){
+                return [
+                    {id: 1, name:'SHINY BLACK', class: 'black'},
+                    {id: 2, name:'BLACK & TEXTURE', class: 'black2'},
+                    {id: 3, name:'Blue', class: 'blue'},
+                    {id: 4, name:'Brown', class: 'brown'},
+                    {id: 5, name:'Burgundy', class: 'burgundy'},
+                    {id: 6, name:'Crystal', class: 'crystal'},
+                    {id: 7, name:'Gold', class: 'gold'},
+                    {id: 8, name:'Green', class: 'green'},
+                    {id: 9, name:'Grey', class: 'grey'},
+                    {id: 10, name:'Gunmetal', class: 'gunmetal'},
+                    {id: 11, name:'Orange', class: 'orange'},
+                    {id: 12, name:'Pink', class: 'pink'},
+                    {id: 13, name:'Print', class: 'print'},
+                    {id: 14, name:'Purple', class: 'purple '},
+                    {id: 15, name:'DARK RED TRANSPARENT', class: 'red'},
+                    {id: 16, name:'Silver', class: 'silver'},
+                    {id: 17, name:'DARK HAVANA', class: 'tortoise'},
+                    {id: 18, name:'Turquoise', class: 'turquoise'},
+                    {id: 19, name:'White', class: 'white'},
+                    {id: 20, name:'Yellow', class: 'yellow'}
+                ];
+            }
+
+            service.getColorById = function(colorId){
+                var colors = service.getColors();
+                var retColor = null;
+                angular.forEach(colors, function(color){
+                    if(color.id == colorId){
+                        retColor = color;
+                        return;
+                    }
+                })
+                return retColor;
+            }
+
+            service.colorIdsToObjects = function(item){
+                if(item.colors != null) {
+                    //format colors objects
+                    var itemColors = [];
+                    angular.forEach(item.colors, function (color) {
+                        var newColor = service.getColorById(color.colorId);
+                        newColor.images = color.images;
+                        itemColors.push(newColor);
+                    })
+                    itemColors[0].active = true;
+                    item.colors = itemColors;
+                }
+            }
+
+            service.getFaceShapes = function(){
+                return [
+                    {id: 1, name: 'Heart', class: 'heart'},
+                    {id: 2, name: 'Oblong', class: 'oblong'},
+                    {id: 3, name: 'Oval', class: 'oval'},
+                    {id: 4, name: 'Round', class: 'round'},
+                    {id: 5, name: 'Square', class: 'square'},
+                ];
+            }
+
+            service.getFrameSizes = function(){
+                return [
+                    {id: 1, name: 'Large'},
+                    {id: 2, name: 'Medium'},
+                    {id: 3, name: 'Small'},
+                    {id: 4, name: 'Petite'}
+                ];
+            };
+
+            service.getFrameTypes = function(){
+                return [
+                    {id: 1, name: 'Full-Rim Metal'},
+                    {id: 2, name: 'Full-Rim Plastic'},
+                    {id: 3, name: 'Full-Rim Wood'},
+                    {id: 4, name: 'Rimless'},
+                    {id: 5, name: 'Semi-Rimless'},
+                ];
+            }
+
+            service.getFrameShapes = function() {
+                return [
+                    {id: 1, name: 'Butterfly', class: 'butterfly'},
+                    {id: 2, name: 'Cat-Eye', class: 'cat-eye'},
+                    {id: 3, name: 'Geometric', class: 'geometric'},
+                    {id: 4, name: 'Oval', class: 'oval'},
+                    {id: 5, name: 'Rectangle', class: 'rectangle'},
+                    {id: 6, name: 'Round', class: 'round'},
+                    {id: 7, name: 'Square', class: 'square'}
+                ];
+            }
+
+            service.getFilterPrices = function() {
+                return [
+                    {id: '50 and 100', name: '$50 - $100'},
+                    {id: '100 and 150', name: '$100 - $150'},
+                    {id: '150 and 200', name: '$150 - $200'},
+                    {id: '200 and 250', name: '$200 - $250'},
+                    {id: '250 and 300', name: '$250 - $300'},
+                    {id: '300 and 1000000', name: 'Over $300'},
+                ];
+            }
+
+            return service;
+        }]
+);
 /**
  * Created by doanthuan on 4/9/2015.
  */

@@ -11,6 +11,6 @@ namespace Doth\Catalog\Product;
 
 interface ProductRepositoryInterface {
 
-
+    public function findByAlias($alias);
 
 }

@@ -1,3 +1,67 @@
+@media only screen and (max-device-width: 768px) {
+    .container-fluid.content-grid { width: 1030px; }
+    #header.container-fluid { width: 1030px; }
+    #footer.container-fluid { width: 1030px; }
+    #carousel-wrapper { overflow: hidden; width: 100% }
+}
+
+/* ---  Global Whole-Page Overrides  --- */
+#main-container {
+    background-color:white;
+    width:100%;
+    margin:0px auto;
+}
+
+body {
+    font-family: gothic-font;
+    color: #333335;
+}
+
+/* ---  Fonts  --- */
+@font-face {
+    font-family: gothic-font;
+    src: url('/fonts/AlternateGothicNo2-webfont.eot');
+    src: url('/fonts/AlternateGothicNo2-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/AlternateGothicNo2-webfont.woff2') format('woff2'),
+    url('/fonts/AlternateGothicNo2-webfont.woff') format('woff'),
+    url('/fonts/AlternateGothicNo2-webfont.ttf') format('truetype'),
+    url('/fonts/AlternateGothicNo2-webfont.svg#alternate_gothic_fsno_2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*============================
+       Global (generic) Rules
+=============================*/
+
+.pointer { cursor: pointer; }
+.hidex { display: none; }
+.valign { vertical-align: middle; display: inline-block; }
+.width50 { width: 50%; }
+.upper { text-transform: uppercase; }
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.75); z-index: 900; }
+
+body {
+    font-family: "Whitney SSm A", "Whitney SSm B", sans-serif !important;
+}
+
+::-webkit-input-placeholder {
+    color: #999;
+}
+
+:-moz-placeholder {
+    color: #999;
+}
+
+::-moz-placeholder {
+    color: #999;
+}
+
+:-ms-input-placeholder {
+    color: #999;
+}
+
+
 
 /*====================
        Header Rules
@@ -538,3 +602,280 @@ p.sprite-checkbox-light {
 p.sprite-checkbox-light.checked {
     background-position: -134px -173px;
 }
+
+/* --- KEEP COLOR LIST IN SYNC with the css file: /application/models/SearchEngine.php */
+ul.new_color_selector {list-style-type:none;padding:0; margin:0;}
+ul.new_color_selector li{padding:0; margin:0;}
+ul.new_color_selector li div {
+    background-image: url("/images/category-swatch-final.png");
+    float: left;
+    height: 23px;
+    overflow: hidden;
+    width: 23px;
+}
+
+.swatch.brown {  background-position: -23px -3px; cursor: pointer;}
+.swatch.brown.swatch-hover {  background-position: 0 -3px;}
+.swatch.brown.selected {  background-position: 0 -3px; }
+.swatch.brown.inactive { background-position: -46px -3px; cursor: default;}
+
+.swatch.tortoise { background-position: -23px -26px; cursor: pointer;}
+.swatch.tortoise.swatch-hover { background-position: 0 -26px; }
+.swatch.tortoise.selected { background-position: 0 -26px; }
+.swatch.tortoise.inactive { background-position: -46px -26px; cursor: default;}
+
+.swatch.black { background-position: -23px -49px; cursor: pointer;}
+.swatch.black.swatch-hover { background-position: 0 -49px; }
+.swatch.black.selected { background-position: 0 -49px; }
+.swatch.black.inactive { background-position: -46px -49px; cursor: default;}
+
+.swatch.silver { background-position: -23px -72px; cursor: pointer;}
+.swatch.silver.swatch-hover { background-position: 0 -72px; }
+.swatch.silver.selected { background-position: 0 -72px; }
+.swatch.silver.inactive { background-position: -46px -72px; cursor: default;}
+
+.swatch.gunmetal { background-position: -23px -95px; cursor: pointer;}
+.swatch.gunmetal.swatch-hover { background-position: 0 -95px; }
+.swatch.gunmetal.selected { background-position: 0 -95px; }
+.swatch.gunmetal.inactive { background-position: -46px -95px; cursor: default;}
+
+.swatch.grey { background-position: -23px -118px; cursor: pointer;}
+.swatch.grey.swatch-hover { background-position: 0 -118px; }
+.swatch.grey.selected { background-position: 0 -118px; }
+.swatch.grey.inactive { background-position: -46px -118px; cursor: default;}
+
+.swatch.blue { background-position: -23px -141px; cursor: pointer;}
+.swatch.blue.swatch-hover { background-position: 0 -141px; }
+.swatch.blue.selected { background-position: 0 -141px; }
+.swatch.blue.inactive { background-position: -46px -141px; cursor: default;}
+
+.swatch.cream { background-position: -23px -164px; cursor: pointer;}
+.swatch.cream.swatch-hover { background-position: 0 -164px; }
+.swatch.cream.selected { background-position: 0 -164px; }
+.swatch.cream.inactive { background-position: -46px -164px; cursor: default;}
+
+.swatch.yellow { background-position: -23px -187px; cursor: pointer;}
+.swatch.yellow.swatch-hover { background-position: 0 -187px; }
+.swatch.yellow.selected { background-position: 0 -187px; }
+.swatch.yellow.inactive { background-position: -46px -187px; cursor: default;}
+
+.swatch.red { background-position: -23px -210px; cursor: pointer;}
+.swatch.red.swatch-hover { background-position: 0 -210px; }
+.swatch.red.selected { background-position: 0 -210px; }
+.swatch.red.inactive { background-position: -46px -210px; cursor: default;}
+
+.swatch.gold { background-position: -23px -233px; cursor: pointer;}
+.swatch.gold.swatch-hover { background-position: 0 -233px; }
+.swatch.gold.selected { background-position: 0 -233px; }
+.swatch.gold.inactive { background-position: -46px -233px; cursor: default;}
+
+.swatch.bronze { background-position: -23px -256px; cursor: pointer;}
+.swatch.bronze.swatch-hover { background-position: 0 -256px; }
+.swatch.bronze.selected { background-position: 0 -256px; }
+.swatch.bronze.inactive { background-position: -46px -256px; cursor: default;}
+
+.swatch.green { background-position: -23px -279px; cursor: pointer;}
+.swatch.green.swatch-hover { background-position: 0 -279px; }
+.swatch.green.selected { background-position: 0 -279px; }
+.swatch.green.inactive { background-position: -46px -279px; cursor: default;}
+
+.swatch.black2 { background-position: -23px -302px; cursor: pointer;}
+.swatch.black2.swatch-hover { background-position: 0 -302px; }
+.swatch.black2.selected { background-position: 0 -302px; }
+.swatch.black2.inactive { background-position: -46px -302px; cursor: default;}
+
+.swatch.crystal { background-position: -23px -325px; cursor: pointer;}
+.swatch.crystal.swatch-hover { background-position: 0 -325px; }
+.swatch.crystal.selected { background-position: 0 -325px; }
+.swatch.crystal.inactive { background-position: -46px -325px; cursor: default;}
+
+.swatch.white { background-position: -23px -348px; cursor: pointer;}
+.swatch.white.swatch-hover { background-position: 0 -348px; }
+.swatch.white.selected { background-position: 0 -348px; }
+.swatch.white.inactive { background-position: -46px -348px; cursor: default;}
+
+.swatch.burgundy { background-position: -23px -371px; cursor: pointer;}
+.swatch.burgundy.swatch-hover { background-position: 0 -371px; }
+.swatch.burgundy.selected { background-position: 0 -371px; }
+.swatch.burgundy.inactive { background-position: -46px -371px; cursor: default;}
+
+.swatch.purple { background-position: -23px -394px; cursor: pointer;}
+.swatch.purple.swatch-hover { background-position: 0 -394px; }
+.swatch.purple.selected { background-position: 0 -394px; }
+.swatch.purple.inactive { background-position: -46px -394px; cursor: default;}
+
+.swatch.turquoise { background-position: -23px -417px; cursor: pointer;}
+.swatch.turquoise.swatch-hover { background-position: 0 -417px; }
+.swatch.turquoise.selected { background-position: 0 -417px; }
+.swatch.turquoise.inactive { background-position: -46px -417px; cursor: default;}
+
+.swatch.orange { background-position: -23px -440px; cursor: pointer;}
+.swatch.orange.swatch-hover { background-position: 0 -440px; }
+.swatch.orange.selected { background-position: 0 -440px; }
+.swatch.orange.inactive { background-position: -46px -440px; cursor: default;}
+
+.swatch.pink { background-position: -23px -463px; cursor: pointer;}
+.swatch.pink.swatch-hover { background-position: 0 -463px; }
+.swatch.pink.selected { background-position: 0 -463px; }
+.swatch.pink.inactive { background-position: -46px -463px; cursor: default;}
+
+.swatch.print { background-position: -23px -486px; cursor: pointer;}
+.swatch.print.swatch-hover { background-position: 0 -486px; }
+.swatch.print.selected { background-position: 0 -486px; }
+.swatch.print.inactive { background-position: -46px -486px; cursor: default;}
+
+.swatch.brights { background-position: -23px -509px; cursor: pointer;}
+.swatch.brights.swatch-hover { background-position: 0 -509px; }
+.swatch.brights.selected { background-position: 0 -509px; }
+.swatch.brights.inactive { background-position: -46px -509px; cursor: default;}
+
+.swatch.emerald { background-position: -23px -532px; cursor: pointer;}
+.swatch.emerald.swatch-hover { background-position: 0 -532px; }
+.swatch.emerald.selected { background-position: 0 -532px; }
+.swatch.emerald.inactive { background-position: -46px -532px; cursor: default;}
+
+.swatch.oxblood { background-position: -23px -555px; cursor: pointer;}
+.swatch.oxblood.swatch-hover { background-position: 0 -555px; }
+.swatch.oxblood.selected { background-position: 0 -555px; }
+.swatch.oxblood.inactive { background-position: -46px -555px; cursor: default;}
+
+.swatch.pastel { background-position: -23px -578px; cursor: pointer;}
+.swatch.pastel.swatch-hover { background-position: 0 -578px; }
+.swatch.pastel.selected { background-position: 0 -578px; }
+.swatch.pastel.inactive { background-position: -46px -578px; cursor: default;}
+
+.swatch.primary { background-position: -23px -601px; cursor: pointer;}
+.swatch.primary.swatch-hover { background-position: 0 -601px; }
+.swatch.primary.selected { background-position: 0 -601px; }
+.swatch.primary.inactive { background-position: -46px -601px; cursor: default;}
+
+
+.l-swatch.vr28{ background-position: 0px 315px;}
+.l-swatch.vr28-black-iridium{ background-position: 0px 291px;}
+.l-swatch.tungsten-iridium{ background-position: 0px 261px;}
+.l-swatch.shallo-blue-iridium{ background-position: 0px 315px;}
+.l-swatch.persimmon{ background-position: 0px 201px;}
+.l-swatch.oo-red-iridium{ background-position: 0px 169px;}
+.l-swatch.oo-black-iridium{ background-position: 0px 140px;}
+.l-swatch.ice-iridium{ background-position: 0px 107px;}
+.l-swatch.grey{ background-position: 0px 80px !important;}
+.l-swatch.gold-iridium{background-position: 0px 207px;}
+.l-swatch.g30-iridium{background-position: -80px 270px }
+.l-swatch.fire-iridium{background-position: -80px 230px;}
+.l-swatch.emerald-iridium{background-position: -80px 206px;}
+.l-swatch.deep-blue-iridium{background-position: -80px 166px;}
+.l-swatch.bronze{background-position: -80px 145px !important;}
+.l-swatch.black-iridium{background-position: -80px 110px;}
+
+
+img.l-swatch{
+    margin: 0px 0 0 0px!important;
+    height: 20px;
+    width: 23px;
+}
+
+li.color_swatch > div[class^='brown'] { background-position: -27px -3px; }
+li.color_swatch > div[class^='brown']:hover { background-position: -4px -3px; }
+li.color_swatch > div[class^='brown'].active { background-position: -4px -3px; }
+
+li.color_swatch > div[class^='tortoise'] { background-position: -27px -26px; }
+li.color_swatch > div[class^='tortoise']:hover { background-position: -4px -26px; }
+li.color_swatch > div[class^='tortoise'].active { background-position: -4px -26px; }
+
+li.color_swatch > div[class^='black'] { background-position: -27px -49px; }
+li.color_swatch > div[class^='black']:hover { background-position: -4px -49px; }
+li.color_swatch > div[class^='black'].active { background-position: -4px -49px; }
+
+li.color_swatch > div[class^='silver'] { background-position: -27px -72px; }
+li.color_swatch > div[class^='silver']:hover { background-position: -4px -72px; }
+li.color_swatch > div[class^='silver'].active { background-position: -4px -72px; }
+
+li.color_swatch > div[class^='gunmetal'] { background-position: -27px -95px; }
+li.color_swatch > div[class^='gunmetal']:hover { background-position: -4px -95px; }
+li.color_swatch > div[class^='gunmetal'].active { background-position: -4px -95px; }
+
+li.color_swatch > div[class^='grey'] { background-position: -27px -118px; }
+li.color_swatch > div[class^='grey']:hover { background-position: -4px -118px; }
+li.color_swatch > div[class^='grey'].active { background-position: -4px -118px; }
+
+li.color_swatch > div[class^='blue'] { background-position: -27px -141px; }
+li.color_swatch > div[class^='blue']:hover { background-position: -4px -141px; }
+li.color_swatch > div[class^='blue'].active { background-position: -4px -141px; }
+
+li.color_swatch > div[class^='cream'] { background-position: -27px -164px; }
+li.color_swatch > div[class^='cream']:hover { background-position: -4px -164px; }
+li.color_swatch > div[class^='cream'].active { background-position: -4px -164px; }
+
+li.color_swatch > div[class^='yellow'] { background-position: -27px -187px; }
+li.color_swatch > div[class^='yellow']:hover { background-position: -4px -187px; }
+li.color_swatch > div[class^='yellow'].active { background-position: -4px -187px; }
+
+li.color_swatch > div[class^='red'] { background-position: -27px -210px; }
+li.color_swatch > div[class^='red']:hover { background-position: -4px -210px; }
+li.color_swatch > div[class^='red'].active { background-position: -4px -210px; }
+
+li.color_swatch > div[class^='gold'] { background-position: -27px -233px; }
+li.color_swatch > div[class^='gold']:hover { background-position: -4px -233px; }
+li.color_swatch > div[class^='gold'].active { background-position: -4px -233px; }
+
+li.color_swatch > div[class^='bronze'] { background-position: -27px -256px; }
+li.color_swatch > div[class^='bronze']:hover { background-position: -4px -256px; }
+li.color_swatch > div[class^='bronze'].active { background-position: -4px -256px; }
+
+li.color_swatch > div[class^='green'] { background-position: -27px -279px; }
+li.color_swatch > div[class^='green']:hover { background-position: -4px -279px; }
+li.color_swatch > div[class^='green'].active { background-position: -4px -279px; }
+
+li.color_swatch > div[class^='crystal'] { background-position: -27px -325px; }
+li.color_swatch > div[class^='crystal']:hover { background-position: -4px -325px; }
+li.color_swatch > div[class^='crystal'].active { background-position: -4px -325px; }
+
+li.color_swatch > div[class^='white'] { background-position: -27px -348px; }
+li.color_swatch > div[class^='white']:hover { background-position: -4px -348px; }
+li.color_swatch > div[class^='white'].active { background-position: -4px -348px; }
+
+li.color_swatch > div[class^='burgundy'] { background-position: -27px -371px; }
+li.color_swatch > div[class^='burgundy']:hover { background-position: -4px -371px; }
+li.color_swatch > div[class^='burgundy'].active { background-position: -4px -371px; }
+
+li.color_swatch > div[class^='purple'] { background-position: -27px -394px; }
+li.color_swatch > div[class^='purple']:hover { background-position: -4px -394px; }
+li.color_swatch > div[class^='purple'].active { background-position: -4px -394px; }
+
+li.color_swatch > div[class^='turquoise'] { background-position: -27px -417px; }
+li.color_swatch > div[class^='turquoise']:hover { background-position: -4px -417px; }
+li.color_swatch > div[class^='turquoise'].active { background-position: -4px -417px; }
+
+li.color_swatch > div[class^='orange'] { background-position: -27px -440px; }
+li.color_swatch > div[class^='orange']:hover { background-position: -4px -440px; }
+li.color_swatch > div[class^='orange'].active { background-position: -4px -440px; }
+
+li.color_swatch > div[class^='pink'] { background-position: -27px -463px; }
+li.color_swatch > div[class^='pink']:hover { background-position: -4px -463px; }
+li.color_swatch > div[class^='pink'].active { background-position: -4px -463px; }
+
+li.color_swatch > div[class^='print'] { background-position: -27px -486px; }
+li.color_swatch > div[class^='print']:hover { background-position: -4px -486px; }
+li.color_swatch > div[class^='print'].active { background-position: -4px -486px; }
+
+li.color_swatch > div[class^='brights'] { background-position: -27px -509px; }
+li.color_swatch > div[class^='brights']:hover { background-position: -4px -509px; }
+li.color_swatch > div[class^='brights'].active { background-position: -4px -509px; }
+
+li.color_swatch > div[class^='emerald'] { background-position: -27px -532px; }
+li.color_swatch > div[class^='emerald']:hover { background-position: -4px -532px; }
+li.color_swatch > div[class^='emerald'].active { background-position: -4px -532px; }
+
+li.color_swatch > div[class^='oxblood'] { background-position: -27px -555px; }
+li.color_swatch > div[class^='oxblood']:hover { background-position: -4px -555px; }
+li.color_swatch > div[class^='oxblood'].active { background-position: -4px -555px; }
+
+li.color_swatch > div[class^='pastel'] { background-position: -27px -578px; }
+li.color_swatch > div[class^='pastel']:hover { background-position: -4px -578px; }
+li.color_swatch > div[class^='pastel'].active { background-position: -4px -578px; }
+
+li.color_swatch > div[class^='primary'] { background-position: -27px -601px; }
+li.color_swatch > div[class^='primary']:hover { background-position: -4px -601px; }
+li.color_swatch > div[class^='primary'].active { background-position: -4px -601px; }
+
+/* End - color swatches*/

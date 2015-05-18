@@ -18,10 +18,15 @@ angular.module('myApp.product').config(['$stateProvider', '$urlRouterProvider',
             controller: 'AdminProductAddController',
             templateUrl: 'templates/admin/products/add.html'
         })
-        .state('front.product', {
+        .state('front.products', {
             url: "/products",
             controller: 'ProductListController',
             templateUrl: 'templates/products/list.html'
+        })
+        .state('front.product', {
+            url: "/product/{alias}",
+            controller: 'ProductViewController',
+            templateUrl: 'templates/products/view.html'
         })
     ;
 

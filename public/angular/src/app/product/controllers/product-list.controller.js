@@ -24,17 +24,8 @@ angular.module('myApp.product').controller('ProductListController', ['$scope', '
 
                 angular.forEach(items, function(item){
 
-                    if(item.colors != null) {
-                        //convert color ids string to color objects
-                        var colorIds = item.colors.split(',');
-                        var itemColors = [];
-                        angular.forEach(colorIds, function (colorId) {
-                            var color = ProductService.getColorById(colorId);
-                            itemColors.push(color);
-                        })
-                        itemColors[0].active = true;
-                        item.colors = itemColors;
-                    }
+                    ProductService.colorIdsToObjects(item);
+
                 });
 
                 $scope.items = items;

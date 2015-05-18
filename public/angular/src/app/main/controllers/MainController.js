@@ -10,4 +10,11 @@ angular.module('myApp').controller('MainController', ['$scope', '$location', fun
         $scope.isAdmin = true;
     }
 
+    if( path.indexOf("product") > 0 ){
+        $scope.curPage = 'product';
+        if( path.indexOf("products") > 0 ){
+            $scope.curPage = 'products';
+        }
+    }
+
 }]);

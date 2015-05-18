@@ -1,0 +1,343 @@
+<app-spinner ng-show="isLoading"></app-spinner>
+<div class="container iframe_override" ng-show="!isLoading">
+    <div class="product_detail_section eye   ">
+        <div class="row">
+            <div class="left-col ng-scope">
+
+                <div images-loaded>
+                    <div ng-repeat="color in product.colors" ng-if="color.selected==true">
+                        <img id="zoom_{{color.id}}" ng-src="/uploads/{{color.images[0].filename}}"
+                             data-zoom-image="/uploads/{{color.images[0].filename}}" width="643px">
+
+                        <div>
+                            <div id="gallery_{{color.id}}" class="gallery">
+                                <a ng-repeat="image in color.images" href="#" data-image="/uploads/{{image.filename}}"
+                                   data-zoom-image="/uploads/{{image.filename}}"><img
+                                        ng-src="/uploads/{{image.filename}}"/></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ng-scope">
+                    <div class="lens-config ng-scope">
+                        <div class="glass-5-pdp-heading-part circle-one">
+                            <h3>Frame<br>Color:</h3>
+
+                            <div class="product-swatches">
+                                <ul class="new_color_selector">
+                                    <li ng-repeat="color in product.colors" title="{{color.name}}" class="color_swatch"
+                                        ng-click="selectColor(color)">
+                                        <div ng-class="color.class + (color.selected?' active':'')"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="color-selected">{{selectedColorName}}</div>
+                        </div>
+                    </div>
+
+
+                    <div class="lens-config ng-scope">
+                        <div class="glass-5-pdp-heading-part circle-two">
+                            <h3 class="ng-binding">Prescription Type:</h3>
+                        </div>
+                        <div class="radio-holder">
+                            <ul class="pdp-control-radio">
+                                <li>
+                                    <label>
+                                        <input type="radio" ng-model="selected_package_code"
+                                               ng-value="'single_vision'"
+                                               ng-change="changeSelectedPackage('single_vision')"
+                                               id="radio_single_vision" name="53" value="single_vision">
+                                        <span class="pdp-label"></span>
+                                        <span>Single Vision</span>
+
+                                        <div class="lens-popup" id="single_vision">
+                                            <div class="flyout-title ng-binding">Lenses start at: <span>$39.00</span>
+                                            </div>
+                                            <p>Single vision lenses are prescribed if you need correction for one field
+                                                of vision, either for distance, intermediate, or items up close.</p>
+
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" ng-model="selected_package_code"
+                                               ng-value="'multi_vision'"
+                                               ng-change="changeSelectedPackage('multi_vision')"
+                                               id="radio_multi_vision" class="ng-pristine ng-untouched ng-valid"
+                                               name="54" value="multi_vision">
+                                        <span class="pdp-label"></span>
+                                        <span>Progressive/Multifocal</span>
+
+                                        <div class="lens-popup" id="multi_vision">
+                                            <div class="flyout-title ng-binding">Lenses start at: <span>$79.00</span>
+                                            </div>
+                                            <p>Progressive/Multifocals are prescribed if you need vision correction for
+                                                all distances—distance, intermediate or near. Our lenses also feature a
+                                                no-line progression through the lens powers.</p>
+
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" ng-model="selected_package_code"
+                                               ng-value="'reader'"
+                                               ng-change="changeSelectedPackage('reader')"
+                                               id="radio_reader" name="55"
+                                               value="reader"><span class="pdp-label"></span>
+                                        <span>Readers</span>
+
+                                        <div class="lens-popup" id="reader">
+                                            <div class="flyout-title ng-binding">Lenses start at: <span>$39.00</span>
+                                            </div>
+                                            <p>For reading magnification only.</p>
+
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" ng-model="selected_package_code"
+                                               ng-value="'plano'"
+                                               ng-change="changeSelectedPackage('plano')"
+                                               id="radio_plano" name="56"
+                                               value="plano">
+                                        <span class="pdp-label"></span>
+                                        <span>Blank Lenses</span>
+
+                                        <div class="lens-popup" id="plano">
+                                            <div class="flyout-title ng-binding">Lenses start at: <span>$39.00</span>
+                                            </div>
+                                            <p>The same high quality CR-39 lenses and features as our prescription
+                                                lenses, but without the prescription.</p>
+
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" ng-model="selected_package_code"
+                                               ng-value="'demo'"
+                                               ng-change="changeSelectedPackage('demo')"
+                                               id="radio_demo" name="57"
+                                               value="demo"><span class="pdp-label"></span>
+                                        <span>Frame Only</span>
+
+                                        <div class="lens-popup" id="demo">
+                                            <p>This option includes only the frames with no lenses.</p>
+
+                                            <div class="arrow"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lens-config ng-scope">
+                        <div class="glass-5-pdp-heading-part circle-three">
+                            <h3 class="ng-binding">Lens Options:</h3>
+                        </div>
+
+                        <ng-include src="'/templates/products/lens/'+ selected_package_code +'.html'"></ng-include>
+
+                        <div ng-if="packages[selected_package_code].upgrades.length > 0">
+                            <h4 class="options-part ng-binding">Upgrades:</h4>
+
+                            <div class="radio-holder">
+                                <ul class="pdp-control-check ng-scope">
+                                    <li ng-if="packages[selected_package_code].upgrades.length > 0">
+                                        <label>
+                                            <input type="checkbox" ng-model="upgrades[0].selected" value="1">
+                                            <span class="pdp-label"></span>
+                                            <span>CleanShield™ Elite No Glare</span>|<span>Add $49.00</span>
+                                            <div class="lens-popup far">
+                                                <p>This premium option is super hydrophobic, allowing for easier lens
+                                                    cleaning and less smudging, as well as prolonging the life of your
+                                                    lenses.</p>
+                                                <div class="arrow"></div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <li ng-if="packages[selected_package_code].upgrades.length > 1">
+                                        <label >
+                                            <input type="checkbox" ng-model="upgrades[1].selected" value="2">
+                                            <span class="pdp-label"></span>
+                                            <span>Transitions Adaptive Grey</span> | <span>Add $99.00</span>
+                                            <div class="lens-popup far">
+                                                <p>Transitions Adaptive Grey Lenses change from light to dark when exposed to sunlight.</p>
+                                                <div class="arrow"></div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div ng-if="packages[selected_package_code].upgrades.length <= 0">
+                            <b>No options for this lens type.</b>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="right-col floating-box ng-scope" style="position: absolute; left: 671px; bottom: auto; top: 71px;">
+                <div class="eyeglass-col">
+                    <div class="top-half">
+                        <div class="product-section">
+                            <div class="product-header">
+                                <div class="title">
+                                    <h1>{{product.name}}</h1>
+                                    <h2></h2>
+                                </div>
+                            </div>
+                            <div class="sub-section">
+                                <div class="main-price">
+                                    <div class="price">
+                                        <span ng-class="{'promo-pink': selected_sku.price != selected_sku.reg_price}"
+                                              class="ng-binding">{{product.price | currency}}</span>
+                                    </div>
+                                </div>
+                                <div class="option-title">Frame Color:</div>
+                                <ul class="option-list">
+                                    <li class="ng-binding">{{selectedColorName}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-section">
+                            <div class="main-price" ng-if="getPriceTotal() > 0">
+                                <div class="price">{{getPriceTotal() | currency}}</div>
+                            </div>
+                            <!-- end ngIf: lensSummary().getAddedChargeSum() > 0 -->
+                            <!-- ngIf: lensSummary().getAddedChargeSum() <= 0 -->
+                            <div class="option-title">Lens Options:</div>
+                            <ul class="option-list">
+                                <li ng-if="packages[selected_package_code].lens[packages.lens_choice].name">{{packages[selected_package_code].lens[packages.lens_choice].name}}</li>
+                                <li ng-if="upgrades[0].selected">{{upgrades[0].name}}</li>
+                                <li ng-if="upgrades[1].selected">{{upgrades[1].name}}</li>
+                                <li ng-if="packages[selected_package_code].name">{{packages[selected_package_code].name}}</li>
+                            </ul>
+
+                        </div>
+                        <div class="product-section">
+                            <!-- ngIf: ! selected_sku.in_stock -->
+                            <div ng-show="selected_sku.in_stock">
+                                <button class="add_to_cart btn" name="add_to_cart"
+                                        ng-click="submitMainAction('/product-detail/add-to-cart/', true)">
+                                    <!-- ngIf: pdp_base.edit_mode -->
+                                    <img ng-show="!pdp_base.edit_mode" id="cart-image"
+                                         src="/images/update/add-to-cart.png">
+                                    <span ng-show="!pdp_base.edit_mode">Add to Cart</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="product-section">
+                            <div ng-show="selected_sku.in_stock" class="shipping-info">
+                                Shipping is always on us
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vto-ihto-pres" style="display: none;">
+                        <!-- /////  In-Home Try-On  ///// -->
+                        <div id="ihto_add_button_inline_wrapper">
+
+                            <!-- ///  IHTO NOT Available  /// -->
+
+                            <div class="try-on-box added ng-hide" style="background: #f4f6f7;"
+                                 ng-show="ihto_message == 'added'">
+                                <div class="btn-container grey" id="btnAddIHTO-button"
+                                     style="background: #ffffff;margin: -10px -20px 0 -19px;height: 33px;">
+                                    <img src="/images/update/checkmark.png" style="left: 40px;top: 4px;">
+                                    <span class="btn-text-only"
+                                          style="color: #1e4154;margin-left: 40px;font-family: museo_slab_500;">Added to In-Home Try-On</span>
+                                </div>
+                                <div class="tryon-description">
+                                    <label>This pair of glasses is in your <a href="/in-home-try-on/cart">In-Home Try-On
+                                        cart</a> and is getting ready to spend the week with you.</label>
+                                </div>
+                            </div>
+                            <div class="try-on-box outofstock ng-hide" style="background: #f4f6f7;"
+                                 ng-show="ihto_message == 'outofstock'">
+                                <div class="btn-container grey" id="btnAddIHTO-button"
+                                     style="background: #ffffff;margin: -10px -20px 0 -19px;height: 39px;padding: 7px;">
+                                    <span class="btn-text-only"
+                                          style="color: #1e4154;margin-left: 55px;font-family: museo_slab_500;text-align:center">Temporarily Unavailable for <br> <img
+                                            src="/images/update/ihto-small-grey.jpg" style="left: 63px;top: 4px;"><span
+                                            style="margin-left: 75px;">In-Home Try-On</span></span>
+                                </div>
+                                <div class="tryon-description">
+                                    <label>
+                                        <strong style="font-weight:bold">Good News:</strong> You can still try 2 of your
+                                        favorite frames absolutely free for 15 days with our risk-free <a
+                                            href="#15d_free_trial_content" title="15-Day Free Trial"
+                                            onclick="doOpenModal(this); return false;">15-Day Trial program.</a>
+                                    </label>
+                                </div>
+                                <div style="display: none;">
+                                    <div id="15d_free_trial_content">
+                                        Take advantage of our 15-day free trial so you have time to fall in love. You
+                                        can order up to two pairs of glasses with your prescription
+                                        at no cost! Just remember to choose 15-day Trial at checkout. We won't charge
+                                        you until after your trial ends, we will only authorize
+                                        your card (for $1) to verify it is valid. When you fall in love with your
+                                        glasses, just keep them and we will charge your card after the
+                                        trial ends. If it's not a perfect match, return them for free and no harm done.
+                                        Call us at 1-800-452-7737 with any questions or to set
+                                        up a return.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="try-on-box ihto_disabled ng-hide" style="background: #f4f6f7;"
+                                 ng-show="ihto_message == 'ihto_disabled'">
+                                <div class="btn-container grey" id="btnAddIHTO-button">
+                                    <span class="btn-text-only" style="color: #1E4164; font-family: museo_slab_500;">Unavailable for <br> <img
+                                            src="/images/update/ihto-small-grey.jpg" style="top: 4px;"><span
+                                            style="margin-left: 5px;">In-Home Try-On</span></span>
+                                </div>
+                                <div class="tryon-description">
+                                    <label>
+                                        Sorry, this product isn't available for In-Home Try-On. However, with our 30-day
+                                        return policy and free shipping both ways, you can still enjoy trying them at
+                                        home and, if you don’t love them, you can send them back with no questions
+                                        asked. Need a similar style recommendation for an In-Home Try-On? <a
+                                            href="javascript:void(0);" onclick="lpMTagConfig.dynButton0.actionHook();">Chat
+                                        with a glasses stylist</a>.
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="try-on-box is-closeout ng-hide" ng-show="ihto_message == 'is-closeout'">
+                                <div class="btn-container grey disabled" style="display:none;" id="btnAddIHTO-button">
+                                    <span class="btn-text-only"
+                                          style="color: #1E4164; font-family: museo_slab_500;"><img
+                                            src="/images/update/ihto-small-grey.jpg" style="top: 4px;margin-right:4px;">Unavailable for In-Home Try-On</span>
+                                </div>
+                                <div class="tryon-description" id="btnAddIHTO-button" style="display:none;">
+                                    <div style="width: 300px;float: left;margin-bottom: 7px;">
+                                        <label>With a price this sweet you can't go wrong. This is a final sale product
+                                            and is not available for In-Home Try On.</label>
+                                    </div>
+                                    <div class="clear" style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ngIf: (pdp_base.is_sun_page || pdp_base.is_specialty) && selected_sku['is_closeout'] == 1 -->
+                    </div>
+
+                </div>
+                <!-- end floating-box -->
+            </div>
+        </div>
+    </div>
+</div>

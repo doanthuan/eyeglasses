@@ -14,4 +14,6 @@ interface MediaRepositoryInterface extends RepositoryInterface{
 
     public function addImagesToProduct($images, $product);
 
+    public function getProductImages($productId);
+
 }

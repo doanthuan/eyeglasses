@@ -21,7 +21,8 @@
   <link href="bower_components/angularjs-toaster/toaster.min.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <link href="css/glasses.css" rel="stylesheet" />
-  <link ng-if="!isAdmin" href="css/products.css" rel="stylesheet" />
+  <link ng-if="curPage=='products'" href="css/products.css" rel="stylesheet" />
+  <link ng-if="curPage=='product'" href="css/product-detail.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -53,6 +54,10 @@
 <script src="bower_components/restangular/dist/restangular.min.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+
+<script src="js/jquery.elevatezoom.js"></script>
+<script src="js/imagesLoaded.min.js"></script>
+
 <script src="/js/app.js"></script>
 </body>
 </html>

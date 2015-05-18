@@ -9,8 +9,8 @@ angular.module('myApp.product').factory('ProductService', [
 
             service.getColors = function(){
                 return [
-                    {id: 1, name:'Black', class: 'black'},
-                    {id: 2, name:'Black 2', class: 'black2'},
+                    {id: 1, name:'SHINY BLACK', class: 'black'},
+                    {id: 2, name:'BLACK & TEXTURE', class: 'black2'},
                     {id: 3, name:'Blue', class: 'blue'},
                     {id: 4, name:'Brown', class: 'brown'},
                     {id: 5, name:'Burgundy', class: 'burgundy'},
@@ -23,9 +23,9 @@ angular.module('myApp.product').factory('ProductService', [
                     {id: 12, name:'Pink', class: 'pink'},
                     {id: 13, name:'Print', class: 'print'},
                     {id: 14, name:'Purple', class: 'purple '},
-                    {id: 15, name:'Red', class: 'red'},
+                    {id: 15, name:'DARK RED TRANSPARENT', class: 'red'},
                     {id: 16, name:'Silver', class: 'silver'},
-                    {id: 17, name:'Tortoise', class: 'tortoise'},
+                    {id: 17, name:'DARK HAVANA', class: 'tortoise'},
                     {id: 18, name:'Turquoise', class: 'turquoise'},
                     {id: 19, name:'White', class: 'white'},
                     {id: 20, name:'Yellow', class: 'yellow'}
@@ -42,6 +42,20 @@ angular.module('myApp.product').factory('ProductService', [
                     }
                 })
                 return retColor;
+            }
+
+            service.colorIdsToObjects = function(item){
+                if(item.colors != null) {
+                    //format colors objects
+                    var itemColors = [];
+                    angular.forEach(item.colors, function (color) {
+                        var newColor = service.getColorById(color.colorId);
+                        newColor.images = color.images;
+                        itemColors.push(newColor);
+                    })
+                    itemColors[0].active = true;
+                    item.colors = itemColors;
+                }
             }
 
             service.getFaceShapes = function(){

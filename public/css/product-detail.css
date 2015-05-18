@@ -1,0 +1,1530 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+#lensSlider .lens_switch{ margin-right: 8px; }
+#colorSliderOptions img.color_switch{width:141px; height:71px; margin-right:7px;}
+.product_detail_section {position:relative;padding:20px 0 0 10px; }
+.product_detail_section, .row {position:relative;}
+.views_right,.views_left {  float: left;  }
+#viewSliderPrev, #viewSliderNext, #colorSliderPrev, #colorSliderNext, #lensSliderPrev, #lensSliderNext { padding-top: 40px; visibility: hidden; height: 37px; float: left; cursor: pointer; position: relative; z-index: 1;}
+#viewSliderPrev.disabled, #viewSliderNext.disabled, #colorSliderPrev.disabled, #colorSliderNext.disabled, #lensSliderPrev.disabled, #lensSliderNext.disabled { visibility:hidden!important; }
+#viewSlider, #colorSlider, #lensSlider { float: left; }
+#viewSlider ul.noSlide li, #colorSlider ul.noSlide li, #lensSlider ul.noSlide li { display: inline; float: left; }
+#viewSlider ul li, #colorSlider ul li, #lensSlider ul li { text-align: center;display:inline-block; }
+#viewSlider{position: absolute!important;}
+#lensSlider{margin-left:25px;}
+#viewSlider,#colorSlider{margin-left:8px;}
+#viewSliderNext,#colorSliderNext,#lensSliderNext{float:right!important;margin-right: 3px;}
+#viewSliderPrev,#colorSliderPrev{margin-left: 3px;}
+#viewSliderPrev, #viewSliderNext, #colorSliderPrev, #colorSliderNext{padding-top:22px; z-index: 999;}
+.color_switch, .lens_switch{ cursor: pointer;}
+#alternate_views { padding-top: 10px; text-align: center; background: #fff;}
+.product_detail_section .left-col .item-actions { clear: both; margin: 12px 0; padding: 0 2px 2px 0; overflow: hidden; }
+button.share_button, button.share_button:visited { width: 80px; height: 28px; border: none; background: url('/images/pdp_share_button_off.png') no-repeat; }
+button.add_to_favorites, button.add_to_favorites:visited { width: 155px; height: 28px; border: none; background: url('/images/pdp_favorites_button_off.png') no-repeat; }
+.product-description, .specs_options { width:635px; height:135px; clear:both; }
+.product_detail_section .right-col {position:absolute; top:0; left:671px; width:295px; }
+.product_detail_section .left-col { float:left; width:645px; border:1px solid #D5D5D5;}
+.detail_section_wrap .product_detail_section .left-col {border:1px solid transparent;}
+.specs_options .option label { display: block; float: left; width: 96px; padding: 0 14px 0 0; }
+.unbeatable-thor {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 12px;
+    color: #56a0d3;
+    padding-right: 10px;
+    background: transparent url('/images/update/caret.png') center right no-repeat;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+}
+.product_detail_section .right-col .gender_sub_head { color: #788691; font-size: 0.83em; font-weight: bold; }
+.product_detail_section .right-col .item-options { padding: 4px 0 10px 0; }
+.product_detail_section .eye .right-col .item-options { padding: 6px 0 10px 0; }
+.product_detail_section .right-col ul.sku-select { list-style-type: none; }
+#frames-container {position:relative;height: 360px;}
+#frames-container .brand-logo {position:absolute; top:18px; left:18px; z-index:12;}
+#video-container {
+    margin: 10px 0;
+    position:relative;
+    z-index:15;
+    max-width: 643px;
+    height: 360px !important;
+    overflow:hidden;
+}
+
+#dcnt-image-overlay-wrapper{
+    position: absolute;
+    z-index: 101;
+    margin: -5px 0 0 -5px;
+}
+#dcnt-image-overlay{
+    position: absolute;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    color: #fff;
+    top: 22px;
+    left: 0px;
+    padding-top: 0px;
+    padding-bottom: 26px;
+    letter-spacing: 0.4px;
+    line-height: 12px;
+    padding-left: 9px;
+    font-size: 13px;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    width: 68px;
+
+}
+.product-tabs {
+    position: relative;
+    min-height: 200px; /* This part sucks */
+    clear: both;
+    margin: 25px 0;
+}
+.product-tab {
+    float: left;
+}
+.product-tab label {
+    background: #eee;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-left: -1px;
+    position: relative;
+    left: 1px;
+}
+.product-tab [type=radio] {
+    display: none;
+}
+
+.product-header {padding:0 0 18px 0; clear:both;}
+.product-header .title {clear:both; margin-bottom: 30px; }
+.product-header .title h1, .product-header .title h2 {color:black; text-transform:uppercase; padding:0; margin:0;}
+.product-header .title h1 {line-height:35px; font:normal 35px gothic-font, sans-serif; margin:-6px 0 -6px 0; clear:both;}
+.product-header .title h2, .product_detail_section .price, .totals-description .total h2 {float:left; color:black; line-height:17px; font:normal 17px "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;}
+.product_detail_section .main-price .price { float: right; }
+.product-header .title h2 {max-width:226px;}
+.product_detail_section .totals-description .total h2 {height:17px; line-height:23px; font-size:12px; font-weight:bold; margin:0; padding:0;}
+.product_detail_section .price #master-price {display:inline-block;color:#000000;}
+.product_detail_section .price .regular-price {font-size:10px; line-height:10px; color:#6D6D6D; text-decoration: line-through;}
+#regPriceStrike,#regLensPriceStrike {clear:both;}
+.product_detail_section .right-col .product-header .thor-price, .product_detail_section .right-col .product-header .main-price, .product_detail_section .totals-description .total .price {float:right; text-align:right; padding-right:4px;}
+.product_detail_section .right-col .product-header .main-price .price {float:right;text-align:right;}
+.product_detail_section .totals-description {margin:18px 0 0 0;list-style-type:none;padding:0;}
+.product-section {padding:0 0 18px 10px; margin:0 0 12px 0; border-bottom:1px solid #E5E5E5; width: 100%; float: left; }
+.sub-section {clear:both;}
+.sub-section .main-price {float:right; padding:15px 0 0 0;}
+.product-section .main-price {float:right;}
+.product-section .option-title {padding-top:0;}
+.product-section.add-to-cart button {
+    margin-bottom: 14px;
+}
+
+button.add_to_cart.btn, button.alternate_version.btn{width:280px; height: 40px; letter-spacing: 1px; background:#FF4026; color:white; border:none; line-height:11px; font:bold 11px "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase; /*float: right;*/ margin: 10px 0 0; }
+button.alternate_version.btn {background:#6D6D6D;}
+button.add_to_cart:hover{background:#DB3321;}
+button.alternate_version:hover{background:#333335;}
+
+.stock-status, .shipping-info {margin:auto; line-height:24px; font:normal 24px gothic-font; color:#FF4026; text-align:center; text-transform:uppercase;}
+.stock-status {width:196px; padding:12px 0 10px 0; border-bottom:1px solid #CCC;}
+.shipping-info {color:#333335; padding:6px 0 0 0; font-size:18px;}
+.view-available {margin:12px auto; text-align:center;}
+.product_detail_section .view-available a { color:#333335; line-height:16px; font:bold 11px "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase; border-bottom:2px solid #FF4026; }
+.product_detail_section .view-available a:hover { text-decoration: none;}
+
+.in-home-try-on .title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.tabber-content {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+#frame-measurments {
+    position: relative;
+    overflow: hidden;
+    color: #008ADD;
+    left: -17px;
+}
+
+.item-options .option-title {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    color:black;
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.item-options h2.accordion, .item-options h2.accordion.single:hover {
+    background: #6F7E8A url(/images/update/pdp_selector.jpg) repeat-x;
+    border: none;
+    color: white;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    padding: 6px 6px 6px 16px;
+    font-size: 15px;
+    outline: none;
+    text-align: left;
+}
+.item-options h2.accordion{
+    cursor:pointer;
+}
+.item-options h2.accordion.single:hover{
+    cursor:default;
+}
+.product_detail_section.prescription-sunglasses #change_frame_selector.single{ display: none; }
+#change_lens_selector.single,#change_frame_selector_link.single, #change_lens_selector_link.single{display:none;}
+
+.item-options h2.accordion:hover {
+    background: #6F7E8A url(/images/update/pdp_selector_hover.jpg) repeat-x;
+}
+.item-options h2.accordion img {
+    margin-right: 15px;
+}
+.item-options ul.accordion_content {
+    background:white;
+    padding: 10px;
+    box-shadow:0px 2px 10px #CDCDCD;
+    position:absolute;
+    background:	white;
+    width:298px;
+    z-index: 10;
+}
+.item-options ul.accordion_content.closed {
+    display:none;
+}
+.item-options .prescription-lens,.item-options .sun-lens{ margin-top: 10px; }
+.stock-line {
+    margin-top: 7px;
+    color: #3f5363;
+    font-weight: bold;
+}
+.stock-line span {
+    color: #3f5363;
+    font-weight: normal;
+}
+#frame-measurments span {
+    position: absolute;
+    text-align: right;
+    width: 30px;
+}
+.specs_options {
+    padding:0 20px 0 0;
+    float: left;
+    width: 225px;
+}
+.specs_options .option {
+    margin: 0 0 6px 0;
+    overflow: hidden;
+    clear: both;
+}
+.specs_options .option span.option_value {
+    float: left;
+}
+.option .inches {
+    margin-left: 5px;
+}
+
+.product-media-icons a{
+    background-image: url('/images/sprite-glasses-rebrand-2015-home.png');
+    width: 20px;
+    height: 18px;
+    float: left;
+    margin-left: 5px;
+}
+.product-media-icons  {margin-left: 5px; list-style-type:none;}
+.product-media-icons  li{float:left;}
+#cart-image {
+    top: 3px;
+    right: 10px;
+    margin-right: 4px;
+    margin-left: -6px;
+}
+#facebookShareLink  {
+    height: 20px;
+    width: 10px;
+    background-position: 0 -24px;
+}
+
+#facebookShareLink:hover {
+    background-position: -99px -24px;
+}
+
+#twitterShareLink {
+    background-position: -34px -24px;
+}
+
+#twitterShareLink:hover {
+    background-position: -133px -24px;
+}
+
+#google-icon {
+    background-position: -78px 0px;
+}
+.btn-container button {
+    width: 100%;
+    margin-top: 0px;
+}
+.btn-container img {
+    position: relative;
+    top: 9px;
+    left:1px;
+}
+.submit-proc {
+    display: none;
+    position: absolute;
+    top: -1px;
+    left: 102px;
+}
+.or-break {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 19px;
+    display:none;
+}
+.eye .or-break{
+    margin-top: 2px;
+}
+.or-break div {
+    width:135px;
+    height:18px;
+    border-bottom:1px solid #B6B6B3;
+}
+.or-break span {
+    position: relative;
+    top: 9px;
+    padding: 7px;
+}
+.rating-below-image {
+    float: right;
+}
+.rating-below-image a {
+    color: #56A0D3;
+}
+div.BVRRRatingSummaryLinks{
+    margin:8px 0 15px;
+}
+/*.rating-below-image img {
+  position: relative;
+  top: 3px;
+}*/
+#add-favorites {
+    font-size: 15px;
+    color: #56A0D3;
+}
+.below-picture {
+    padding: 11px 0 30px 0px;
+    width: 643px;
+}
+.eye .below-picture {
+    padding: 0;
+    margin: 0;
+    background: white;
+    width: 643px;
+    height: 35px;
+}
+.item-actions {
+    float: left;
+    margin: 10px 0px 0px 30px;
+}
+.grey a {
+    margin-top: 0px;
+}
+.try-on-box {
+    width: 296px;
+    background: #FFF;
+    padding: 10px 20px;
+    margin: 15px 0 30px;
+}
+.tryon-description {
+    margin-top: 10px;
+    /*font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; */
+    /*text-transform:uppercase;*/
+    font-family: "Whitney SSm A", "Whitney SSm B", sans-serif;
+    color: #6d6d6d;
+    font-size: 12px;
+    font-style: oblique;
+}
+.outofstock .tryon-description { text-align: center; }
+.tryon-description b {
+    font-weight: 700;
+}
+.tryon-description a {
+    color: #56A0D3;
+}
+#other-frames, #other-editions {
+    background:white;
+}
+
+.other-glasses {list-style-type:none; margin:0; padding:0;}
+.other-glasses li {float: left; width:192px; margin:0 12px 0 0; text-align:center;}
+.other-glasses li.last {margin:0;}
+
+#other-editions{
+    overflow: hidden;
+}
+#other-frames-title, .other_group {
+    padding:0;
+    text-transform:uppercase;
+    color:black;
+    font:bold 15px "Gotham SSm A", "Gotham SSm B", sans-serif;
+    margin-top: 15px;
+}
+.other-description li {
+    margin-left: 0px;
+}
+.lens-options h2 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 20px;
+    color:black;
+    display: inline-block;
+
+}
+.lens-options span {
+    font-size: 14px;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+
+}
+.totals-description li {
+    margin-top: 10px;
+}
+.price-totals li {
+    margin-top: 10px;
+}
+.other-description {
+    margin: 8px 0px 0px -5px;
+    max-width: 214px;
+}
+
+.other-glasses a {text-decoration: none}
+.other-glasses a:hover .brand_name { color: #ff4026; text-decoration: none; }
+.brand_name, .frame_model_price {height:20px;line-height:20px; text-align:center; color:#6D6D6D;}
+.brand_name, .frame_model_price:hover { text-decoration: none }
+.brand_name {font:normal 12px "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;}
+.brand_name:hover {color: #ff4026; text-decoration: none; }
+.frame_model_price {font:normal 12px "Whitney SSm A", "Whitney SSm B", sans-serif;}
+.frame_model_price:hover {text-decoration: none;}
+
+.lens-options h3 {
+    color: #3D93C9;
+    font-size: 18px;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    margin-top: 29px;
+    margin-bottom: -16px;
+}
+.lens-description span {
+    font-family: arial;
+    color: #798792;
+    font-size: 15px;
+}
+.lens-description label {
+    width: 320px;
+    display: inline-block;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 13px;
+    color:black;
+    margin-top: 3px;
+}
+.lens-description label span {
+    color: #657581;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 13px;
+}
+.lens-description h2 {
+    font-size: 16px;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+}
+div.lens-description h2{
+    margin-top: 25px;
+}
+.lens-options {
+    margin-top: 88px;
+}
+.brand-promise label {
+    display: inline-block;
+    width: 370px;
+    font-size: 13px;
+    line-height: 1.5em;
+    color: black;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.brand-promise a.shop-all {
+    display: inline-block;
+    margin: 10px 0 12px 0;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 700;
+    border-bottom: 2px solid #ff4026;
+    font-family: "Gotham SSm B", "Gotham SSm A", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.brand-promise a.shop-all:hover {
+    text-decoration: none;
+}
+
+.brand-promise a.learn-more {text-align:right; display: block; margin:10px 0 12px 0; font:normal 20px gothic-font, sans-serif; text-transform:uppercase;}
+
+.brand-confidence {
+    background:#FFF;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.brand-confidence h2 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 18px;
+    color:black;
+    margin: 40px 0px 0px 0px;
+}
+.inhome-tryon-bottom {
+    font-size: 15px;
+    padding-top: 50px;
+}
+
+div.inhome-tryon-bottom-content{
+    width: 495px;
+    font-size: 15px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inhome-tryon-bottom a {
+
+    color: #56A0D3;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+}
+.inhome-tryon-bottom img {
+    display: inline-block;
+    margin: 5px 66px 0px 107px;
+}
+.inhome-tryon-bottom h2 {
+    font-family: museo_slab_700;
+    color:black;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+.inhome-tryon-bottom span {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    color: #657581;
+}
+.virtual-tryon h2 {
+    font-family: museo_slab_700;
+    color:black;
+    font-size: 15px;
+}
+.virtual-tryon span {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    color: #657581;
+    font-size: 15px;
+}
+.virtual-tryon {
+    width: 495px;
+    float: left;
+    margin-top: 100px;
+}
+.virtual-tryon img {
+    display: block;
+    margin: 0 auto;
+}
+.virtual-tryon a {
+    display: block;
+    color: #56A0D3;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+}
+.satisfaction-pledge h2 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 20px;
+    color:black;
+}
+.main-point h3, .main-point label {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 16px;
+    color:black;
+}
+.main-point {
+    margin-top: 20px;
+}
+.main-point span {
+    color: #657581;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 15px;
+    display: block;
+    margin-top: 10px;
+}
+.satisfaction-pledge {
+    margin-top: 40px;
+}
+.review-header {
+    padding-left: 223px;
+    border-bottom: 1px dotted;
+    height: 30px;
+}
+.review-header img{
+    position: relative;
+    top: 1px;
+}
+.review-header li {
+    float: left;
+    padding-left: 3px;
+}
+.overall-rating {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 16px;
+    color:black;
+}
+.review-header a , .review-row a {
+    color: #56A0D3;
+}
+.review-count {
+    font-size: 13px;
+    color: #86929B;
+}
+.name-details {
+    width: 200px;
+    float: left;
+    height: 100px;
+}
+.name-review {
+    font-size: 15px;
+    font-weight: bold;
+    color:black;
+}
+.place-review {
+    font-size: 13px;
+    color: #86929B;
+}
+.review-title {
+    color:black;
+    font-weight: bold;
+    font-size: 15px;
+}
+.review-description {
+    font-size: 15px;
+    color:black;
+}
+.star-review span {
+    font-size: 13px;
+    color: #86929B;
+}
+.review-row {
+    padding-top: 20px;
+    border-bottom: 1px dotted;
+    padding-bottom: 20px;
+}
+
+
+
+/* //// SUNGLASSES CSS ///// */
+
+.prescription-frame {
+    background: #FFF;
+    margin-top: 15px;
+    padding: 10px;
+    height: 30px;
+}
+.prescription-frame a{ font-size:15px;line-height:32px;margin-left:14px; }
+.prescription-frame img {
+    float: left;
+}
+.prescription-frame div {
+    float: left;
+    width: 249px;
+    color: #56A0D3;
+    font-size: 12px;
+    margin: 7px 0px 0px 11px;
+}
+.video-review {
+    margin-top: 68px;
+    border-bottom: 1px solid #B2BAC0;
+    padding-bottom: 40px;
+}
+.video-review h2 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 20px;
+    color:black;
+    padding-bottom: 20px;
+}
+.video-review h3 {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 15px;
+    color:black;
+    padding: 15px 0px 8px 0px;
+
+}
+.video-review span {
+    color:black;
+}
+/* ////END OF SUNGLASSES//// */
+
+/* ////RX SUNGLASSES///// */
+
+.vto-ihto-pres {
+    /*min-height: 255px;*/
+    /*removed because it made bug 107 less clean, but I fully expect it to break something I don't know about, so by all means, restore it when needed*/
+}
+.eye .vto-ihto-pres {
+    position: relative;
+    top: -7px;
+    min-height: 115px;
+}
+#frame-holder,#lens-holder,#lens-options-holder {
+    width: 287px;
+    padding: 15px;
+    background-color: #FFF;
+    position: absolute;
+    display: none;
+    z-index: 199 !important;
+    box-shadow: 1px 1px 4px #A0A0A0;
+    left:50%;
+    margin-left:180px;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+#frame-holder{
+    max-height:300px;
+}
+#lens-holder{
+    max-height:395px;
+}
+.border-frames {
+    border-bottom: 1px solid #CCC;
+    height: 1px;
+    clear: both;
+    margin-bottom: 10px;
+}
+.frame-block {
+    border: 2px solid #FFF;
+    border-radius:3px;
+    /*display: inline-block;*/
+    /*margin-left: 12px;*/
+    /*text-align: center;*/
+    /*width: 138px;
+    height:116px;*/
+    vertical-align: top;
+    /*overflow:hidden;*/
+    position: relative;
+}
+.frame-block-hover {
+    border-color:#56A0D3;
+}
+.frame-block.first {
+    margin-left:0px;
+}
+.frame-block a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.frame-block span {
+    color:black;
+    font-size: 12px;
+
+}
+.lenses .frame-block span,
+.frames .frame-block span {display: table-cell; vertical-align: middle;height: 56px;}
+.title_expander { text-align: left;}
+#expander_contents, .expander_interior_contents{z-index: 99999;position:absolute;top: 50%;left: 50%;background: #FFF;padding: 0px 4px;margin-left: -4px;margin-top: -1px;}
+.expander_interior_contents { width: 142px; display: none;margin-top: -10px;}
+.frame-block .color_selector_thumb {
+    position: relative;
+}
+.frame-block img {
+    float:left;
+    padding-left:3px;
+    padding-right:15px;
+}
+#more-frames,#more-lenses {
+    text-align: center;
+    display: block;
+    color: #56A0D3;
+}
+
+/* ////END OF RX SUNGLASSES///// */
+
+/* about glasses tabs */
+
+.about-glasses {
+    position: relative;
+    /*min-height: 430px; 380 on everything but RX sunglasses */
+    clear: both;
+    margin: 40px 0 0 0;
+}
+
+.about-glasses-top {
+    position: relative;
+    min-height: 215px;
+    clear: both;
+}
+ul.glasses_tab{margin:0; padding:0;}
+ul.glasses_tab li {
+    margin:0 5px 0 0; padding:0;
+    list-style-type:none;
+    position: relative;
+    font:bold 12px "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-transform:uppercase;
+    color:black;
+    display:inline-block;
+    width: 165px;
+    height:33px;
+    line-height:33px;
+    text-align: center;
+    background: #CCC;
+    cursor: pointer;
+}
+
+ul.glasses_tab li.active {background: white;}
+.about-tabs {background:white; font:normal 12px "Whitney SSm A", "Whitney SSm B", sans-serif;}
+.about-tabs label {font-weight:bold;}
+.about-content {padding:20px;}
+
+
+/* //// Tabs for pictures //// */
+#example-one { background: #eee; padding: 10px; margin: 0 0 15px 0; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; }
+
+#example-one .nav { overflow: hidden; margin: 0 0 10px 0; }
+#example-one .nav li { width: 97px; float: left; margin: 0 10px 0 0; }
+#example-one .nav li.last { margin-right: 0; }
+#example-one .nav li a { display: block; padding: 5px; background: #959290; color: white; font-size: 10px; text-align: center; border: 0; }
+#example-one .nav li a:hover { background-color: #111; }
+
+#example-one ul { list-style: none; }
+#example-one ul li a { display: block; border-bottom: 1px solid #666; padding: 4px; color: #666; }
+#example-one ul li a:hover, #example-one ul li a:focus { background: #fe4902; color: white; }
+#example-one ul li:last-child a { border: none; }
+
+#example-one li.nav-one a.current, ul.featured li a:hover { background-color: #0575f4; color: white; }
+#example-one li.nav-two a.current, ul.core li a:hover { background-color: #d30000; color: white; }
+#example-one li.nav-three a.current, ul.jquerytuts li a:hover { background-color: #8d01b0; color: white; }
+#example-one li.nav-four a.current, ul.classics li a:hover { background-color: #FE4902; color: white; }
+.hide { position: absolute; top: -9999px; left: -9999px; }
+
+div.product_detail_section {
+    padding-bottom: 30px;
+}
+
+div.product_detail_section .row .left-col {
+
+}
+
+div.product_detail_section_bottom {
+    background: #E1E4E7 url('/images/update/pdp_bottom_bg.jpg') repeat-x;
+}
+
+
+
+.pdp_breadcrumb{
+    margin:14px 0px 17px;
+}
+
+.promo-banner-area{
+    min-height:1px;
+}
+
+/* MATCHES/RECOMENDATIONS */
+#matches-banner-pdp { background: #edf6fd url('/images/matches/matches_pdp_bg.png') repeat-y; height: 40px; position: relative;margin:10px -20px 0 -20px;padding-left:20px; }
+#matches-banner-pdp #pdp-options { position: absolute; top: 10px; left: 200px; }
+#matches-banner-pdp #pdp-options table td { padding-left: 10px; }
+#matches-banner #pdp-options { position: absolute; top: 8px; right: 20px; }
+#matches-banner #pdp-options table td { padding-left: 10px; }
+.promo-banner-area{overflow:hidden; width:645px; max-height:48px; margin:-1px 0 0 -1px;}
+
+
+.btn-container.grey a:after,.btn-container.grey button:after{content: "";background: none;width: 0;height: 0;display: inline-block;vertical-align: middle;margin-left:0;}
+.cloud-zoom-loading {display: none;}
+
+/* BUNDLED PRICING */
+.open_bundled_price_details {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("/images/pcp/help.png") no-repeat scroll 0 0 transparent;
+    margin-left: 3px;
+    text-indent: -9999px;
+}
+
+div.lens-select, div.sku-select {
+    padding-bottom:16px;
+}
+
+.lens-package-options {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 11px;
+    height: 46px;
+    text-align: left;
+    color: #3f5363;
+    padding: 12px 0 0 10px;
+}
+.lens-package-options input{
+    margin: 0 2px 0 0;
+}
+.lens-package-options .option{
+    height: 21px;
+}
+.lens-package-options label,
+.lens-package-options span,
+.lens-package-options div {
+    display: inline-block;
+    font-size: 13px;
+}
+.lens-package-options div.invisible{
+    display: none;
+}
+.lens-package-options .option-name {
+    width: 214px;
+}
+.lenses_decision {
+    color: #285D89;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.lenses_decision span, #lens-select-options .lighter {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-weight: bold;
+    float: right;
+    position: relative;
+    top: 2px;
+    color: #c73367;
+}
+
+.decision_option {
+    clear: both;
+    overflow: hidden;
+}
+
+.decision_option.readers {
+    margin: 13px;
+}
+
+.decision_option label {
+    float: left;
+}
+
+.decision_option.readers label {
+    height: 23px;
+    line-height: 27px;
+    margin-right: 6px;
+}
+
+#change_lens_options span b {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-weight: bold;
+}
+.selectboxit-container {
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.lens_option_price_wrap {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 13px;
+}
+/* lens tooltip styles */
+.help {
+    background: url("/images/pcp/help.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    position: relative;
+    float: right;
+    top: 4px;
+    height: 16px;
+    width: 16px;
+}
+.eye .help {
+    float: none;
+    left: 5px;
+}
+.option .help{
+    background: url("/images/tips.png") no-repeat scroll 0 0 transparent;
+    height: 13px;
+    width: 13px;
+    float: right;
+    top: 2px;
+}
+.help-text {
+    background: none;
+    height: auto;
+    width: auto;
+    color:black;
+    text-decoration: underline;
+    margin-right: 0;
+    top: 0px;
+    left: 0px;
+}
+.dd-option .showTooltip {
+    color: #aaa;
+    text-decoration: none;
+}
+.dd-option-selected .showTooltip {
+    color: #fff;
+    text-decoration: none;
+}
+.popup {
+    position:absolute;
+    width:404px;
+    z-index:9999;
+    display:none;
+    overflow: hidden;
+}
+.cart-lens-popups .popup .text-container {
+    background: url("/images/unbundled_pricing_pupillary_distance_popup_bg.png") no-repeat scroll 0 0 transparent;
+    font-size: 95%;
+    padding: 33px;
+    width: 338px;
+}
+.popup_foot {
+    background: url("/images/unbundled_pricing_pupillary_distance_popup_bg.png") no-repeat scroll 0 bottom transparent;
+    height: 22px;
+    padding: 0;
+    width: 414px;
+}
+.popup ul {
+    margin: 10px 20px;
+    list-style: disc;
+}
+/* end lens tooltip styles */
+
+
+/* BEGIN whitebox styles */
+div.eye #frames-container, div.sunrx #frames-container {
+    z-index: 1;
+}
+
+div.eye #frame-holder, div.eye #lens-holder,
+div.sunrx #frame-holder, div.sunrx #lens-holder
+div.sun #frame-holder, div.sun #lens-holder, div.special #lens-holder {
+    width: 258px;
+    margin-left: 197px;
+}
+
+div.eye .item-options h2.accordion, div.sunrx .item-options h2.accordion, div.sun .item-options h2.accordion , div.special .item-options h2.accordion {
+    padding: 6px 0px 6px 12px;
+}
+
+
+div.eye .stock-line {
+    display: none;
+}
+
+.product_detail_section div.eye .right-col .item-options, .product_detail_section div.sunrx .right-col .item-options , .product_detail_section div.sun .right-col .item-options , .product_detail_section div.special .right-col .item-options {
+    padding: 7px 0px 2px 0px;
+    position: relative;
+}
+
+div.eye .selector, div.sunrx .selector, div.sun .selector, div.special .selector  {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 15px;
+    text-align: left;
+}
+
+div.eye .selector select, div.sunrx .selector select, div.sun .selector select, div.specail .selector select {
+    width: 190px;
+    font-size: 11px;
+    line-height: 1;
+    border: 1;
+    border-color: #c7c7c7;
+    border-radius: 0;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    color: #3f5363;
+}
+
+div.eye .frame-color.selector, div.sunrx .frame-color.selector, div.special .frame-color.selector, div.specail .frame-color.selector, div.special .frame-color.selector {
+    margin-bottom: 21px;
+}
+
+div.eye .selector-label, div.sunrx .selector-label, div.specail .selector-label {
+    display: inline-block;
+    text-align: left;
+    width: 95px;
+}
+div.eye .selector-dropdown, div.sunrx .selector-dropdown, div.specail .selector-label {
+    display: inline-block;
+    text-align: right;
+}
+
+div.eye #valueprops, div.sunrx #valueprops, div.specail #valueprops {
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 14px;
+    padding: 3px;
+    color: black;
+}
+
+
+/* END whitebox styles */
+
+/* Eyeglasses Alternate Views */
+
+.alt-views {
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+    height: 90px;
+    width: 643px
+}
+
+.alt-thumb {
+    display: inline-block;
+    height: 60px;
+    width: 75px;
+    margin-right: 3px;
+    overflow: hidden;
+    opacity: .3;
+    border: 1px solid #fff;
+    padding: 3px;
+}
+
+.alt-thumb img {
+    width: 75px;
+}
+.alt-thumb.active {
+    border: 1px solid #cccccc;
+    opacity: 1.0;
+}
+
+div.eye .popup {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 12px #666;
+    width: 300px;
+    padding: 5px;
+}
+
+.product-detail-wrap {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(15%, #FFF), color-stop(100%, #E0E4E7));
+    background: -webkit-linear-gradient(top, #FFF 15%, #E0E4E7 100%);
+    background: -o-linear-gradient(top, #fff 15%, #e0e4e7 100%);
+    background: -ms-linear-gradient(top, #fff 15%, #e0e4e7 100%);
+    background: linear-gradient(to bottom, #FFF 15%,#E0E4E7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e0e4e7',GradientType=0 );
+    overflow: hidden;
+    padding: 0px 0 25px;
+}
+
+.product-detail-wrap .center-layout {
+    padding-top: 0;
+}
+
+.product-detail-ihto-message {
+    overflow: hidden;
+    width: 750px;
+    margin: 30px auto;
+}
+
+/* Color/Lens Dropdowns */
+
+.pdp-color-name{
+    line-height: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.pdp-swatch {
+    margin: 1px 7px 0 7px;
+    border: 1px solid #D4D4D4;
+    background: #fff url('/images/pdp-swatches.png') no-repeat;
+    height: 19px;
+    width: 36px;
+    float: left;
+}
+.pdp-frame-copy{
+    margin: 2px 0 0 10px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+}
+.dd-select{
+    width: 290px;
+    height: 30px;
+    border-color: #CDCDCD;
+    border-radius: 5px;
+    background: #fff url("/images/pdp-selectbox-grad.png") repeat-x;
+}
+.dd-options{
+    width: 290px;
+    border-radius: 5px;
+}
+.dd-option {
+    padding: 5px;
+}
+.dd-option-selected:hover,
+.dd-option-selected{
+    background-color: white;
+    border: 2px solid #56A0D3;
+    color: #333;
+}
+.dd-option-selected:hover{
+    background-color: #f3f3f3;
+}
+
+a.dd-selected{
+    color: #3D5465;
+}
+.pdp-swatch.tortoise{
+    background-position: 0 -18px;
+}
+.pdp-swatch.black{
+    background-position: 0 -36px
+}
+.pdp-swatch.silver{
+    background-position: 0 -54px
+}
+.pdp-swatch.gunmetal{
+    background-position: 0 -72px
+}
+.pdp-swatch.grey{
+    background-position: 0 -90px
+}
+.pdp-swatch.blue{
+    background-position: 0 -108px
+}
+.pdp-swatch.cream{
+    background-position: 0 -126px
+}
+.pdp-swatch.yellow{
+    background-position: 0 -144px
+}
+.pdp-swatch.red{
+    background-position: 0 -162px
+}
+.pdp-swatch.gold{
+    background-position: 0 -180px
+}
+.pdp-swatch.bronze{
+    background-position: 0 -198px
+}
+.pdp-swatch.green{
+    background-position: 0 -216px
+}
+.pdp-swatch.black2{
+    background-position: 0 -234px
+}
+.pdp-swatch.crystal{
+    background-position: 0 -252px
+}
+.pdp-swatch.white{
+    background-position: 0 -270px
+}
+.pdp-swatch.burgundy{
+    background-position: 0 -288px
+}
+.pdp-swatch.purple{
+    background-position: 0 -306px
+}
+.pdp-swatch.turquoise{
+    background-position: 0 -324px
+}
+.pdp-swatch.orange{
+    background-position: 0 -342px
+}
+.pdp-swatch.pink{
+    background-position: 0 -360px
+}
+.pdp-swatch.print{
+    background-position: 0 -378px
+}
+.pdp-swatch.brights{
+    background-position: 0 -396px
+}
+.pdp-swatch.emerald{
+    background-position: 0 -414px
+}
+.pdp-swatch.oxblood{
+    background-position: 0 -432px
+}
+.pdp-swatch.pastel{
+    background-position: 0 -450px
+}
+.pdp-swatch.primary{
+    background-position: 0 -468px
+}
+.clear{
+    clear: both;
+}
+
+.left-col .product-container {
+    border: 1px solid #D0D4D7;
+}
+
+.glass-5-frame-colors-div {
+    position: absolute;
+    z-index: 99;
+    background: none;
+    margin-left: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.lens-config {margin:0 22px; padding:20px 0 20px 16px; border-top:1px solid #E5E5E5;}
+
+.glass-5-pdp-heading-part {
+    background: url("/images/glasses-numbers.png") no-repeat;
+    height: 40px;
+    padding:0 0 20px 33px;
+}
+
+.glass-5-pdp-heading-part h3{height:40px; max-width:120px; padding:0 0 0 8px; margin:0 0 0 9px; color:black; font:normal 26px gothic-font, sans-serif; text-transform:uppercase; line-height:20px; border-left:1px solid #E8E8E9;}
+
+.glass-5-pdp-heading-part.circle-one {background-position:0 0;}
+.glass-5-pdp-heading-part.circle-one h3 {float:left; width:80px;}
+.glass-5-pdp-heading-part.circle-two{background-position:0 -40px;}
+.glass-5-pdp-heading-part.circle-three{background-position:0 -80px;}
+
+
+.color-selected {font:normal 15px "Gotham SSm A", "Gotham SSm B", sans-serif; line-height:12px; text-transform:uppercase;}
+
+.product-swatches {position:relative; top:-4px; padding:0; width:440px; height:25px; }
+
+.product-content-wrapper {
+    background: #FBFBFB;
+    padding: 15px;
+}
+
+.product_detail_section div.eye  .right-col .product-header .charges-summary {
+    text-align:center
+}
+
+div.eye .top-half {
+    padding:0px;
+}
+
+.lens-options h3 {
+    margin-bottom: 0px;
+}
+
+.promo-pink {
+    color:#FF4026;
+    font-weight: bold;
+}
+
+.lens-summary-label {
+    margin-top: 3px;
+    font-family: 'Chalet-LondonSixty';
+    color: #A1A1A1;
+    font-size: 12px;
+}
+
+.satisfaction-info-holder {
+    padding-top: 24px;
+    padding-bottom: 20px;
+    border: 1px solid #E0E1E3;
+    border-top: 0px;
+}
+
+.satisfaction-part-1 {
+    color: #4A5D6C;
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-family: 'museo_slab_100';
+}
+
+.prescription-holder,
+.glass-lens-option-div {
+    padding: 25px 20px 30px 20px;
+}
+
+.prescription-holder {
+    background: url("/images/glasses-part-2-bg2.png");
+    position: relative;
+    height: 167px;
+}
+
+.glass-lens-option-div {
+    background-color: #FFF;
+    background-image: url(/images/glas-pdp-options-part-bg.jpg);
+    background-repeat: no-repeat;
+    min-height: 256px;
+}
+
+.glass-pdp-bg-image-model-text {
+    position: absolute;
+    top: 72px;
+    right: 86px;
+    color: #2D6189;
+    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif; text-transform:uppercase;
+    font-size: 22px;
+}
+
+.radio-holder {
+    margin-top: 8px;
+    padding-left: 10px;
+}
+
+.radio-holder ul {
+    list-style: none;
+    padding-left:32px;
+}
+
+.radio-holder ul li {
+    height: 27px;
+}
+
+.radio-holder label:hover {
+    background: #EAEAEA;
+    cursor: pointer;
+}
+
+.radio-holder label {
+    position: relative;
+    display: inline-block;
+    height: 24px;
+    color: black;
+    font:normal 14px "Whitney SSm A", "Whitney SSm B", sans-serif;
+    line-height: 24px;
+    width: 420px;
+    padding-left:8px;
+}
+
+.radio-extended ul li {
+    height:45px;
+}
+
+.radio-extended .lens-compare {position:absolute; left:26px; top:20px; color:#A1A1A1; font-style:italic; font-size:11px;}
+
+ul.pdp-control-check li>label>input[type=checkbox],
+ul.pdp-control-radio li>label>input[type=radio]{
+    width   : 15px;
+    margin  : 0;
+    padding : 0;
+    opacity : 0;
+}
+ul.pdp-control-check li>label>input[type=checkbox] + span,
+ul.pdp-control-radio li>label>input[type=radio] + span {
+    position:absolute;
+    top:0;
+    left:8px;
+    display      : block;
+    height:24px;
+    width:15px;
+    padding-left : 15px;
+    background   : url(/images/glasses-rebrand-2015-pdp-ui-sprite.png) no-repeat -20px -169px;
+    line-height  : 24px;
+}
+ul.pdp-control-check li>label>input[type=checkbox] + span {background-position:-94px -170px;}
+ul.pdp-control-radio li>label>input[type=radio]:checked + span {background-position:-2px -169px;}
+ul.pdp-control-check li>label>input[type=checkbox]:checked + span {background-position:-74px -170px;}
+
+.options-part {
+    font:bold 15px "Gotham SSm A", "Gotham SSm B", sans-serif;
+    text-transform:uppercase;
+    line-height:15px;
+    color: black;
+    padding: 8px 0 0 50px;
+    width: 537px;
+}
+
+.radio-holder label:hover .lens-popup{display: block;}
+
+.lens-popup {
+    display: none;
+    position: absolute;
+    left: 226px;
+    margin-top: -45px;
+    width: 262px;
+    padding: 14px;
+    font-weight: bolder;
+    line-height: 18px;
+    font-size: 13px;
+    border: solid 1px #DDD;
+    z-index: 1001;
+    background:#FFF;
+}
+
+.lens-popup.far {
+    width:192px;
+    left:380px;
+}
+
+.lens-popup .arrow {position:absolute; left:-7px; top:24px; width:7px; height:13px; background:url('/images/glass-5-arrow.png') no-repeat;}
+
+.lens-popup .flyout-title {
+    padding-bottom: 10px;
+}
+
+.lens-popup p {
+    line-height: 18px;
+    font-size: 11px;
+    font-weight: normal;
+    padding:0;
+    margin:0;
+}
+
+/**/
+div.eye .right-col-fixed{
+    position: fixed;
+    width: 338px;
+}
+div.eye .right-col-abs{
+    position: absolute;
+}
+
+.right-col {
+    position: relative;
+}
+
+.app-ui-fancy-select{
+    display:none;
+}
+
+
+.main-image {
+    float: left;
+    margin-right: 15px;
+}
+
+.brand-promise {
+    /*float: right;*/
+}
+
+ul.option-list li {
+    margin-top: 5px;
+}
+
+
+/*=================
+	FHTO
+==================*/
+
+#in-home-try-on {
+    margin: 20px 0 0;
+    /*border-bottom: 1px solid #E5E5E5;*/
+    /*padding: 0 0 15px;*/
+    width: 295px;
+    float: left;
+}
+
+#in-home-try-on a { text-decoration: underline; color: #33c2d7; }
+#in-home-try-on .title img { margin-top: -5px; margin-right: 2px; position: relative; }
+#in-home-try-on .title label { font-weight: 700; font-family: "Gotham SSm B", "Gotham SSm A", Helvetica, Arial, sans-serif; font-size: 11px; width: 100%; vertical-align: baseline}
+#in-home-try-on .title #ordr_free_trial { float: right; margin-right: 15px; }
+#in-home-try-on #check-wrap { float: right; }
+#in-home-try-on .fake_check_holder input, #in-home-try-on .fake_check_holder span {
+    position: absolute;
+    left: auto;
+    right: 15px;
+}
+
+#in-home-try-on .body { font-weight: 500; font-size: 12px; }
+#in-home-try-on .view-more { margin: 10px 0 0; }
+#in-home-try-on .view-more img {
+    vertical-align: top;
+    display: inline-block;
+    margin: 14px 0 0;
+}
+#in-home-try-on .view-more p {
+    max-width: 265px;
+    margin: 10px 0 0 5px;
+    display: inline-block;
+}
+#in-home-try-on .view-more label {
+    color: #333335;
+    padding-left: 15px;
+    font: 500 12px/18px "Whitney SSm A", "Whitney SSm B";
+}
