@@ -2,8 +2,8 @@
  * Created by doanthuan on 4/9/2015.
  */
 
-angular.module('myApp.product').controller('ProductViewController', ['$scope', 'Restangular', 'ProductService', '$stateParams', '$timeout',
-    function ($scope, Restangular, ProductService, $stateParams, $timeout) {
+angular.module('myApp.product').controller('ProductViewController', ['$scope', 'Restangular', 'ProductService', '$stateParams', '$timeout', '$location', 'CartService',
+    function ($scope, Restangular, ProductService, $stateParams, $timeout, $location, CartService) {
 
         $scope.isLoading = true;
         Restangular.one('product/get-by-alias', $stateParams.alias).get().then(function (product) {
@@ -51,6 +51,7 @@ angular.module('myApp.product').controller('ProductViewController', ['$scope', '
 
         $scope.packages = {
             'single_vision' : {
+                'name': 'Single Vision',
                 'lens':{
                     'cr39' : {'name': 'CR-39', 'price': 39},
                     'poly' : {'name': 'Polycarbonate', 'price': 79},
@@ -68,6 +69,7 @@ angular.module('myApp.product').controller('ProductViewController', ['$scope', '
                 'upgrades': [1]
             },
             'reader' : {
+                'name': 'Reader',
                 'price': 39,
                 'upgrades': [1]
             },
@@ -77,6 +79,7 @@ angular.module('myApp.product').controller('ProductViewController', ['$scope', '
                 'upgrades': [1, 2]
             },
             'demo' : {
+                'name': 'Frame Only',
                 'price': 0,
                 'upgrades': []
             }
@@ -94,7 +97,7 @@ angular.module('myApp.product').controller('ProductViewController', ['$scope', '
             $scope.selected_package_code = selected_package_code;
         }
 
-        $scope.getPriceTotal = function(){
+        $scope.getPriceOptions = function(){
             var price = 0;
             //lens options
             if($scope.selected_package_code == 'single_vision' || $scope.selected_package_code == 'multi_vision'){
@@ -111,6 +114,38 @@ angular.module('myApp.product').controller('ProductViewController', ['$scope', '
                 price += $scope.upgrades[1].price;
             }
             return price;
+        }
+
+        $scope.isSaving = false;
+        $scope.addToCart = function(productId){
+            $scope.isSaving = true;
+            var data = {
+                productId: productId,
+                color: $scope.selectedColorName
+            }
+            if($scope.packages[$scope.selected_package_code]){
+                data.package = $scope.packages[$scope.selected_package_code].name;
+            }
+            if($scope.packages[$scope.selected_package_code].lens[$scope.packages.lens_choice]){
+                data.lens = $scope.packages[$scope.selected_package_code].lens[$scope.packages.lens_choice];
+            }
+            data.upgrades = [];
+            if($scope.upgrades[0].selected){
+                data.upgrades.push($scope.upgrades[0]);
+            }
+            if($scope.upgrades[1].selected){
+                data.upgrades.push($scope.upgrades[1]);
+            }
+
+            data.price_options = $scope.getPriceOptions();
+
+            CartService.addToCart(data).then(function() {
+                $location.path('/cart');
+                $scope.isSaving = false;
+            }, function() {
+                alert('add to cart error!');
+                $scope.isSaving = false;
+            });
         }
 
     }]);

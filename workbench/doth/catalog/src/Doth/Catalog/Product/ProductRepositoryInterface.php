@@ -8,8 +8,9 @@
 
 namespace Doth\Catalog\Product;
 
+use Doth\Core\Abstracts\RepositoryInterface;
 
-interface ProductRepositoryInterface {
+interface ProductRepositoryInterface extends RepositoryInterface{
 
     public function findByAlias($alias);
 

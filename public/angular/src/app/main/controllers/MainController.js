@@ -17,4 +17,8 @@ angular.module('myApp').controller('MainController', ['$scope', '$location', fun
         }
     }
 
+    if( path.indexOf("cart") > 0 ){
+        $scope.curPage = 'cart';
+    }
+
 }]);

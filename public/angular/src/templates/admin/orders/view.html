@@ -1,0 +1,104 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Order Information</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">Order Date</div>
+            <div class="col-md-6"><strong>{{order.created_at}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">Order Status:</div>
+            <div class="col-md-6"><strong>{{getOrderStatus(order.status)}}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Customer Information'</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">Customer Email:</div>
+            <div class="col-md-6"><strong>{{order.customer_email}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">Customer Phone:</div>
+            <div class="col-md-6"><strong>{{order.customer_phone}}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Billing Address</div>
+        <div class="panel-body">
+          <address>
+            <strong>{{billing.first_name+' '+billing.last_name}}</strong>
+            <br>{{billing.address}}
+            <br>{{billing.city}}, {{billing.state}}&nbsp;{{billing.zipcode}}
+            <br><abbr title="Phone">P:</abbr> {{billing.phone}}
+          </address>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Shipping Address</div>
+        <div class="panel-body">
+          <address>
+            <strong>{{shipping.first_name+' '+shipping.last_name}}</strong>
+            <br>{{shipping.address}}
+            <br>{{shipping.city}}, {{shipping.state}}&nbsp;{{shipping.zipcode}}
+            <br><abbr title="Phone">P:</abbr> {{shipping.phone}}
+          </address>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Items Ordered</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th class="col-md-5">Product Name</th>
+              <th class="col-md-2">SubTotal</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="product in orderItems">
+              <td class="name">
+                {{product.name}}
+              </td>
+              <td class="total">{{product.total}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="cart-total text-right">
+            <strong>Total:</strong> {{order.amount | currency }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -3,7 +3,6 @@
     <div class="product_detail_section eye   ">
         <div class="row">
             <div class="left-col ng-scope">
-
                 <div images-loaded>
                     <div ng-repeat="color in product.colors" ng-if="color.selected==true">
                         <img id="zoom_{{color.id}}" ng-src="/uploads/{{color.images[0].filename}}"
@@ -213,8 +212,8 @@
                             </div>
                         </div>
                         <div class="product-section">
-                            <div class="main-price" ng-if="getPriceTotal() > 0">
-                                <div class="price">{{getPriceTotal() | currency}}</div>
+                            <div class="main-price" ng-if="getPriceOptions() > 0">
+                                <div class="price">{{getPriceOptions() | currency}}</div>
                             </div>
                             <!-- end ngIf: lensSummary().getAddedChargeSum() > 0 -->
                             <!-- ngIf: lensSummary().getAddedChargeSum() <= 0 -->
@@ -228,112 +227,26 @@
 
                         </div>
                         <div class="product-section">
-                            <!-- ngIf: ! selected_sku.in_stock -->
-                            <div ng-show="selected_sku.in_stock">
-                                <button class="add_to_cart btn" name="add_to_cart"
-                                        ng-click="submitMainAction('/product-detail/add-to-cart/', true)">
-                                    <!-- ngIf: pdp_base.edit_mode -->
+
+                            <div>
+                                <app-spinner ng-show="isSaving"></app-spinner>
+                                <button class="add_to_cart btn" name="add_to_cart" ng-show="!isSaving"
+                                        ng-click="addToCart(product.product_id)">
                                     <img ng-show="!pdp_base.edit_mode" id="cart-image"
                                          src="/images/update/add-to-cart.png">
-                                    <span ng-show="!pdp_base.edit_mode">Add to Cart</span>
+                                    <span>Add to Cart</span>
                                 </button>
                             </div>
 
                         </div>
 
                         <div class="product-section">
-                            <div ng-show="selected_sku.in_stock" class="shipping-info">
+                            <div class="shipping-info">
                                 Shipping is always on us
                             </div>
                         </div>
                     </div>
 
-                    <div class="vto-ihto-pres" style="display: none;">
-                        <!-- /////  In-Home Try-On  ///// -->
-                        <div id="ihto_add_button_inline_wrapper">
-
-                            <!-- ///  IHTO NOT Available  /// -->
-
-                            <div class="try-on-box added ng-hide" style="background: #f4f6f7;"
-                                 ng-show="ihto_message == 'added'">
-                                <div class="btn-container grey" id="btnAddIHTO-button"
-                                     style="background: #ffffff;margin: -10px -20px 0 -19px;height: 33px;">
-                                    <img src="/images/update/checkmark.png" style="left: 40px;top: 4px;">
-                                    <span class="btn-text-only"
-                                          style="color: #1e4154;margin-left: 40px;font-family: museo_slab_500;">Added to In-Home Try-On</span>
-                                </div>
-                                <div class="tryon-description">
-                                    <label>This pair of glasses is in your <a href="/in-home-try-on/cart">In-Home Try-On
-                                        cart</a> and is getting ready to spend the week with you.</label>
-                                </div>
-                            </div>
-                            <div class="try-on-box outofstock ng-hide" style="background: #f4f6f7;"
-                                 ng-show="ihto_message == 'outofstock'">
-                                <div class="btn-container grey" id="btnAddIHTO-button"
-                                     style="background: #ffffff;margin: -10px -20px 0 -19px;height: 39px;padding: 7px;">
-                                    <span class="btn-text-only"
-                                          style="color: #1e4154;margin-left: 55px;font-family: museo_slab_500;text-align:center">Temporarily Unavailable for <br> <img
-                                            src="/images/update/ihto-small-grey.jpg" style="left: 63px;top: 4px;"><span
-                                            style="margin-left: 75px;">In-Home Try-On</span></span>
-                                </div>
-                                <div class="tryon-description">
-                                    <label>
-                                        <strong style="font-weight:bold">Good News:</strong> You can still try 2 of your
-                                        favorite frames absolutely free for 15 days with our risk-free <a
-                                            href="#15d_free_trial_content" title="15-Day Free Trial"
-                                            onclick="doOpenModal(this); return false;">15-Day Trial program.</a>
-                                    </label>
-                                </div>
-                                <div style="display: none;">
-                                    <div id="15d_free_trial_content">
-                                        Take advantage of our 15-day free trial so you have time to fall in love. You
-                                        can order up to two pairs of glasses with your prescription
-                                        at no cost! Just remember to choose 15-day Trial at checkout. We won't charge
-                                        you until after your trial ends, we will only authorize
-                                        your card (for $1) to verify it is valid. When you fall in love with your
-                                        glasses, just keep them and we will charge your card after the
-                                        trial ends. If it's not a perfect match, return them for free and no harm done.
-                                        Call us at 1-800-452-7737 with any questions or to set
-                                        up a return.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="try-on-box ihto_disabled ng-hide" style="background: #f4f6f7;"
-                                 ng-show="ihto_message == 'ihto_disabled'">
-                                <div class="btn-container grey" id="btnAddIHTO-button">
-                                    <span class="btn-text-only" style="color: #1E4164; font-family: museo_slab_500;">Unavailable for <br> <img
-                                            src="/images/update/ihto-small-grey.jpg" style="top: 4px;"><span
-                                            style="margin-left: 5px;">In-Home Try-On</span></span>
-                                </div>
-                                <div class="tryon-description">
-                                    <label>
-                                        Sorry, this product isn't available for In-Home Try-On. However, with our 30-day
-                                        return policy and free shipping both ways, you can still enjoy trying them at
-                                        home and, if you don’t love them, you can send them back with no questions
-                                        asked. Need a similar style recommendation for an In-Home Try-On? <a
-                                            href="javascript:void(0);" onclick="lpMTagConfig.dynButton0.actionHook();">Chat
-                                        with a glasses stylist</a>.
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="try-on-box is-closeout ng-hide" ng-show="ihto_message == 'is-closeout'">
-                                <div class="btn-container grey disabled" style="display:none;" id="btnAddIHTO-button">
-                                    <span class="btn-text-only"
-                                          style="color: #1E4164; font-family: museo_slab_500;"><img
-                                            src="/images/update/ihto-small-grey.jpg" style="top: 4px;margin-right:4px;">Unavailable for In-Home Try-On</span>
-                                </div>
-                                <div class="tryon-description" id="btnAddIHTO-button" style="display:none;">
-                                    <div style="width: 300px;float: left;margin-bottom: 7px;">
-                                        <label>With a price this sweet you can't go wrong. This is a final sale product
-                                            and is not available for In-Home Try On.</label>
-                                    </div>
-                                    <div class="clear" style="clear: both;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ngIf: (pdp_base.is_sun_page || pdp_base.is_specialty) && selected_sku['is_closeout'] == 1 -->
-                    </div>
 
                 </div>
                 <!-- end floating-box -->

@@ -1528,3 +1528,8 @@ ul.option-list li {
     padding-left: 15px;
     font: 500 12px/18px "Whitney SSm A", "Whitney SSm B";
 }
+
+div.eye .top-half {
+    padding: 0px;
+    border: 0px;
+}

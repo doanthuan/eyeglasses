@@ -1,0 +1,190 @@
+
+    <div id="your-cart">
+        <div class="cart-header">
+            <div class="valign width50">
+                <h2>My Cart
+                </h2>
+            </div><div class="valign width50 breadcrumbs"> 			<div id="cart-sub-nav">
+            <ul class="cart-breadcrumbs">
+                <li class="active">
+                    cart		</li>
+                <li>
+                    checkout		</li>
+                <li>
+                    receipt		</li>
+            </ul>
+        </div>
+        </div>
+        </div>
+
+        <!-- ///// NOT-Empty Cart ///// -->
+
+        <ul class="line_item_headings">
+            <li>frame</li>
+            <li>lens</li>
+            <li>pricing</li>
+        </ul>
+        <div class="frame" id="empty_cart_line" ng-show="!isLoading && cart.products == null">
+            <h3 class="upper gotham">You have no items in your cart.</h3>
+            <div>Questions? Call us at 1-800-GLASSES or
+                <a href="/womens-glasses">Continue Shopping</a>
+            </div>
+        </div>
+
+        <app-spinner ng-show="isLoading"></app-spinner>
+        <div class="frame eyeglasses" ng-show="!isLoading" ng-repeat="product in cart.products">
+
+            <div class="line_frame">
+                <a class="product-img" ng-href="#/product/{{product.alias}}">
+                    <img ng-src="/uploads/{{product.thumbnail}}" width="252px">
+                </a>
+                <div class="lineTitle">
+                    <div class="product">{{product.name}}</div>
+                    <div class="color"></div>
+                </div>
+
+                <div class="remove"><a href="javascript: void(0);" class="removeFromCart" ng-click="removeFromCart(product.product_id)"></a></div>
+
+            </div>
+            <div class="line_lens">
+                <div class="lens-type">
+                    {{product.cart.package}}
+                </div>
+                <div class="lens-type-upgrades">
+                    <span ng-if="product.cart.lens">{{product.cart.lens.name}}</span>
+                    <span ng-if="product.cart.upgrades[0]">, {{product.cart.upgrades[0].name}}</span>
+                    <span ng-if="product.cart.upgrades[1]">, {{product.cart.upgrades[1].name}}</span>
+                </div>
+                <div class="line_message_wrap">
+                </div>
+            </div>
+            <div class="line_price">
+                <div class="price_wrapper">
+                    <div>
+                        <div class="price_label">Frame</div>
+                        <div class="price_details">
+                            <div class="line_price_display " id="frame_price_508494546" data-price="">${{product.price | number }}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="price_label">Lenses</div>
+                        <div class="price_details">
+                            <div class="line_price_display lenses ">$<span id="lens_price_508494546">{{product.cart.price_options}}</span></div>
+                        </div>
+                    </div>
+                    <div class="subtotal">
+                        <div class="price_label">Subtotal</div>
+                        <div class="line_price_display ">$<span id="line_price_508494546">{{product.subTotal}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart_footer">
+            <div class="cart_cta_container">
+                <div class="cta-container gotham" id="ctaContainer1">
+                        <img src="/images/dyn-images/single_270_tile/Home_RTBs_05-1.jpg" data-mobile-src="" alt="Free Frame Adjustments" id="imageMap_map_81874" class="placeholder ">
+                    </a>
+
+                </div>
+                <div class="cta-container gotham" id="ctaContainer2">
+                        <img src="/images/dyn-images/single_270_tile/Home_RTBs_07-2.jpg" data-mobile-src="" alt="Return Policy" id="imageMap_map_92949" class="placeholder ">
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="order_summary" id="orderSummary">
+                <div class="free-shipping-banner upper gothic">Shipping is always on us</div>
+                <div class="purchase-summary">
+
+
+
+
+                    <div class="order_summary_line"><span class="subtotal upper gotham"> Subtotal</span>
+                        <div class="order_summary_line_val gotham" id="order_lines_subtotal">$198.00</div>
+                    </div>
+
+                    <div class="order_summary_line">
+                        <div class="fake_select_holder">
+                            <select name="ship_id" class="shipping-edit-select" id="payment_shipping_option" style="display: none;">
+                                <option value="1" selected="selected">Standard (5-7 business days)</option>
+                                <option value="3">Expedited (2 business days)</option>
+                            </select>
+                            <div class="fake_select_activate"><a href=""><span>Standard (5-7 business days)</span><b></b></a></div><ul class="fake_select" style="display: none;"><li><a href="#" val="1" class="fake_selected hover" text_value="Standard (5-7 business days)">Standard (5-7 business days)</a></li><li><a href="#" val="3" text_value="Expedited (2 business days)">Expedited (2 business days)</a></li></ul></div>
+                        <div class="order_summary_line_val"><span class="total-shipping" id="shipping_total">Free</span></div>
+                    </div>
+
+
+
+                    <div class="order_summary_line_total upper">
+                        Total
+                        <div class="order_summary_line_val" id="order_total">
+                            <span class="total-total" id="total_price">$198.00</span>
+                        </div>
+                    </div>
+
+                    <div class="order_summary_continue">
+                    </div>
+
+
+                    <a id="cart-continue" class="btn-container order_summary_lenses gotham upper" href="#/checkout">
+                        Continue</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <br style="clear:both"><br>
+
+
+    <div class="cart-lens-popups">
+
+        <div id="basic_popup_container" class="popup">
+            <div id="basic_popup" class="text-container">CR-39 plastic lenses are heavier and less durable than polycarbonate. Commonly carried in national optical lens retailers. We don’t really recommend them for daily glasses wearers.</div>
+            <div class="popup_foot"></div>
+        </div>
+
+        <div id="upgraded_popup_container" class="popup">
+            <div id="upgraded_popup" class="text-container">Our polycarbonate lenses are thinner, lighter, and more durable than CR-39 lenses. We also include a lot of free upgrades most retailers charge extra for, such as:
+                <ul>
+                    <li> treatment</li>
+                    <li>Scratch-resistant treatment</li>
+                    <li>100% UV protection</li>
+                </ul>
+            </div>
+            <div class="popup_foot"></div>
+        </div>
+
+        <div id="premium_popup_container" class="popup">
+            <div id="premium_popup" class="text-container">The same top-of-the-line AirLight polycarbonate lenses in Best Value, plus two treatment upgrades which extend the life of your lenses and improve the wearing experience:
+                <ul>
+                    <li> treatment with super hydrophobic properties which repel water</li>
+                    <li>Less smudging</li>
+                    <li>Easier to clean</li>
+                    <li>Premium scratch-resistant treatment</li>
+                </ul>
+            </div>
+            <div class="popup_foot"></div>
+        </div>
+        <div id="reader_popup_container" class="popup">
+            <div id="reader_popup" class="text-container">Add power assists in bringing near vision into focus. Increasing the number increases the strength of the correction.</div>
+            <div class="popup_foot"></div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        function moveToCart(psku,ihto_line){
+            $.ajaxSetup({async:false});
+            sendAddToCart( psku ,'rx');
+            removeIHTOLine( ihto_line, false, "//www.glasses.com" );
+            $.ajaxSetup({async:true});
+            window.location.reload();
+        }
+
+    </script>
+    <!--endContent-->
+</div>

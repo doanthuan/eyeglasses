@@ -9,7 +9,8 @@ var app = angular.module('myApp', [
     'myApp.common',
     'myApp.product',
     'myApp.category',
-    'myApp.brand'
+    'myApp.brand',
+    'myApp.checkout'
 ]);
 
 app.config(['$provide', Decorate]);

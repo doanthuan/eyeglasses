@@ -1,0 +1,417 @@
+<div id="your-cart" class="checkout">
+
+    <div class="cart-header">
+        <div class="valign width50">
+            <h2>Checkout</h2>
+        </div><div class="valign width50 breadcrumbs"> 			<div id="cart-sub-nav">
+        <ul class="cart-breadcrumbs">
+            <li>
+                <a href="https://www.glasses.com/cart">Cart</a>		</li>
+            <li class="active">
+                checkout		</li>
+            <li>
+                receipt		</li>
+        </ul>
+    </div>
+    </div>
+    </div>
+    <div id="main__discount_removal_message" class="error_discount_advice_full no_error" style="position:absolute;top:-55px;z-index:-1;"><img src="/javascript/lib/errorfy/bg_icon.png">Oops! Your promo code is expired and has been removed from your order.</div>
+
+    <div style="clear: both;"></div>
+
+    <div id="ft-blue-box" class="ft-blue-box" style="display: none;">
+        <p class="ft-txt">
+            <span class="ft-heading">How is your current 15-day free trial going?</span><br>
+
+            Just a heads up: we only allow one free trial per customer at a time.  But did you know we offer free returns
+            and free shipping both ways?  So you can buy these and if you don't love them, send them back for free.
+        </p>
+    </div>
+    <div class="content_left" style="display:static!important;float:left;">
+        <accordion close-others="oneAtATime">
+            <accordion-group heading="1. Shipping Address" is-open="billShipOpen" class="step" style="border:none">
+                <div class="step_content">
+                    <form method="POST" action="" id="address_form" class="no-errorfy-tooltip" >
+                    <input type="hidden" name="save_info" value="1" autocomplete="off">
+                    <input type="hidden" name="action" value="address" autocomplete="off">
+
+                    <div class="addressLine plain-text">
+                        Enter your shipping address below.
+                    </div>
+
+                    <div class="addressLine margin-right">
+                        <input type="text" name="ship__fname" ng-model="shipping.first_name" value="" size="65" maxlength="15" class="large_input first-name" placeholder="First Name" required="required">
+                    </div>
+                    <div class="addressLine">
+                        <input type="text" name="ship__lname" ng-model="shipping.last_name" value="" size="65" maxlength="25" class="large_input last-name" placeholder="Last Name" required="required">
+                    </div>
+                    <div class="addressLine">
+                        <input type="text" name="ship__address_1" ng-model="shipping.address_1" value="" size="65" maxlength="50" class="large_input address-1" placeholder="Address" required="required">
+                    </div>
+                    <div class="addressLine">
+                        <input type="text" name="ship__address_2" ng-model="shipping.address_2" value="" size="65" maxlength="50" class="large_input address-2" placeholder="Address 2" required="required">
+                    </div>
+
+                    <input type="hidden" name="ship__ctry_id" value="1" required="required">
+                    <div class="addressLine margin-right">
+                        <input type="text" name="ship__city" ng-model="shipping.city" value="" size="65" maxlength="50" class="large_input city" placeholder="City" required="required">
+                    </div>
+                    <div class="addressLine margin-right">
+                        <select ng-init="shipping.state = -1" ng-model="shipping.state" class="state" required="required" class="form-control">
+                            <option value="-1" selected="selected">State</option>
+                            <option value="Alabama">Alabama</option>
+                            <option value="Alaska">Alaska</option>
+                            <option value="Arizona">Arizona</option>
+                            <option value="Arkansas">Arkansas</option>
+                            <option value="California">California</option>
+                            <option value="Colorado">Colorado</option>
+                            <option value="Connecticut">Connecticut</option>
+                            <option value="Delaware">Delaware</option>
+                            <option value="District of Columbia">District of Columbia</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Hawaii">Hawaii</option>
+                            <option value="Idaho">Idaho</option>
+                            <option value="Illinois">Illinois</option>
+                            <option value="Indiana">Indiana</option>
+                            <option value="Iowa">Iowa</option>
+                            <option value="Kansas">Kansas</option>
+                            <option value="Kentucky">Kentucky</option>
+                            <option value="Louisiana">Louisiana</option>
+                            <option value="Maine">Maine</option>
+                            <option value="Maryland">Maryland</option>
+                            <option value="Massachusetts">Massachusetts</option>
+                            <option value="Michigan">Michigan</option>
+                            <option value="Minnesota">Minnesota</option>
+                            <option value="Mississippi">Mississippi</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Montana">Montana</option>
+                            <option value="Nebraska">Nebraska</option>
+                            <option value="Nevada">Nevada</option>
+                            <option value="New Hampshire">New Hampshire</option>
+                            <option value="New Jersey">New Jersey</option>
+                            <option value="New Mexico">New Mexico</option>
+                            <option value="New Yor">New York</option>
+                            <option value="North Carolina">North Carolina</option>
+                            <option value="North Dakot">North Dakota</option>
+                            <option value="Ohio">Ohio</option>
+                            <option value="Oklahoma">Oklahoma</option>
+                            <option value="Oregon">Oregon</option>
+                            <option value="Pennsylvania">Pennsylvania</option>
+                            <option value="Rhode Islan">Rhode Island</option>
+                            <option value="South Carolin">South Carolina</option>
+                            <option value="South Dakota">South Dakota</option>
+                            <option value="Tennessee">Tennessee</option>
+                            <option value="Texas">Texas</option>
+                            <option value="Utah">Utah</option>
+                            <option value="Vermont">Vermont</option>
+                            <option value="Virginia">Virginia</option>
+                            <option value="Washington">Washington</option>
+                            <option value="West Virginia">West Virginia</option>
+                            <option value="Wisconsin">Wisconsin</option>
+                            <option value="Wyoming">Wyoming</option>
+                            <option value="Armed Forces America">Armed Forces America</option>
+                            <option value="Armed Forces Other">Armed Forces Other</option>
+                            <option value="Armed Forces Pacific">Armed Forces Pacific</option>
+                        </select>
+
+                    </div>
+                    <div class="clear-both"></div>
+                    <div class="addressLine">
+                        <input type="text" name="ship__postal_code" ng-model="shipping.zipcode" value="" maxlength="9" onkeyup="fieldNumbersOnly( this );" class="zip-city-state-loader zip-code" size="5" placeholder="Zip" required="required">
+                    </div>
+                    <div class="clear-both"></div>
+                    <div class="addressLine margin-right">
+                        <input type="text" name="ship__phone" ng-model="shipping.phone" value="" maxlength="13" placeholder="Phone" class="phone" required="required">
+                    </div>
+
+                    <div class="addressLine margin-right">
+                        <input type="text" name="ship__email" ng-model="shipping.email" value="" placeholder="Email" class="email" required="required">
+                    </div>
+
+                    <div class="opt-in">
+                        <label><input type="checkbox" name="newsletter_opt_in" value="1" checked="yes" required="required"> Send me promotions and offers by email.</label>
+                    </div>
+
+                    <div class="clear:both"></div>
+
+
+                    <div class="decision_node">
+                        <div class="decision">
+                            <select name="bill_address_id" ng-init="shipToBill = 1" ng-model="shipToBill" ng-change="toggleShipToBill()" required="required">
+                                <option value="1" selected="selected"> Bill To: My Shipping address</option>
+                                <option value="0">Bill To: A New Address </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="billing_form" class="no-errorfy-tooltip" ng-show="shipToBill == 0">
+
+                        <div class="addressLine margin-right">
+                            <input type="text" name="ship__fname" ng-model="billing.fname" value="" size="65" maxlength="15" class="large_input first-name" placeholder="First Name" required="required">
+                        </div>
+                        <div class="addressLine">
+                            <input type="text" name="ship__lname" ng-model="billing.lname" value="" size="65" maxlength="25" class="large_input last-name" placeholder="Last Name" required="required">
+                        </div>
+                        <div class="addressLine">
+                            <input type="text" name="ship__address_1" ng-model="billing.address_1" value="" size="65" maxlength="50" class="large_input address-1" placeholder="Address" required="required">
+                        </div>
+                        <div class="addressLine">
+                            <input type="text" name="ship__address_2" ng-model="billing.address_2" value="" size="65" maxlength="50" class="large_input address-2" placeholder="Address 2" required="required">
+                        </div>
+
+                        <input type="hidden" name="ship__ctry_id" value="1" required="required">
+                        <div class="addressLine margin-right">
+                            <input type="text" name="ship__city" ng-model="billing.city" value="" size="65" maxlength="50" class="large_input city" placeholder="City" required="required">
+                        </div>
+                        <div class="addressLine margin-right">
+                            <select class="state" ng-init="billing.state = -1" ng-model="billing.state" required="required" class="form-control">
+                                <option value="-1" selected="selected">State</option>
+                                <option value="Alabama">Alabama</option>
+                                <option value="Alaska">Alaska</option>
+                                <option value="Arizona">Arizona</option>
+                                <option value="Arkansas">Arkansas</option>
+                                <option value="California">California</option>
+                                <option value="Colorado">Colorado</option>
+                                <option value="Connecticut">Connecticut</option>
+                                <option value="Delaware">Delaware</option>
+                                <option value="District of Columbia">District of Columbia</option>
+                                <option value="Florida">Florida</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Hawaii">Hawaii</option>
+                                <option value="Idaho">Idaho</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Indiana">Indiana</option>
+                                <option value="Iowa">Iowa</option>
+                                <option value="Kansas">Kansas</option>
+                                <option value="Kentucky">Kentucky</option>
+                                <option value="Louisiana">Louisiana</option>
+                                <option value="Maine">Maine</option>
+                                <option value="Maryland">Maryland</option>
+                                <option value="Massachusetts">Massachusetts</option>
+                                <option value="Michigan">Michigan</option>
+                                <option value="Minnesota">Minnesota</option>
+                                <option value="Mississippi">Mississippi</option>
+                                <option value="Missouri">Missouri</option>
+                                <option value="Montana">Montana</option>
+                                <option value="Nebraska">Nebraska</option>
+                                <option value="Nevada">Nevada</option>
+                                <option value="New Hampshire">New Hampshire</option>
+                                <option value="New Jersey">New Jersey</option>
+                                <option value="New Mexico">New Mexico</option>
+                                <option value="New Yor">New York</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="North Dakot">North Dakota</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Oklahoma">Oklahoma</option>
+                                <option value="Oregon">Oregon</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Rhode Islan">Rhode Island</option>
+                                <option value="South Carolin">South Carolina</option>
+                                <option value="South Dakota">South Dakota</option>
+                                <option value="Tennessee">Tennessee</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Utah">Utah</option>
+                                <option value="Vermont">Vermont</option>
+                                <option value="Virginia">Virginia</option>
+                                <option value="Washington">Washington</option>
+                                <option value="West Virginia">West Virginia</option>
+                                <option value="Wisconsin">Wisconsin</option>
+                                <option value="Wyoming">Wyoming</option>
+                                <option value="Armed Forces America">Armed Forces America</option>
+                                <option value="Armed Forces Other">Armed Forces Other</option>
+                                <option value="Armed Forces Pacific">Armed Forces Pacific</option>
+                            </select>
+
+                        </div>
+                        <div class="clear-both"></div>
+                        <div class="addressLine">
+                            <input type="text" name="ship__postal_code" ng-model="billing.zipcode" value="" maxlength="9" onkeyup="fieldNumbersOnly( this );" class="zip-city-state-loader zip-code" size="5" placeholder="Zip" required="required">
+                        </div>
+                        <div class="clear-both"></div>
+                        <div class="addressLine margin-right">
+                            <input type="text" name="ship__phone" ng-model="billing.phone" value="" maxlength="13" placeholder="Phone" class="phone" required="required">
+                        </div>
+
+                        <div class="addressLine margin-right">
+                            <input type="text" name="ship__email" ng-model="billing.email" value="" placeholder="Email" class="email" required="required">
+                        </div>
+
+                    </div>
+
+                    <div id="checkout_address_continue" class="btn-container">
+                        <button ng-click="saveBillShip()" autocomplete="off">
+                            Continue
+                        </button>
+                    </div>
+
+                    <div class="clearfix"> </div>
+
+                </form>
+                </div>
+            </accordion-group>
+
+            <accordion-group heading="2. payment information" is-open="paymentOpen" class="step" style="border:none">
+                <div class="step_content">
+
+                    <form class="payment-form" method="POST" id="payment-form">
+                        <input type="hidden" name="save_info" value="1" autocomplete="off">
+                        <input type="hidden" name="action" value="process" autocomplete="off">
+                        <input type="hidden" name="complete_action" value="1" autocomplete="off">
+                        <input type="hidden" name="visitor_code" value="4c9326a0da6e24d7b63b07e5f936cdc2" autocomplete="off">
+                        <input type="hidden" name="order_code" value="G268081477" autocomplete="off">
+
+                        <span class="payment-errors"></span>
+
+                        <div class="addressLine plain-text">
+                            Enter your secure payment information below.
+                        </div>
+                        <div class="payment-labels">
+                            <input type="text" data-stripe="number" value="" maxlength="16" placeholder="Card Number*" class="card-number" autocomplete="off">
+
+                            <ul class="cards" id="billingCards">
+                            <li>
+                                <div class="card-one"></div>
+                            </li>
+                            <li>
+                                <div class="card-two"></div>
+                            </li>
+                            <li>
+                                <div class="card-three"></div>
+                            </li>
+                            <li>
+                                <div class="card-four"></div>
+                            </li>
+                        </ul>
+                            <p> Note: HSA &amp; FSA cards can be used on RX orders.</p>
+                            <label for="exp_month" class="margin-right" style="color:#000000;"><b>Expiration</b></label><br>
+                                <select class="exp_month margin-right" autocomplete="off" data-stripe="exp-month">
+                                    <option value="">MM</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+
+                            <select class="year margin-right" autocomplete="off" data-stripe="exp-year">
+                                <option value="">YYYY</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+
+                            <br>
+                            <input class="my_test cvc numbers-only margin-right" data-stripe="cvc" type="text" value="" maxlength="4" size="3" placeholder="CVC*" autocomplete="off">
+
+
+                            <input type="text" value="" placeholder="Name On Card*" class="name" autocomplete="off"> <div id="main__name_on_card__advice" class="input_advice input_advice_text" style="display: none"></div><br>
+                        </div>
+
+
+                        <div class="btn-container">
+                            <button id="final-submit-button" autocomplete="off" ng-show="!isSaving" ng-disabled="isSaving" ng-click="submitCheckout()"><span>Submit Order</span></button>
+                            <app-spinner ng-show="isSaving"></app-spinner>
+                            <br><br><br>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </accordion-group>
+        </accordion>
+
+    </div>
+
+    <div class="content_right">
+        <div class="order_summary" id="orderSummary">
+            <div class="order-summary-title">Order Summary</div>
+            <div class="shipping-note">Shipping is always on us</div>
+
+            <div class="cartitem" ng-repeat="product in cart.products">
+                <div class="sku">
+                    <div class="name">
+                        {{product.name}}
+                    </div>
+                    <div class="price">
+                        <span class="">{{product.price | currency }}</span>
+                    </div>
+                </div>
+
+                <div class="cart_item_line">
+                    <div class="label">Frame Color:</div>
+                    <div class="clear:both"></div>
+                    <div class="cart_item_sublines">
+                        <div class="cart_item_subline"><div class="name">{{product.cart.color}}</div></div>
+                    </div>
+                </div>
+                <div class="cart_item_line">
+                    <div class="label">Lens:</div>
+                    <div class="cart_item_sublines">
+                        <div class="cart_item_subline" ng-if="product.cart.lens">
+                            <div class="name">{{product.cart.lens.name}}</div>
+                            <div class="price">
+                                <span class="">{{product.cart.lens.price | currency}} </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="cart_item_line">
+                    <div class="cart_item_sublines">
+
+                        <div class="cart_item_subline" ng-if="product.cart.upgrades[0]">
+                            <div class="name">{{product.cart.upgrades[0].name}}</div>
+                            <div class="price">
+                                <span class="">{{product.cart.upgrades[0].price | currency}}</span>
+                            </div>
+                        </div>
+
+                        <div class="cart_item_subline" ng-if="product.cart.upgrades[1]">
+                            <div class="name">{{product.cart.upgrades[1].name}}</div>
+                            <div class="price">
+                                <span class="">{{product.cart.upgrades[1].price | currency}}</span>
+                            </div>
+                        </div>
+
+                        <br class="clear">
+                    </div>
+                </div>
+
+                <div class="order_summary_line"><span class="subtotal upper gotham"> Subtotal</span>
+                    <div class="order_summary_line_val gotham" id="order_lines_subtotal">{{product.subTotal | currency}}</div>
+                </div>
+
+            </div>
+
+            <div class="cart_totals total">
+                Total:
+                <div class="price"><span class="total-total" id="total_price">{{cart.totalAmount | currency}}</span></div>
+            </div>
+
+            <div style="clear: both;"></div>
+
+        </div>
+
+
+    </div>
+    <div style="clear:both;">&nbsp;</div>
+
+
+</div>

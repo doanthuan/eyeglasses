@@ -8,7 +8,7 @@
 					<div class="product-item">
 						<div class="thumbnail">
 							<a ng-href="#/product/{{item.alias}}">
-								<img ng-src="/uploads/{{item.thumbnail}}">
+								<img ng-src="/uploads/{{getThumbnail(item)}}">
 							</a>
 							<div class="product-name">
 								<a ng-href="#/product/{{item.alias}}">
@@ -19,7 +19,7 @@
 							</div>
 							<div class="row product_swatches">
 								<ul class="new_color_selector">
-									<li ng-repeat="color in item.colors" title="{{color.name}}" class="color_swatch selected" ng-mouseover="product.active_sku = sku">
+									<li ng-repeat="color in item.colors" title="{{color.name}}" class="color_swatch selected" ng-mouseover="selectColor(color, item)">
 										<div ng-class="color.class + (color.active?' active':'')"></div>
 									</li>
 								</ul>

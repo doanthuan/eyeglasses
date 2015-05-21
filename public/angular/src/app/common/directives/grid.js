@@ -1,8 +1,8 @@
 /**
  * Created by doanthuan on 4/12/2015.
  */
-angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$state',
-    function (Restangular, toaster, $location, $state) {
+angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '$location', '$state', '$sce',
+    function (Restangular, toaster, $location, $state, $sce) {
     return {
         restrict: 'E',
         templateUrl: '/templates/common/directives/grid.html',
@@ -10,7 +10,8 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
             url: '@',
             cols: '=',
             items: '=',
-            itemKey: '@'
+            itemKey: '@',
+            action: '@?'
         },
         controller: function($scope, $element){
             $scope.getPage = function (tableState) {
@@ -60,8 +61,12 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
 
             $scope.editItem = function(item){
                 var curUrl = $location.path();
-                console.log(item);
                 $location.path(curUrl + '/add/'+ item[$scope.itemKey]);
+            }
+
+            $scope.viewItem = function(item){
+                var curUrl = $location.path();
+                $location.path(curUrl + '/view/'+ item[$scope.itemKey]);
             }
 
             $scope.deleteItems = function(){
@@ -104,6 +109,12 @@ angular.module('myApp.common').directive('appGrid', ['Restangular', 'toaster', '
             $scope.$parent.$on('delete_item', function(e, data){
                 $scope.deleteItems();
             });
+
+
+            //action buttons
+            if($scope.action == undefined){
+                $scope.action = 'edit';
+            }
         }
     }
 }]);
@@ -123,6 +134,18 @@ angular.module('myApp.common').filter('picker', function($filter) {
                     return 'Yes';
                 } else{
                     return 'No';
+                }
+            }
+            else if(filterName == 'order-status'){
+                switch(value){
+                    case 1:
+                        return 'Created';
+                    case 2:
+                        return 'Paid';
+                    case 3:
+                        return 'Completed';
+                    case -1:
+                        return 'Error';
                 }
             }
             else{

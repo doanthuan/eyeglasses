@@ -10,7 +10,7 @@
         <th ng-repeat="col in cols" st-sort="{{col.name}}">
             {{col.title}}
         </th>
-        <th>Action</th>
+        <th class="col-sm-1">Action</th>
     </tr>
     <tr>
         <th></th>
@@ -27,9 +27,12 @@
             {{item[col.name] | picker:col.format}}
         </td>
         <td>
-            <a class="btn btn-sm btn-info" href="" ng-click="editItem(item)">
+            <a ng-if="action=='edit'" class="btn btn-sm btn-info" href="" ng-click="editItem(item)">
                 <i class="glyphicon glyphicon-pencil"></i>
                 Edit
+            </a>
+            <a ng-if="action=='view'" class="btn btn-sm btn-info" href="" ng-click="viewItem(item)">
+                View
             </a>
         </td>
     </tr>

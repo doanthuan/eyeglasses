@@ -64,6 +64,10 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
     border-radius: 6px 0 6px 6px;
 }
 
+header .header_list > ul > li:hover > a .underline {
+    border-bottom-color: #ff4026;
+}
+
 /* error */
 .glyphicon-asterisk{
     color: #d9534f;
@@ -165,5 +169,33 @@ div#admin-content{
     margin-left:5%;
 }
 
-#gallery_01 img{border:2px solid white;width: 96px;}
-.active img{border:2px solid #333 !important;}
+.product_detail_section .gallery img{border:2px solid white;width: 96px;}
+.product_detail_section .active img{border:2px solid #333 !important;}
+
+
+.step  .panel-body {
+    padding: 0px;
+}
+
+#your-cart.checkout div.content_left div.step div.panel-heading {
+    font-family: "Gotham SSm A", "Gotham Ssm B";
+    font-size: 16px;
+    font-weight: 500;
+    background: #333335;
+    height: 40px;
+    line-height: 40px;
+    color: #FFFFFF;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+#your-cart.checkout div.content_right div.order_summary div.cartitem {
+    border-bottom: 0px;
+}
+
+#your-cart div.order_summary div.order_summary_line {
+    border-top: 1px solid #CECECE;
+}
+#your-cart div.order_summary div.order_summary_line div.order_summary_line_val {
+    font-size: 12px;
+}

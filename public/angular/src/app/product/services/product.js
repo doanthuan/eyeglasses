@@ -58,6 +58,23 @@ angular.module('myApp.product').factory('ProductService', [
                 }
             }
 
+            service.colorIdsToObjectsThumbnail = function(item){
+                if(item.colors != null) {
+                    //format colors objects
+                    var itemColors = [];
+                    var colorIds = item.colors.split(',');
+                    var images = item.images.split(',');
+
+                    for(var i = 0 ; i < colorIds.length; i++){
+                        var newColor = service.getColorById(colorIds[i]);
+                        newColor.thumbnail = images[i];
+                        itemColors.push(newColor);
+                    }
+                    itemColors[0].active = true;
+                    item.colors = itemColors;
+                }
+            }
+
             service.getFaceShapes = function(){
                 return [
                     {id: 1, name: 'Heart', class: 'heart'},

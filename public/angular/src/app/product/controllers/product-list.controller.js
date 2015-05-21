@@ -24,7 +24,7 @@ angular.module('myApp.product').controller('ProductListController', ['$scope', '
 
                 angular.forEach(items, function(item){
 
-                    ProductService.colorIdsToObjects(item);
+                    ProductService.colorIdsToObjectsThumbnail(item);
 
                 });
 
@@ -36,6 +36,25 @@ angular.module('myApp.product').controller('ProductListController', ['$scope', '
             });
         };
         $scope.getList();
+
+        $scope.getThumbnail = function(item){
+            var result = '';
+            angular.forEach(item.colors, function(color){
+                if(color.active){
+                    result = color.thumbnail;
+                    return;
+                }
+            })
+            return result;
+        }
+
+        $scope.selectColor = function(color, item){
+            angular.forEach(item.colors, function(aColor){
+                aColor.active = false;
+            })
+            color.active = true;
+            item.thumbnail = color.thumbnail;
+        }
 
         $scope.selectItem = function(item, filter){
             if(item.selected == null || item.selected == false){

@@ -76,7 +76,9 @@ class ProductRepository extends Repository implements ProductRepositoryInterface
         $query = $this->model->getQuery();
         $query->leftJoin('product_color', 'product.product_id', '=', 'product_color.product_id');
         $query->select('product.*', 'product_color.color_id', \DB::raw( "GROUP_CONCAT(product_color.color_id SEPARATOR ',') as colors" ));
+        $query->addSelect(\DB::raw( "GROUP_CONCAT(product_color.thumbnail SEPARATOR ',') as images" ));
         $query->groupBy('product.product_id');
+
 
         $this->filter($query, $input);
 

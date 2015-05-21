@@ -7,7 +7,7 @@
 	"require": {
 		"laravel/framework": "5.0.*",
 	  	"illuminate/workbench": "dev-master",
-	  	"doth/catalog": "*"
+	  	"stripe/stripe-php": "2.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

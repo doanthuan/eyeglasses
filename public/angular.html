@@ -17,12 +17,13 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <link rel="stylesheet" href="/css/app.css">
   <link href="bower_components/angularjs-toaster/toaster.min.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <link href="css/glasses.css" rel="stylesheet" />
-  <link ng-if="curPage=='products'" href="css/products.css" rel="stylesheet" />
-  <link ng-if="curPage=='product'" href="css/product-detail.css" rel="stylesheet" />
+  <link ng-if="!isAdmin" href="css/glasses.css" rel="stylesheet" />
+  <link ng-if="!isAdmin" href="css/products.css" rel="stylesheet" />
+  <link ng-if="!isAdmin" href="css/product-detail.css" rel="stylesheet" />
+  <link ng-if="!isAdmin" href="css/cart.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 
@@ -57,6 +58,11 @@
 
 <script src="js/jquery.elevatezoom.js"></script>
 <script src="js/imagesLoaded.min.js"></script>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  Stripe.setPublishableKey('pk_test_eAGxdRhRbVcl7xAOWCbmy9Wx');
+</script>
 
 <script src="/js/app.js"></script>
 </body>

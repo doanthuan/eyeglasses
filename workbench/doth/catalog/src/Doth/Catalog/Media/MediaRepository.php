@@ -15,7 +15,8 @@ use Input, DB;
  * Class MediaRepository
  * @package Doth\Catalog\Media
  */
-class MediaRepository extends Repository implements MediaRepositoryInterface{
+class MediaRepository extends Repository implements MediaRepositoryInterface
+{
 
     /**
      * @param Media $media
@@ -40,8 +41,8 @@ class MediaRepository extends Repository implements MediaRepositoryInterface{
                 if ($media) {
                     $media->product_id = $product->product_id;
                     $media->save();
-                    if(!in_array($media->color_id, $newColors)){
-                        $newColors[] = $media->color_id;
+                    if (!array_key_exists($media->color_id, $newColors)) {
+                        $newColors[$media->color_id] = $media;
                     }
                 }
             }
@@ -64,9 +65,15 @@ class MediaRepository extends Repository implements MediaRepositoryInterface{
             DB::table('product_color')->where('product_id', $product->product_id)->delete();
 
             //add colors to product
-            foreach ($newColors as $colorId) {
-                DB::table('product_color')->insert(
-                    ['color_id' => $colorId, 'product_id' => $product->product_id]
+            foreach ($newColors as $colorId => $image) {
+
+                //set thumbnail
+                $thumbnail = $image->filename;
+                DB::table('product_color')->insert([
+                        'color_id' => $colorId,
+                        'product_id' => $product->product_id,
+                        'thumbnail' => $thumbnail
+                    ]
                 );
             }
         }

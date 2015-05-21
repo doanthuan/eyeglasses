@@ -27,3 +27,9 @@ Route::post('media/upload', 'Doth\Catalog\Controllers\MediaController@upload');
 
 Route::resource('brand', 'Doth\Catalog\Controllers\BrandController');
 Route::post('brand/delete', 'Doth\Catalog\Controllers\BrandController@delete');
+
+Route::controller('cart', 'Doth\Catalog\Controllers\CartController');
+Route::controller('checkout', 'Doth\Catalog\Controllers\CheckoutController');
+
+Route::resource('order', 'Doth\Catalog\Controllers\OrderController');
+Route::post('order/delete', 'Doth\Catalog\Controllers\OrderController@delete');

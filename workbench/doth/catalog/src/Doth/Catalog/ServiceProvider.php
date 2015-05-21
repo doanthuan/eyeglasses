@@ -28,5 +28,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			'Doth\Catalog\Brand\BrandRepositoryInterface',
 			'Doth\Catalog\Brand\BrandRepository'
 		);
+
+		$this->app->bind(
+			'Doth\Catalog\Cart\CartRepositoryInterface',
+			'Doth\Catalog\Cart\CartRepository'
+		);
+
+		$this->app->bind(
+			'Doth\Catalog\Checkout\CheckoutRepositoryInterface',
+			'Doth\Catalog\Checkout\CheckoutRepository'
+		);
+
+		$this->app->bind(
+			'Doth\Catalog\Order\OrderRepositoryInterface',
+			'Doth\Catalog\Order\OrderRepository'
+		);
 	}
 }
